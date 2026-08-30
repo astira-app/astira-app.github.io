@@ -173,10 +173,9 @@
   }
   .note { color: var(--muted); }
   .addr { line-height: 1.5; }
-  .prevails {
-    color: var(--muted); border-left: 3px solid var(--outline);
-    padding-left: 12px; margin: 12px 0 0;
-  }
+  /* Ohne Balken und Einzug (Nutzer-Vorgabe 30.08.2026): Der Satz gehört
+     zum Kopf der Seite, nicht in ein Zitat. */
+  .prevails { color: var(--muted); margin: 12px 0 0; }
   dl { margin: 6px 0 0; }
   .entry { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
   .entry:first-child { margin-top: 4px; }
@@ -188,8 +187,13 @@
     flex: 0 0 auto; fill: var(--accent);
     height: 20px; width: 20px;
   }
-  .entry dt { font-weight: 600; margin: 0; }
-  .entry dd { margin: 0; color: var(--muted); }
+  /* Genau wie ein Abschnitt der Hauptseite: Der Name steht in der
+     Akzentfarbe und im Gewicht einer Überschrift, die Erklärung in der
+     vollen Textfarbe. Bis zum 30.08.2026 war es umgekehrt — heller Name,
+     blasse Erklärung —, und damit las sich die Hilfe anders als der Rest
+     der Seite (Nutzer-Befund). */
+  .entry dt { font-weight: 600; margin: 0; color: var(--accent); }
+  .entry dd { margin: 0; }
   /* Der Tipp auf der Hilfeseite. Er ist ein `card`, damit eine Änderung an
      den Kästen ihn mitnimmt — behält aber sein eigenes Aussehen (Vorgabe
      30.08.2026). Zwei Klassen schlagen die `.card`-Regel. */
@@ -316,14 +320,19 @@
 <label class="overlay" for="menu"></label>
 <aside class="sidebar">
   <h2>Aviso legal</h2>
-  <a href="#abschnitt-3">Contacto</a>
-  <a href="#abschnitt-5">Responsable del contenido según el § 18, apdo. 2, MStV</a>
+  <a href="#abschnitt-2">Prestador de servicios</a>
+  <a href="#abschnitt-4">Contacto</a>
+  <a href="#abschnitt-6">Responsable del contenido según el § 18, apdo. 2, MStV</a>
 </aside>
 <main class="main">
 <div class="inner">
   <section class="card intro">
     <h1>Aviso legal</h1>
-    <p>Información conforme al § 5 DDG</p>
+    <p class="note">Información conforme al § 5 DDG</p>
+  </section>
+
+  <section class="card">
+    <h2 id="abschnitt-2">Prestador de servicios</h2>
     <p class="addr">
       Robin Christ<br>
       Herrenweg 6/1<br>
@@ -333,12 +342,12 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-3">Contacto</h2>
+    <h2 id="abschnitt-4">Contacto</h2>
     <p class="addr">Correo electrónico: <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a></p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-5">Responsable del contenido según el § 18, apdo. 2, MStV</h2>
+    <h2 id="abschnitt-6">Responsable del contenido según el § 18, apdo. 2, MStV</h2>
     <p class="addr">
       Robin Christ (dirección como arriba)
     </p>
