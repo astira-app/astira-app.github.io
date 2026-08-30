@@ -26,9 +26,11 @@
     --accent: #8FA7E8;
     --line: #2A3348;
     --outline: #45536E;
+    --bar: 52px;
+    --side: 250px;
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
@@ -37,27 +39,118 @@
       Helvetica, Arial, sans-serif;
     line-height: 1.6;
   }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; }
-  header.top {
-    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
-    border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px;
-  }
-  header.top .app { font-weight: 700; font-size: 1.15rem; letter-spacing: .5px; }
-  header.top .sub { color: var(--muted); font-size: .9rem; }
-  .sitenav { margin: 14px 0 4px; font-size: .95rem; }
-  .langnav { margin: 8px 0 28px; font-size: .92rem; }
-  .sitenav a, .langnav a { color: var(--accent); text-decoration: none; }
-  .sitenav a:hover, .langnav a:hover { text-decoration: underline; }
-  .sitenav strong, .langnav strong { font-weight: 600; }
   a { color: var(--accent); }
-  h1 { font-size: 1.8rem; margin: 0 0 8px; line-height: 1.25; }
-  h2 { font-size: 1.15rem; margin: 30px 0 6px; color: var(--accent); }
-  p, ul { margin: 8px 0; }
+
+  /* ---------------------------------------------------- Kopfleiste oben */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--bar);
+    display: flex; align-items: center; gap: 2px;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+    padding: 0 12px; z-index: 3;
+  }
+  .brand {
+    font-weight: 700; letter-spacing: .5px; padding: 0 12px;
+    color: var(--text); text-decoration: none; font-size: 1.05rem;
+  }
+  .pages { display: flex; gap: 2px; overflow: hidden; }
+  .pages a, .pages strong {
+    padding: 8px 12px; border-radius: 8px; text-decoration: none;
+    color: var(--muted); font-size: .95rem; white-space: nowrap;
+  }
+  .pages a:hover { background: var(--card); color: var(--text); }
+  .pages strong { color: var(--text); font-weight: 600; }
+
+  /* Sprachauswahl als Klappmenü — `details` kann das ohne JavaScript. */
+  .langs { margin-left: auto; position: relative; }
+  .langs summary {
+    list-style: none; cursor: pointer; padding: 7px 12px; border-radius: 8px;
+    color: var(--text); font-size: .95rem; white-space: nowrap;
+    border: 1px solid var(--line);
+  }
+  .langs summary::-webkit-details-marker { display: none; }
+  .langs summary::after { content: " \25BE"; color: var(--muted); }
+  .langs summary:hover { background: var(--card); }
+  .langs ul {
+    position: absolute; right: 0; top: calc(100% + 6px); margin: 0;
+    padding: 6px; list-style: none; min-width: 200px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+  }
+  .langs li a, .langs li strong {
+    display: block; padding: 8px 12px; border-radius: 6px;
+    text-decoration: none; color: var(--muted); font-size: .95rem;
+  }
+  .langs li a:hover { background: var(--surface); color: var(--text); }
+  .langs li strong { color: var(--text); }
+
+  /* -------------------------------------------------- Seitenleiste links */
+  .burger {
+    display: none; cursor: pointer; padding: 8px 12px; border-radius: 8px;
+    color: var(--text); font-size: 1.15rem; line-height: 1;
+  }
+  .burger:hover { background: var(--card); }
+  #menu { position: absolute; opacity: 0; pointer-events: none; }
+  .sidebar {
+    position: fixed; top: var(--bar); bottom: 0; left: 0; width: var(--side);
+    background: var(--surface); border-right: 1px solid var(--line);
+    overflow-y: auto; padding: 18px 0 28px; z-index: 2;
+  }
+  .sidebar h2 {
+    font-size: .74rem; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 10px; padding: 0 18px; font-weight: 600;
+  }
+  .sidebar a {
+    display: block; padding: 7px 18px; color: var(--muted);
+    text-decoration: none; font-size: .9rem; line-height: 1.35;
+    border-left: 3px solid transparent;
+  }
+  .sidebar a:hover {
+    background: var(--card); color: var(--text);
+    border-left-color: var(--accent);
+  }
+  .overlay { display: none; }
+
+  /* ---------------------------------------------------- Inhalt rechts */
+  .main {
+    margin-left: var(--side); padding: calc(var(--bar) + 30px) 30px 64px;
+    max-width: 1120px;
+  }
+  h1 { font-size: 1.9rem; margin: 0 0 10px; line-height: 1.25; }
+  h2 {
+    font-size: 1.2rem; margin: 34px 0 8px; color: var(--accent);
+    scroll-margin-top: calc(var(--bar) + 16px);
+  }
+  p, ul { margin: 10px 0; }
   ul { padding-left: 22px; }
   li { margin: 5px 0; }
-  .hero { margin: 8px 0 28px; }
-  .hero .lead { font-size: 1.15rem; color: var(--text); margin: 0 0 14px; }
-  .hero .intro { color: var(--muted); }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 24px 26px; margin-bottom: 28px;
+  }
+  .card > h2:first-child { margin-top: 4px; }
+  .note { color: var(--muted); font-size: .92rem; }
+  .addr { line-height: 1.5; }
+  .prevails {
+    color: var(--muted); font-size: .9rem;
+    border-left: 3px solid var(--outline); padding-left: 12px; margin: 12px 0 0;
+  }
+  dl { margin: 6px 0 0; }
+  dt { font-weight: 600; margin-top: 18px; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+  .hint {
+    margin-top: 26px; padding: 14px 16px;
+    background: rgba(143, 167, 232, .10);
+    border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
+  }
+  footer {
+    color: var(--muted); font-size: .85rem; text-align: center;
+    border-top: 1px solid var(--line); padding-top: 20px; margin-top: 44px;
+  }
+  footer a { color: var(--muted); }
+
+  /* ------------------------------------------- nur auf der Startseite */
+  .hero { margin: 0 0 30px; }
+  .hero .lead { font-size: 1.2rem; margin: 0 0 14px; }
   /* Das Badge bekommt **nur** eine Höhe: kein Hintergrund, keine Ecken,
      kein Filter, kein Effekt beim Überfahren. Googles Richtlinie verbietet
      jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
@@ -66,72 +159,88 @@
   .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
   .play img { height: 56px; width: auto; display: block; }
   /* Bild neben seinem Abschnitt statt in einem Streifen, durch den man
-     scrollen muss (Nutzer-Vorgabe 30.08.2026). Wer die Seite liest, sieht
-     die Funktion und ihre Erklärung nebeneinander — und nichts liegt außer
-     Sicht. */
-  .feature { display: flex; gap: 28px; align-items: flex-start; margin: 30px 0; }
-  /* Der Abstand muss an der **Zeile** hängen, nicht an der Überschrift: Das
-     Bild sitzt oben in der Zeile und ist höher als ein kurzer Absatz — ohne
-     eigenen Abstand stoßen zwei Bilder aneinander, sobald der Text darunter
-     endet (Nutzer-Befund 30.08.2026). Aus demselben Grund verliert die
-     Überschrift hier ihren oberen Abstand, sonst stünde sie tiefer als die
-     Oberkante des Bildes daneben. */
-  .feature-text > h2:first-child { margin-top: 0; }
+     scrollen muss (Nutzer-Vorgabe 30.08.2026). */
+  .feature { display: flex; gap: 30px; align-items: flex-start; }
   .feature-text { flex: 1 1 auto; min-width: 0; }
-  .feature-shot { flex: 0 0 200px; margin: 0; }
+  .feature-shot { flex: 0 0 190px; margin: 0; }
   .feature-shot img {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--outline); border-radius: 14px;
   }
-  @media (max-width: 640px) {
+  @media (max-width: 720px) {
     /* Auf schmalen Geräten untereinander — nebeneinander bliebe für beides
        zu wenig Platz. */
     .feature { display: block; }
-    .feature-shot { max-width: 240px; margin: 14px auto 4px; }
+    .feature-shot { max-width: 230px; margin: 14px auto 4px; }
   }
-  section.doc {
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-    padding: 24px 26px; margin-bottom: 28px;
+
+  /* --------------------------------------------------- schmale Geräte */
+  @media (max-width: 992px) {
+    .burger { display: block; }
+    .pages { display: none; }
+    .sidebar { transform: translateX(-100%); transition: transform .18s; }
+    #menu:checked ~ .sidebar { transform: none; }
+    #menu:checked ~ .overlay {
+      display: block; position: fixed; top: var(--bar); left: 0; right: 0;
+      bottom: 0; background: rgba(3, 6, 14, .6); z-index: 1; cursor: pointer;
+    }
+    .main { margin-left: 0; padding: calc(var(--bar) + 22px) 18px 56px; }
   }
-  section.doc > h2:first-child { margin-top: 4px; }
-  section.doc > h1 + .note { margin: 0 0 6px; }
-  .note { color: var(--muted); font-size: .9rem; }
-  dl { margin: 6px 0 0; }
-  dt { font-weight: 600; margin-top: 16px; }
-  dd { margin: 2px 0 0; color: var(--muted); }
-  .hint {
-    margin-top: 24px; padding: 14px 16px; color: var(--text);
-    background: rgba(143, 167, 232, .10);
-    border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
-  }
-  footer {
-    color: var(--muted); font-size: .85rem; text-align: center;
-    border-top: 1px solid var(--line); padding-top: 18px; margin-top: 8px;
-  }
-  footer a { color: var(--muted); }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <span class="app">Astira</span>
-  </header>
-  <nav class="sitenav"><strong>Astira</strong> · <a href="help/es.html">Ayuda</a> · <a href="privacy/es.html">Política de privacidad</a> · <a href="legal/es.html">Aviso legal</a></nav>
-  <nav class="langnav"><a href="de.html" lang="de">Deutsch</a> · <a href="./" lang="en">English</a> · <strong>Español</strong> · <a href="fr.html" lang="fr">Français</a> · <a href="it.html" lang="it">Italiano</a> · <a href="pt.html" lang="pt">Português (Brasil)</a> · <a href="ja.html" lang="ja">日本語</a></nav>
-
+<input type="checkbox" id="menu" aria-hidden="true" tabindex="-1">
+<header class="topbar">
+  <label class="burger" for="menu" title="Astira – Mapa estelar">&#9776;</label>
+  <a class="brand" href="es.html">Astira</a>
+  <nav class="pages">
+    <a href="help/es.html">Ayuda</a>
+    <a href="privacy/es.html">Política de privacidad</a>
+    <a href="legal/es.html">Aviso legal</a>
+  </nav>
+  <details class="langs">
+    <summary>Español</summary>
+    <ul>
+      <li><a href="de.html" lang="de">Deutsch</a></li>
+      <li><a href="./" lang="en">English</a></li>
+      <li><strong>Español</strong></li>
+      <li><a href="fr.html" lang="fr">Français</a></li>
+      <li><a href="it.html" lang="it">Italiano</a></li>
+      <li><a href="pt.html" lang="pt">Português (Brasil)</a></li>
+      <li><a href="ja.html" lang="ja">日本語</a></li>
+    </ul>
+  </details>
+</header>
+<label class="overlay" for="menu"></label>
+<aside class="sidebar">
+  <h2>Astira</h2>
+  <a href="#abschnitt-1">EL CIELO SIGUE TU MOVIMIENTO</a>
+  <a href="#abschnitt-2">TOCA Y ENTIENDE</a>
+  <a href="#abschnitt-3">ENCUENTRA LO QUE BUSCAS</a>
+  <a href="#abschnitt-4">LO QUE VERÁS</a>
+  <a href="#abschnitt-5">EL TIEMPO EN CÁMARA RÁPIDA</a>
+  <a href="#abschnitt-6">ECLIPSES DE SOL Y DE LUNA</a>
+  <a href="#abschnitt-7">ALINEACIÓN PRECISA</a>
+  <a href="#abschnitt-8">EL CIELO SOBRE TU ENTORNO</a>
+  <a href="#abschnitt-9">HECHO PARA OBSERVAR</a>
+  <a href="#abschnitt-10">COMPLETAMENTE SIN CONEXIÓN — Y PRIVADO</a>
+  <a href="#abschnitt-11">PRECISIÓN</a>
+  <a href="#abschnitt-12">FUENTES DE DATOS</a>
+</aside>
+<main class="main">
   <section class="hero">
     <h1>Astira – Mapa estelar</h1>
     <p class="lead">Reconoce constelaciones, planetas y la Luna, sin internet.</p>
-    <p class="intro">Apunta el teléfono al cielo — Astira te muestra en vivo lo que estás viendo: estrellas y constelaciones, planetas, la Luna y galaxias lejanas. Calculado con precisión para tu lugar y el momento, completamente sin internet.</p>
+    <p class="note">Apunta el teléfono al cielo — Astira te muestra en vivo lo que estás viendo: estrellas y constelaciones, planetas, la Luna y galaxias lejanas. Calculado con precisión para tu lugar y el momento, completamente sin internet.</p>
     <a class="play" href="https://play.google.com/store/apps/details?id=dev.astira.astira">
       <img src="assets/badge/es.svg" alt="Google Play" height="56" width="189">
     </a>
   </section>
 
-  <section class="doc">
+  <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2>EL CIELO SIGUE TU MOVIMIENTO</h2>
+      <h2 id="abschnitt-1">EL CIELO SIGUE TU MOVIMIENTO</h2>
       <p>En el modo en vivo, el sensor de orientación dirige la vista: mueve el dispositivo y el mapa se mueve contigo — con suavidad y con corrección de la declinación magnética de tu ubicación. ¿Prefieres la forma clásica? Explora el cielo deslizando y pellizcando para acercar.</p>
       </div>
       <figure class="feature-shot">
@@ -140,7 +249,7 @@
     </div>
     <div class="feature">
       <div class="feature-text">
-      <h2>TOCA Y ENTIENDE</h2>
+      <h2 id="abschnitt-2">TOCA Y ENTIENDE</h2>
       <p>Toca cualquier objeto para saber más sin salir de la vista: nombre propio y designación de catálogo, distancia, brillo, clase espectral y temperatura, y en muchas estrellas brillantes también radio y masa — además de las horas de salida, culminación y puesta para tu lugar.</p>
       </div>
       <figure class="feature-shot">
@@ -149,14 +258,14 @@
     </div>
     <div class="feature">
       <div class="feature-text">
-      <h2>ENCUENTRA LO QUE BUSCAS</h2>
+      <h2 id="abschnitt-3">ENCUENTRA LO QUE BUSCAS</h2>
       <p>Busca estrellas, planetas, constelaciones y objetos de cielo profundo por nombre o número de catálogo — M 31, NGC 224 y Andrómeda llevan al mismo objeto. Si queda fuera de la pantalla, una flecha señala el camino y el ángulo. Y si aún no sabes qué buscar: «Visible esta noche» te nombra los objetos más interesantes de la noche, con altura y ventana de observación. Una entrada a la astronomía sin conocimientos previos, y en el primer inicio un breve recorrido te guía por el manejo.</p>
       </div>
       <figure class="feature-shot">
         <img src="assets/shots/es/03-heute-nacht.webp" alt="Visible esta noche" loading="lazy">
       </figure>
     </div>
-    <h2>LO QUE VERÁS</h2>
+    <h2 id="abschnitt-4">LO QUE VERÁS</h2>
     <ul>
       <li>Unas 8.900 estrellas — todas las visibles a simple vista (hasta magnitud 6,5)</li>
       <li>El Sol, la Luna (con su fase) y todos los planetas, con su visibilidad y el estado del crepúsculo</li>
@@ -164,40 +273,39 @@
       <li>Capas que puedes activar y desactivar: constelaciones, Vía Láctea, sistema solar, eclíptica, trayectorias orbitales (±30 días)</li>
       <li>Ubicación por GPS o manual, momento libremente ajustable — mira hoy el cielo de mañana</li>
     </ul>
-    <h2>EL TIEMPO EN CÁMARA RÁPIDA</h2>
+    <h2 id="abschnitt-5">EL TIEMPO EN CÁMARA RÁPIDA</h2>
     <p>La cámara rápida te muestra cómo las estrellas recorren el cielo, hacia delante y hacia atrás. Así ves ponerse un objeto, recorres una noche entera o sigues a la Luna por sus fases.</p>
     <div class="feature">
       <div class="feature-text">
-      <h2>ECLIPSES DE SOL Y DE LUNA</h2>
+      <h2 id="abschnitt-6">ECLIPSES DE SOL Y DE LUNA</h2>
       <p>Astira calcula qué eclipses se ven desde tu lugar: cuándo empiezan y cuánto queda cubierto. Un toque y la cámara rápida lo reproduce.</p>
       </div>
       <figure class="feature-shot">
         <img src="assets/shots/es/05-finsternis-ansehen.webp" alt="Un toque y la cámara rápida lo reproduce." loading="lazy">
       </figure>
     </div>
-    <h2>ALINEACIÓN PRECISA</h2>
+    <h2 id="abschnitt-7">ALINEACIÓN PRECISA</h2>
     <p>¿El mapa se desvía un poco? Le pasa a toda brújula de teléfono. Apunta a una estrella que conozcas, tócala, pulsa «Alinear aquí» — listo. El mapa coincide con tu cielo en vez de dejarte adivinando.</p>
-    <h2>EL CIELO SOBRE TU ENTORNO</h2>
+    <h2 id="abschnitt-8">EL CIELO SOBRE TU ENTORNO</h2>
     <p>Activa la imagen de la cámara y el mapa estelar se superpone a lo que tienes realmente delante: el horizonte, los árboles, los tejados. En vez de unir mapa y realidad mentalmente, apuntas el dispositivo hacia donde buscas. La imagen solo se muestra: nunca se captura, ni se guarda, ni se transmite.</p>
-    <h2>HECHO PARA OBSERVAR</h2>
+    <h2 id="abschnitt-9">HECHO PARA OBSERVAR</h2>
     <ul>
       <li>El modo nocturno en rojo intenso conserva tu adaptación a la oscuridad</li>
       <li>La pantalla se mantiene encendida mientras observas</li>
       <li>Estrellas con colores realistas (según el índice de color) y tamaño según el brillo</li>
       <li>Límite de magnitud ajustable, distancias en años luz o pársecs</li>
     </ul>
-    <h2>COMPLETAMENTE SIN CONEXIÓN — Y PRIVADO</h2>
+    <h2 id="abschnitt-10">COMPLETAMENTE SIN CONEXIÓN — Y PRIVADO</h2>
     <p>Astira no necesita internet: todos los cálculos se hacen en tu dispositivo. La aplicación no tiene permiso de internet, no muestra publicidad y no contiene rastreo. Tu ubicación solo se usa en el dispositivo para calcular la vista del cielo — ideal también para lugares de observación lejos de la ciudad (y de la cobertura).</p>
-    <h2>PRECISIÓN</h2>
+    <h2 id="abschnitt-11">PRECISIÓN</h2>
     <p>El cálculo de posiciones sigue los métodos estándar de la literatura astronómica — las posiciones de los planetas se desvían menos de un minuto de arco de la referencia del JPL.</p>
-    <h2>FUENTES DE DATOS</h2>
+    <h2 id="abschnitt-12">FUENTES DE DATOS</h2>
     <p>Catálogo de estrellas: base de datos HYG (CC BY-SA) · Objetos de cielo profundo: OpenNGC (CC BY-SA) · Detalles en la pantalla de créditos de la aplicación.</p>
   </section>
   <p class="note">Nota: la precisión de la brújula de un teléfono suele ser de ±5–10°. Con la calibración guiada y la alineación con estrellas identificarás igualmente cualquier objeto con seguridad.</p>
-
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="privacy/es.html">Política de privacidad</a> · <a href="legal/es.html">Aviso legal</a>
   </footer>
-</div>
+</main>
 </body>
 </html>
