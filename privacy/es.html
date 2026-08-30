@@ -119,6 +119,15 @@
     text-decoration: none; border-left: 3px solid transparent;
   }
   .sidebar a:hover { background: var(--card); color: var(--text); }
+  /* Das Seitenmenü im Klappfach. Am Rechner verborgen — dort steht es in
+     der Kopfleiste; die Seite, auf der man ist, trägt dieselbe Marke wie
+     ein Abschnitt, bei dem man gerade steht. */
+  .drawer-pages { display: none; margin-bottom: 18px; }
+  .drawer-pages strong {
+    display: block; padding: 6px 18px; font-weight: 600;
+    color: var(--text); border-left: 3px solid var(--accent);
+    background: var(--card);
+  }
   /* Wo man gerade ist. `current` setzt das Skript am Seitenende, `:target`
      greift auch ohne JavaScript, sobald man einen Eintrag angeklickt hat. */
   .sidebar a.current, .sidebar a:target {
@@ -270,6 +279,11 @@
   @media (max-width: 992px) {
     .burger { display: block; }
     .pages { display: none; }
+    /* Die Kopfleiste hat für die Seiten keinen Platz mehr — also führt das
+       Klappfach zu ihnen, und die Sprungliste der Abschnitte weicht ihnen
+       (Nutzer-Vorgabe 30.08.2026). */
+    .drawer-pages { display: block; margin-bottom: 0; }
+    .anchors { display: none; }
     .sidebar { transform: translateX(-100%); transition: transform .18s; }
     #menu:checked ~ .sidebar { transform: none; }
     #menu:checked ~ .overlay {
@@ -319,16 +333,24 @@
 </header>
 <label class="overlay" for="menu"></label>
 <aside class="sidebar">
-  <h2>Política de privacidad</h2>
-  <a href="#abschnitt-1">Lo esencial de un vistazo</a>
-  <a href="#abschnitt-2">Responsable del tratamiento</a>
-  <a href="#abschnitt-3">Datos de ubicación (opcional)</a>
-  <a href="#abschnitt-4">Cámara (opcional)</a>
-  <a href="#abschnitt-5">Datos de los sensores</a>
-  <a href="#abschnitt-6">Contacto por correo electrónico</a>
-  <a href="#abschnitt-7">Ajustes guardados localmente</a>
-  <a href="#abschnitt-8">Google Play</a>
-  <a href="#abschnitt-9">Tus derechos</a>
+  <nav class="drawer-pages">
+    <a href="../es.html">Astira</a>
+    <a href="../help/es.html">Ayuda</a>
+    <strong>Política de privacidad</strong>
+    <a href="../legal/es.html">Aviso legal</a>
+  </nav>
+  <div class="anchors">
+    <h2>Política de privacidad</h2>
+    <a href="#abschnitt-1">Lo esencial de un vistazo</a>
+    <a href="#abschnitt-2">Responsable del tratamiento</a>
+    <a href="#abschnitt-3">Datos de ubicación (opcional)</a>
+    <a href="#abschnitt-4">Cámara (opcional)</a>
+    <a href="#abschnitt-5">Datos de los sensores</a>
+    <a href="#abschnitt-6">Contacto por correo electrónico</a>
+    <a href="#abschnitt-7">Ajustes guardados localmente</a>
+    <a href="#abschnitt-8">Google Play</a>
+    <a href="#abschnitt-9">Tus derechos</a>
+  </div>
 </aside>
 <main class="main">
 <div class="inner">

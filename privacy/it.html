@@ -119,6 +119,15 @@
     text-decoration: none; border-left: 3px solid transparent;
   }
   .sidebar a:hover { background: var(--card); color: var(--text); }
+  /* Das Seitenmenü im Klappfach. Am Rechner verborgen — dort steht es in
+     der Kopfleiste; die Seite, auf der man ist, trägt dieselbe Marke wie
+     ein Abschnitt, bei dem man gerade steht. */
+  .drawer-pages { display: none; margin-bottom: 18px; }
+  .drawer-pages strong {
+    display: block; padding: 6px 18px; font-weight: 600;
+    color: var(--text); border-left: 3px solid var(--accent);
+    background: var(--card);
+  }
   /* Wo man gerade ist. `current` setzt das Skript am Seitenende, `:target`
      greift auch ohne JavaScript, sobald man einen Eintrag angeklickt hat. */
   .sidebar a.current, .sidebar a:target {
@@ -270,6 +279,11 @@
   @media (max-width: 992px) {
     .burger { display: block; }
     .pages { display: none; }
+    /* Die Kopfleiste hat für die Seiten keinen Platz mehr — also führt das
+       Klappfach zu ihnen, und die Sprungliste der Abschnitte weicht ihnen
+       (Nutzer-Vorgabe 30.08.2026). */
+    .drawer-pages { display: block; margin-bottom: 0; }
+    .anchors { display: none; }
     .sidebar { transform: translateX(-100%); transition: transform .18s; }
     #menu:checked ~ .sidebar { transform: none; }
     #menu:checked ~ .overlay {
@@ -319,16 +333,24 @@
 </header>
 <label class="overlay" for="menu"></label>
 <aside class="sidebar">
-  <h2>Informativa sulla privacy</h2>
-  <a href="#abschnitt-1">L'essenziale in breve</a>
-  <a href="#abschnitt-2">Titolare del trattamento</a>
-  <a href="#abschnitt-3">Dati di posizione (facoltativo)</a>
-  <a href="#abschnitt-4">Fotocamera (facoltativo)</a>
-  <a href="#abschnitt-5">Dati dei sensori</a>
-  <a href="#abschnitt-6">Contatto via e-mail</a>
-  <a href="#abschnitt-7">Impostazioni salvate localmente</a>
-  <a href="#abschnitt-8">Google Play</a>
-  <a href="#abschnitt-9">I tuoi diritti</a>
+  <nav class="drawer-pages">
+    <a href="../it.html">Astira</a>
+    <a href="../help/it.html">Aiuto</a>
+    <strong>Informativa sulla privacy</strong>
+    <a href="../legal/it.html">Note legali</a>
+  </nav>
+  <div class="anchors">
+    <h2>Informativa sulla privacy</h2>
+    <a href="#abschnitt-1">L'essenziale in breve</a>
+    <a href="#abschnitt-2">Titolare del trattamento</a>
+    <a href="#abschnitt-3">Dati di posizione (facoltativo)</a>
+    <a href="#abschnitt-4">Fotocamera (facoltativo)</a>
+    <a href="#abschnitt-5">Dati dei sensori</a>
+    <a href="#abschnitt-6">Contatto via e-mail</a>
+    <a href="#abschnitt-7">Impostazioni salvate localmente</a>
+    <a href="#abschnitt-8">Google Play</a>
+    <a href="#abschnitt-9">I tuoi diritti</a>
+  </div>
 </aside>
 <main class="main">
 <div class="inner">
