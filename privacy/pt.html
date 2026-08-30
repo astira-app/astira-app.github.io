@@ -189,11 +189,15 @@
   }
   .entry dt { font-weight: 600; margin: 0; }
   .entry dd { margin: 0; color: var(--muted); }
-  .hint {
-    margin-top: 22px; padding: 14px 16px;
+  /* Der Tipp auf der Hilfeseite. Er ist ein `card`, damit eine Änderung an
+     den Kästen ihn mitnimmt — behält aber sein eigenes Aussehen (Vorgabe
+     30.08.2026). Zwei Klassen schlagen die `.card`-Regel. */
+  .card.tip {
+    padding: 14px 16px; margin-bottom: 26px;
     background: rgba(143, 167, 232, .10);
     border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
   }
+  .card.tip p { margin: 0; }
   footer {
     color: var(--muted); text-align: center;
     border-top: 1px solid var(--line); padding-top: 20px;
@@ -300,7 +304,6 @@
   <section class="card intro">
     <h1>Política de privacidade</h1>
     <p class="note">Atualizado em: 23.07.2026</p>
-    <p class="note"><a href="https://astira-app.github.io/privacy/pt.html">https://astira-app.github.io/privacy/pt.html</a></p>
     <p class="prevails">Em caso de dúvida sobre a interpretação de uma versão traduzida, prevalece a versão em inglês.</p>
   </section>
 
@@ -369,6 +372,7 @@
   <section class="card">
     <h2 id="abschnitt-10">Alterações</h2>
     <p>Esta política de privacidade é atualizada quando as funções do aplicativo mudam. A versão atual está disponível no endereço indicado acima.</p>
+    <p class="note"><a href="https://astira-app.github.io/privacy/pt.html">https://astira-app.github.io/privacy/pt.html</a></p>
   </section>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="pt.html">Política de privacidade</a> · <a href="../legal/pt.html">Informações legais</a>

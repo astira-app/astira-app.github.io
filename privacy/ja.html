@@ -189,11 +189,15 @@
   }
   .entry dt { font-weight: 600; margin: 0; }
   .entry dd { margin: 0; color: var(--muted); }
-  .hint {
-    margin-top: 22px; padding: 14px 16px;
+  /* Der Tipp auf der Hilfeseite. Er ist ein `card`, damit eine Änderung an
+     den Kästen ihn mitnimmt — behält aber sein eigenes Aussehen (Vorgabe
+     30.08.2026). Zwei Klassen schlagen die `.card`-Regel. */
+  .card.tip {
+    padding: 14px 16px; margin-bottom: 26px;
     background: rgba(143, 167, 232, .10);
     border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
   }
+  .card.tip p { margin: 0; }
   footer {
     color: var(--muted); text-align: center;
     border-top: 1px solid var(--line); padding-top: 20px;
@@ -300,7 +304,6 @@
   <section class="card intro">
     <h1>プライバシーポリシー</h1>
     <p class="note">最終更新: 23.07.2026</p>
-    <p class="note"><a href="https://astira-app.github.io/privacy/ja.html">https://astira-app.github.io/privacy/ja.html</a></p>
     <p class="prevails">翻訳版の解釈に疑義がある場合は、英語版が優先されます。</p>
   </section>
 
@@ -369,6 +372,7 @@
   <section class="card">
     <h2 id="abschnitt-10">変更について</h2>
     <p>このプライバシーポリシーは、アプリの機能が変わったときに更新されます。最新版は上記のURLでご覧いただけます。</p>
+    <p class="note"><a href="https://astira-app.github.io/privacy/ja.html">https://astira-app.github.io/privacy/ja.html</a></p>
   </section>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="ja.html">プライバシーポリシー</a> · <a href="../legal/ja.html">運営者情報</a>
