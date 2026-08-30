@@ -6,6 +6,7 @@
 <meta name="robots" content="index, follow">
 <meta name="description" content="Astira は完全にオフラインで動作します。このアプリはインターネットの権限を持たないため、技術的にお使いの端末からデータを送信できません。アカウント、広告、トラッキング、分析サービスはいずれもありません。個人データが当方や第三者に送信されることはありません。">
 <title>プライバシーポリシー – Astira</title>
+<link rel="icon" href="../assets/icon.png">
 <link rel="canonical" href="https://astira-app.github.io/privacy/ja.html">
 <link rel="alternate" hreflang="de" href="https://astira-app.github.io/privacy/de.html">
 <link rel="alternate" hreflang="en" href="https://astira-app.github.io/privacy/">
@@ -28,16 +29,23 @@
     --outline: #45536E;
     --bar: 52px;
     --side: 250px;
+    --mitte: 820px;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  /* **Eine Größe für alles** (Vorgabe 30.08.2026): Was hier steht, gilt für
+     jede Schrift auf der Seite. Überschriften heben sich über Gewicht und
+     Farbe ab, nicht über die Größe. */
+  body, h1, h2, dt, dd, p, li, a, summary, figcaption {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Helvetica, Arial, sans-serif;
-    line-height: 1.6;
   }
   a { color: var(--accent); }
 
@@ -49,13 +57,15 @@
     padding: 0 12px; z-index: 3;
   }
   .brand {
-    font-weight: 700; letter-spacing: .5px; padding: 0 12px;
-    color: var(--text); text-decoration: none; font-size: 1.05rem;
+    display: flex; align-items: center; gap: 10px; padding: 0 12px;
+    font-weight: 700; letter-spacing: .5px;
+    color: var(--text); text-decoration: none;
   }
+  .brand img { width: 28px; height: 28px; display: block; }
   .pages { display: flex; gap: 2px; overflow: hidden; }
   .pages a, .pages strong {
     padding: 8px 12px; border-radius: 8px; text-decoration: none;
-    color: var(--muted); font-size: .95rem; white-space: nowrap;
+    color: var(--muted); white-space: nowrap;
   }
   .pages a:hover { background: var(--card); color: var(--text); }
   .pages strong { color: var(--text); font-weight: 600; }
@@ -64,8 +74,7 @@
   .langs { margin-left: auto; position: relative; }
   .langs summary {
     list-style: none; cursor: pointer; padding: 7px 12px; border-radius: 8px;
-    color: var(--text); font-size: .95rem; white-space: nowrap;
-    border: 1px solid var(--line);
+    color: var(--text); white-space: nowrap; border: 1px solid var(--line);
   }
   .langs summary::-webkit-details-marker { display: none; }
   .langs summary::after { content: " \25BE"; color: var(--muted); }
@@ -78,7 +87,7 @@
   }
   .langs li a, .langs li strong {
     display: block; padding: 8px 12px; border-radius: 6px;
-    text-decoration: none; color: var(--muted); font-size: .95rem;
+    text-decoration: none; color: var(--muted);
   }
   .langs li a:hover { background: var(--surface); color: var(--text); }
   .langs li strong { color: var(--text); }
@@ -86,92 +95,105 @@
   /* -------------------------------------------------- Seitenleiste links */
   .burger {
     display: none; cursor: pointer; padding: 8px 12px; border-radius: 8px;
-    color: var(--text); font-size: 1.15rem; line-height: 1;
+    color: var(--text); line-height: 1;
   }
   .burger:hover { background: var(--card); }
-  #menu { position: absolute; opacity: 0; pointer-events: none; }
+  /* `fixed` und nicht `absolute`: Ein absolut gesetztes Kästchen sitzt am
+     Seitenanfang, und der Browser scrollt beim Anklicken des Labels dorthin
+     — die Seite sprang beim Zuklappen nach oben (Nutzer-Befund 30.08.2026).
+     Ein festes Element hat nichts, wohin gescrollt werden könnte. */
+  #menu {
+    position: fixed; top: 0; left: 0; width: 1px; height: 1px;
+    opacity: 0; pointer-events: none; margin: 0;
+  }
   .sidebar {
     position: fixed; top: var(--bar); bottom: 0; left: 0; width: var(--side);
     background: var(--surface); border-right: 1px solid var(--line);
     overflow-y: auto; padding: 18px 0 28px; z-index: 2;
   }
   .sidebar h2 {
-    font-size: .74rem; letter-spacing: .09em; text-transform: uppercase;
-    color: var(--muted); margin: 0 0 10px; padding: 0 18px; font-weight: 600;
+    color: var(--muted); margin: 0 0 8px; padding: 0 18px; font-weight: 600;
   }
   .sidebar a {
-    display: block; padding: 7px 18px; color: var(--muted);
-    text-decoration: none; font-size: .9rem; line-height: 1.35;
-    border-left: 3px solid transparent;
+    display: block; padding: 6px 18px; color: var(--muted);
+    text-decoration: none; border-left: 3px solid transparent;
   }
-  .sidebar a:hover {
-    background: var(--card); color: var(--text);
+  .sidebar a:hover { background: var(--card); color: var(--text); }
+  /* Wo man gerade ist. `current` setzt das Skript am Seitenende, `:target`
+     greift auch ohne JavaScript, sobald man einen Eintrag angeklickt hat. */
+  .sidebar a.current, .sidebar a:target {
+    color: var(--text); background: var(--card);
     border-left-color: var(--accent);
   }
   .overlay { display: none; }
 
   /* ---------------------------------------------------- Inhalt rechts */
-  .main {
-    margin-left: var(--side); padding: calc(var(--bar) + 30px) 30px 64px;
-    max-width: 1120px;
-  }
-  h1 { font-size: 1.9rem; margin: 0 0 10px; line-height: 1.25; }
+  .main { margin-left: var(--side); padding: calc(var(--bar) + 30px) 30px 64px; }
+  /* Mittig in der Fläche neben der Seitenleiste (Vorgabe 30.08.2026) — der
+     Text darin bleibt linksbündig. */
+  .inner { max-width: var(--mitte); margin: 0 auto; }
+  h1 { margin: 0 0 6px; font-weight: 700; }
   h2 {
-    font-size: 1.2rem; margin: 34px 0 8px; color: var(--accent);
+    margin: 0 0 8px; color: var(--accent); font-weight: 600;
     scroll-margin-top: calc(var(--bar) + 16px);
   }
   p, ul { margin: 10px 0; }
   ul { padding-left: 22px; }
   li { margin: 5px 0; }
+  /* Ein Kasten je Überschrift (Vorgabe 30.08.2026) statt eines einzigen
+     grossen um die ganze Seite. */
   .card {
     background: var(--card); border: 1px solid var(--line);
-    border-radius: 14px; padding: 24px 26px; margin-bottom: 28px;
+    border-radius: 14px; padding: 22px 24px; margin-bottom: 18px;
   }
-  .card > h2:first-child { margin-top: 4px; }
-  .note { color: var(--muted); font-size: .92rem; }
+  .note { color: var(--muted); }
   .addr { line-height: 1.5; }
   .prevails {
-    color: var(--muted); font-size: .9rem;
-    border-left: 3px solid var(--outline); padding-left: 12px; margin: 12px 0 0;
+    color: var(--muted); border-left: 3px solid var(--outline);
+    padding-left: 12px; margin: 12px 0 0;
   }
   dl { margin: 6px 0 0; }
-  dt { font-weight: 600; margin-top: 18px; }
-  dd { margin: 2px 0 0; color: var(--muted); }
+  .entry { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; }
+  .entry:first-child { margin-top: 4px; }
+  /* Das Symbol auf der ersten Zeile mittig — wie in den Einstellungen der
+     App: Der Kasten ist so hoch wie eine Textzeile, das SVG steht darin
+     mittig. */
+  .entry .icon {
+    flex: 0 0 auto; fill: var(--accent);
+    height: calc(1rem * 1.6); width: 20px;
+  }
+  .entry dt { font-weight: 600; margin: 0; }
+  .entry dd { margin: 0; color: var(--muted); }
   .hint {
-    margin-top: 26px; padding: 14px 16px;
+    margin-top: 22px; padding: 14px 16px;
     background: rgba(143, 167, 232, .10);
     border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
   }
   footer {
-    color: var(--muted); font-size: .85rem; text-align: center;
-    border-top: 1px solid var(--line); padding-top: 20px; margin-top: 44px;
+    color: var(--muted); text-align: center;
+    border-top: 1px solid var(--line); padding-top: 20px; margin-top: 34px;
   }
   footer a { color: var(--muted); }
 
   /* ------------------------------------------- nur auf der Startseite */
-  .hero { margin: 0 0 30px; }
-  .hero .lead { font-size: 1.2rem; margin: 0 0 14px; }
+  .hero { margin: 0 0 18px; }
+  .hero img {
+    width: 100%; height: auto; display: block; border-radius: 14px;
+    border: 1px solid var(--line);
+  }
   /* Das Badge bekommt **nur** eine Höhe: kein Hintergrund, keine Ecken,
      kein Filter, kein Effekt beim Überfahren. Googles Richtlinie verbietet
      jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
      nimmt nur die Unterlänge weg, die eine Zeile sonst darunter setzt.
      Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
-  .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
+  .play { display: inline-block; margin: 20px 0 26px; line-height: 0; }
   .play img { height: 56px; width: auto; display: block; }
-  /* Bild neben seinem Abschnitt statt in einem Streifen, durch den man
-     scrollen muss (Nutzer-Vorgabe 30.08.2026). */
-  .feature { display: flex; gap: 30px; align-items: flex-start; }
+  .feature { display: flex; gap: 26px; align-items: flex-start; }
   .feature-text { flex: 1 1 auto; min-width: 0; }
-  .feature-shot { flex: 0 0 190px; margin: 0; }
+  .feature-shot { flex: 0 0 180px; margin: 0; }
   .feature-shot img {
     width: 100%; height: auto; display: block;
-    border: 1px solid var(--outline); border-radius: 14px;
-  }
-  @media (max-width: 720px) {
-    /* Auf schmalen Geräten untereinander — nebeneinander bliebe für beides
-       zu wenig Platz. */
-    .feature { display: block; }
-    .feature-shot { max-width: 230px; margin: 14px auto 4px; }
+    border: 1px solid var(--outline); border-radius: 12px;
   }
 
   /* --------------------------------------------------- schmale Geräte */
@@ -186,13 +208,20 @@
     }
     .main { margin-left: 0; padding: calc(var(--bar) + 22px) 18px 56px; }
   }
+  @media (max-width: 720px) {
+    /* Bild und Text untereinander — nebeneinander bliebe für beides zu
+       wenig Platz. */
+    .feature { display: block; }
+    .feature-shot { max-width: 230px; margin: 14px auto 4px; }
+  }
 </style>
 </head>
 <body>
 <input type="checkbox" id="menu" aria-hidden="true" tabindex="-1">
 <header class="topbar">
   <label class="burger" for="menu" title="プライバシーポリシー – Astira">&#9776;</label>
-  <a class="brand" href="../ja.html">Astira</a>
+  <a class="brand" href="../ja.html">
+    <img src="../assets/icon.png" alt="" width="28" height="28">Astira</a>
   <nav class="pages">
     <a href="../help/ja.html">ヘルプ</a>
     <strong>プライバシーポリシー</strong>
@@ -226,15 +255,20 @@
   <a href="#abschnitt-10">変更について</a>
 </aside>
 <main class="main">
+<div class="inner">
   <section class="card">
     <h1>プライバシーポリシー</h1>
     <p class="note">最終更新: 23.07.2026</p>
     <p class="note"><a href="https://astira-app.github.io/privacy/ja.html">https://astira-app.github.io/privacy/ja.html</a></p>
     <p class="prevails">翻訳版の解釈に疑義がある場合は、英語版が優先されます。</p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-1">要点</h2>
     <p>Astira は完全にオフラインで動作します。このアプリはインターネットの権限を持たないため、技術的にお使いの端末からデータを送信できません。アカウント、広告、トラッキング、分析サービスはいずれもありません。個人データが当方や第三者に送信されることはありません。</p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-2">管理者</h2>
     <p class="addr">
       Robin Christ<br>
@@ -243,7 +277,9 @@
       ドイツ<br>
       <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a>
     </p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-3">位置情報 (任意)</h2>
     <p>その場所の星空を表示するために、アプリは端末の現在地を利用できます。利用は Android の権限確認による明示的な同意があるときにかぎられます (法的根拠: GDPR 第6条第1項(a))。</p>
     <ul>
@@ -251,7 +287,9 @@
       <li>最後に使った現在地は端末に保存されます。次回の起動時に既定の場所へ戻らないようにするためです。この情報が端末の外に出ることはありません。アプリはインターネットに接続せず、Android によるアプリデータのバックアップも Astira では無効にしています。</li>
       <li>この権限は任意です。現在地を手動で入力することもでき、許可した権限は Android の設定でいつでも取り消せます。</li>
     </ul>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-4">カメラ (任意)</h2>
     <p>星図の後ろにカメラ映像を重ねる表示のために、アプリがカメラを使うことがあります。Android の権限確認による明示的な同意があるときだけです (法的根拠: GDPR 第6条第1項(a))。</p>
     <ul>
@@ -259,29 +297,68 @@
       <li>写真も動画も撮影・保存・送信しません。このアプリはインターネットにもマイクにもアクセスしません。</li>
       <li>この権限は任意です。なくてもアプリはすべての機能が使え、許可した権限は Android の設定でいつでも取り消せます。</li>
     </ul>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-5">センサーのデータ</h2>
     <p>ライブモードでは、端末が向いている方向を求めるために動きと方位のセンサー (回転センサー、磁気センサー) を使います。これらのデータは端末の中でリアルタイムに処理されるだけで、保存も送信もされません。</p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-6">メールでのお問い合わせ</h2>
     <p>設定の「お問い合わせ・ご意見」などから連絡をいただいた場合、お返事のためだけに、メールアドレスとご本文を取り扱います。法的根拠は、お問い合わせに応じることについての正当な利益です (GDPR 第6条第1項(f))。いただいた内容を第三者に渡すことはなく、用件が済み、法令上の保存義務がなくなった時点で削除します。</p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-7">端末内に保存される設定</h2>
     <p>アプリは設定をお使いの端末の中だけに保存します。夜間モード、明るさの上限、距離の単位、表示中のレイヤー、言語の選択、ライブモード、最後に使った現在地、各説明を見たかどうかです。これらが当方や第三者に送信されることはなく、Android のバックアップにも含まれません。アプリを削除するか、アプリのデータを消去すると、いっしょになくなります。</p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-8">Google Play</h2>
     <p>Google Play からアプリを入手した場合、Google は独立した管理者としてデータ (インストールやクラッシュに関するものなど) を取り扱います。詳しくは Google のプライバシーポリシーをご覧ください:</p>
     <p><a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-9">あなたの権利</h2>
     <p>あなたご自身が連絡してこないかぎり、当方があなたのデータを取り扱うことはありません。アプリは何も送信しないからです。あなたには原則として GDPR 第15条から第21条の権利 (アクセス、訂正、消去、制限、異議、データポータビリティ) と、データ保護監督機関に苦情を申し立てる権利 (第77条) があります。ご質問は上記のメールアドレスへお寄せください。</p>
+  </section>
 
+  <section class="card">
     <h2 id="abschnitt-10">変更について</h2>
     <p>このプライバシーポリシーは、アプリの機能が変わったときに更新されます。最新版は上記のURLでご覧いただけます。</p>
   </section>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="ja.html">プライバシーポリシー</a> · <a href="../legal/ja.html">運営者情報</a>
   </footer>
+</div>
 </main>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(
+    document.querySelectorAll('.sidebar a[href^="#"]')
+  );
+  if (!links.length) return;
+  var marks = links.map(function (a) {
+    return document.getElementById(a.getAttribute('href').slice(1));
+  });
+  function update() {
+    var y = window.scrollY + 96;
+    var current = 0;
+    for (var i = 0; i < marks.length; i++) {
+      if (marks[i] && marks[i].getBoundingClientRect().top + window.scrollY <= y) {
+        current = i;
+      }
+    }
+    for (var j = 0; j < links.length; j++) {
+      links[j].classList.toggle('current', j === current);
+    }
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();
+</script>
 </body>
 </html>
