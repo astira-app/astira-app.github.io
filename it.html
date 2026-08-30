@@ -65,17 +65,22 @@
      Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
   .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
   .play img { height: 56px; width: auto; display: block; }
-  .shots {
-    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
-    margin: 0 0 28px;
-  }
-  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
-  .shots img {
+  /* Bild neben seinem Abschnitt statt in einem Streifen, durch den man
+     scrollen muss (Nutzer-Vorgabe 30.08.2026). Wer die Seite liest, sieht
+     die Funktion und ihre Erklärung nebeneinander — und nichts liegt außer
+     Sicht. */
+  .feature { display: flex; gap: 28px; align-items: flex-start; }
+  .feature-text { flex: 1 1 auto; min-width: 0; }
+  .feature-shot { flex: 0 0 200px; margin: 0; }
+  .feature-shot img {
     width: 100%; height: auto; display: block;
-    border: 1px solid var(--outline); border-radius: 12px;
+    border: 1px solid var(--outline); border-radius: 14px;
   }
-  .shots figcaption {
-    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  @media (max-width: 640px) {
+    /* Auf schmalen Geräten untereinander — nebeneinander bliebe für beides
+       zu wenig Platz. */
+    .feature { display: block; }
+    .feature-shot { max-width: 240px; margin: 14px auto 4px; }
   }
   section.doc {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
@@ -116,32 +121,34 @@
     </a>
   </section>
 
-  <div class="shots">
-    <figure>
-      <img src="assets/shots/it/01-objekt-info.webp" alt="TOCCA E CAPISCI" loading="lazy">
-      <figcaption>TOCCA E CAPISCI</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/it/02-heute-nacht.webp" alt="Visibile stanotte" loading="lazy">
-      <figcaption>Visibile stanotte</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/it/03-himmel.webp" alt="IL CIELO SEGUE IL TUO MOVIMENTO" loading="lazy">
-      <figcaption>IL CIELO SEGUE IL TUO MOVIMENTO</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/it/05-finsternis.webp" alt="ECLISSI DI SOLE E DI LUNA" loading="lazy">
-      <figcaption>ECLISSI DI SOLE E DI LUNA</figcaption>
-    </figure>
-  </div>
-
   <section class="doc">
-    <h2>IL CIELO SEGUE IL TUO MOVIMENTO</h2>
-    <p>Nella modalità dal vivo il sensore di orientamento guida la vista: muovi il dispositivo e la mappa si muove con te — in modo fluido e con la correzione della declinazione magnetica della tua posizione. Preferisci il modo classico? Esplora il cielo trascinando e pizzicando per ingrandire.</p>
-    <h2>TOCCA E CAPISCI</h2>
-    <p>Tocca un oggetto per saperne di più senza uscire dalla vista: nome proprio e sigla di catalogo, distanza, luminosità, classe spettrale e temperatura, e per molte stelle luminose anche raggio e massa — insieme agli orari di levata, culminazione e tramonto per il tuo luogo.</p>
-    <h2>TROVA QUELLO CHE CERCHI</h2>
-    <p>Cerca stelle, pianeti, costellazioni e oggetti del cielo profondo per nome o numero di catalogo — M 31, NGC 224 e Andromeda portano allo stesso oggetto. Fuori dallo schermo, una freccia indica strada e angolo. E se non sai che cosa cercare: «Visibile stanotte» elenca gli oggetti più interessanti della notte, con altezza e finestra di osservazione. Un ingresso nell'astronomia senza conoscenze pregresse, e al primo avvio un breve giro guidato ti mostra i comandi.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>IL CIELO SEGUE IL TUO MOVIMENTO</h2>
+      <p>Nella modalità dal vivo il sensore di orientamento guida la vista: muovi il dispositivo e la mappa si muove con te — in modo fluido e con la correzione della declinazione magnetica della tua posizione. Preferisci il modo classico? Esplora il cielo trascinando e pizzicando per ingrandire.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/it/01-himmel.webp" alt="IL CIELO SEGUE IL TUO MOVIMENTO" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>TOCCA E CAPISCI</h2>
+      <p>Tocca un oggetto per saperne di più senza uscire dalla vista: nome proprio e sigla di catalogo, distanza, luminosità, classe spettrale e temperatura, e per molte stelle luminose anche raggio e massa — insieme agli orari di levata, culminazione e tramonto per il tuo luogo.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/it/02-objekt-info.webp" alt="TOCCA E CAPISCI" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>TROVA QUELLO CHE CERCHI</h2>
+      <p>Cerca stelle, pianeti, costellazioni e oggetti del cielo profondo per nome o numero di catalogo — M 31, NGC 224 e Andromeda portano allo stesso oggetto. Fuori dallo schermo, una freccia indica strada e angolo. E se non sai che cosa cercare: «Visibile stanotte» elenca gli oggetti più interessanti della notte, con altezza e finestra di osservazione. Un ingresso nell'astronomia senza conoscenze pregresse, e al primo avvio un breve giro guidato ti mostra i comandi.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/it/03-heute-nacht.webp" alt="Visibile stanotte" loading="lazy">
+      </figure>
+    </div>
     <h2>CHE COSA VEDRAI</h2>
     <ul>
       <li>Circa 8.900 stelle — tutte quelle visibili a occhio nudo (fino alla magnitudine 6,5)</li>
@@ -152,8 +159,15 @@
     </ul>
     <h2>IL TEMPO IN ACCELERATO</h2>
     <p>Il time lapse ti mostra le stelle attraversare il cielo, nei due sensi. Vedi tramontare un oggetto, percorri un'intera notte, segui la Luna nelle sue fasi.</p>
-    <h2>ECLISSI DI SOLE E DI LUNA</h2>
-    <p>Astira calcola quali eclissi sono visibili dal tuo luogo: quando iniziano e quanta parte viene coperta. Un tocco e segui l'eclissi nel time lapse.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>ECLISSI DI SOLE E DI LUNA</h2>
+      <p>Astira calcola quali eclissi sono visibili dal tuo luogo: quando iniziano e quanta parte viene coperta. Un tocco e segui l'eclissi nel time lapse.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/it/05-finsternis-ansehen.webp" alt="Un tocco e segui l&#x27;eclissi nel time lapse." loading="lazy">
+      </figure>
+    </div>
     <h2>ALLINEAMENTO PRECISO</h2>
     <p>La mappa è un po' fuori posto? Succede a ogni bussola da telefono. Punta una stella che conosci, toccala, premi «Allinea qui» — fatto. La mappa coincide con il tuo cielo invece di lasciarti indovinare.</p>
     <h2>IL CIELO SOPRA CIÒ CHE TI CIRCONDA</h2>

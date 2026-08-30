@@ -65,17 +65,22 @@
      Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
   .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
   .play img { height: 56px; width: auto; display: block; }
-  .shots {
-    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
-    margin: 0 0 28px;
-  }
-  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
-  .shots img {
+  /* Bild neben seinem Abschnitt statt in einem Streifen, durch den man
+     scrollen muss (Nutzer-Vorgabe 30.08.2026). Wer die Seite liest, sieht
+     die Funktion und ihre Erklärung nebeneinander — und nichts liegt außer
+     Sicht. */
+  .feature { display: flex; gap: 28px; align-items: flex-start; }
+  .feature-text { flex: 1 1 auto; min-width: 0; }
+  .feature-shot { flex: 0 0 200px; margin: 0; }
+  .feature-shot img {
     width: 100%; height: auto; display: block;
-    border: 1px solid var(--outline); border-radius: 12px;
+    border: 1px solid var(--outline); border-radius: 14px;
   }
-  .shots figcaption {
-    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  @media (max-width: 640px) {
+    /* Auf schmalen Geräten untereinander — nebeneinander bliebe für beides
+       zu wenig Platz. */
+    .feature { display: block; }
+    .feature-shot { max-width: 240px; margin: 14px auto 4px; }
   }
   section.doc {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;

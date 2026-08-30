@@ -1,128 +1,156 @@
 {
   "de": [
     {
-      "file": "01-objekt-info.webp",
-      "caption": "ANTIPPEN UND VERSTEHEN"
+      "file": "01-himmel.webp",
+      "caption": "DER HIMMEL FOLGT DEINER BEWEGUNG",
+      "section": 0
     },
     {
-      "file": "02-heute-nacht.webp",
-      "caption": "Heute Nacht sichtbar"
+      "file": "02-objekt-info.webp",
+      "caption": "ANTIPPEN UND VERSTEHEN",
+      "section": 1
     },
     {
-      "file": "03-himmel.webp",
-      "caption": "DER HIMMEL FOLGT DEINER BEWEGUNG"
+      "file": "03-heute-nacht.webp",
+      "caption": "Heute Nacht sichtbar",
+      "section": 2
     },
     {
-      "file": "05-finsternis.webp",
-      "caption": "SONNEN- UND MONDFINSTERNISSE"
+      "file": "05-finsternis-ansehen.webp",
+      "caption": "Ein Tipp, und du verfolgst sie im Zeitraffer.",
+      "section": 5
     }
   ],
   "en": [
     {
-      "file": "01-objekt-info.webp",
-      "caption": "TAP TO UNDERSTAND"
+      "file": "01-himmel.webp",
+      "caption": "THE SKY FOLLOWS YOUR MOVEMENT",
+      "section": 0
     },
     {
-      "file": "02-heute-nacht.webp",
-      "caption": "Visible tonight"
+      "file": "02-objekt-info.webp",
+      "caption": "TAP TO UNDERSTAND",
+      "section": 1
     },
     {
-      "file": "03-himmel.webp",
-      "caption": "THE SKY FOLLOWS YOUR MOVEMENT"
+      "file": "03-heute-nacht.webp",
+      "caption": "Visible tonight",
+      "section": 2
     },
     {
-      "file": "05-finsternis.webp",
-      "caption": "SOLAR AND LUNAR ECLIPSES"
+      "file": "05-finsternis-ansehen.webp",
+      "caption": "One tap and you can follow it in time lapse.",
+      "section": 5
     }
   ],
   "es": [
     {
-      "file": "01-objekt-info.webp",
-      "caption": "TOCA Y ENTIENDE"
+      "file": "01-himmel.webp",
+      "caption": "EL CIELO SIGUE TU MOVIMIENTO",
+      "section": 0
     },
     {
-      "file": "02-heute-nacht.webp",
-      "caption": "Visible esta noche"
+      "file": "02-objekt-info.webp",
+      "caption": "TOCA Y ENTIENDE",
+      "section": 1
     },
     {
-      "file": "03-himmel.webp",
-      "caption": "EL CIELO SIGUE TU MOVIMIENTO"
+      "file": "03-heute-nacht.webp",
+      "caption": "Visible esta noche",
+      "section": 2
     },
     {
-      "file": "05-finsternis.webp",
-      "caption": "ECLIPSES DE SOL Y DE LUNA"
+      "file": "05-finsternis-ansehen.webp",
+      "caption": "Un toque y la cámara rápida lo reproduce.",
+      "section": 5
     }
   ],
   "fr": [
     {
-      "file": "01-objekt-info.webp",
-      "caption": "TOUCHE POUR COMPRENDRE"
+      "file": "01-himmel.webp",
+      "caption": "LE CIEL SUIT TON MOUVEMENT",
+      "section": 0
     },
     {
-      "file": "02-heute-nacht.webp",
-      "caption": "Visible cette nuit"
+      "file": "02-objekt-info.webp",
+      "caption": "TOUCHE POUR COMPRENDRE",
+      "section": 1
     },
     {
-      "file": "03-himmel.webp",
-      "caption": "LE CIEL SUIT TON MOUVEMENT"
+      "file": "03-heute-nacht.webp",
+      "caption": "Visible cette nuit",
+      "section": 2
     },
     {
-      "file": "05-finsternis.webp",
-      "caption": "ÉCLIPSES DE SOLEIL ET DE LUNE"
+      "file": "05-finsternis-ansehen.webp",
+      "caption": "Une touche, et tu la suis en accéléré.",
+      "section": 5
     }
   ],
   "it": [
     {
-      "file": "01-objekt-info.webp",
-      "caption": "TOCCA E CAPISCI"
+      "file": "01-himmel.webp",
+      "caption": "IL CIELO SEGUE IL TUO MOVIMENTO",
+      "section": 0
     },
     {
-      "file": "02-heute-nacht.webp",
-      "caption": "Visibile stanotte"
+      "file": "02-objekt-info.webp",
+      "caption": "TOCCA E CAPISCI",
+      "section": 1
     },
     {
-      "file": "03-himmel.webp",
-      "caption": "IL CIELO SEGUE IL TUO MOVIMENTO"
+      "file": "03-heute-nacht.webp",
+      "caption": "Visibile stanotte",
+      "section": 2
     },
     {
-      "file": "05-finsternis.webp",
-      "caption": "ECLISSI DI SOLE E DI LUNA"
+      "file": "05-finsternis-ansehen.webp",
+      "caption": "Un tocco e segui l'eclissi nel time lapse.",
+      "section": 5
     }
   ],
   "ja": [
     {
-      "file": "01-objekt-info.webp",
-      "caption": "タップして知る"
+      "file": "01-himmel.webp",
+      "caption": "空があなたの動きに合わせて動きます",
+      "section": 0
     },
     {
-      "file": "02-heute-nacht.webp",
-      "caption": "今夜の見どころ"
+      "file": "02-objekt-info.webp",
+      "caption": "タップして知る",
+      "section": 1
     },
     {
-      "file": "03-himmel.webp",
-      "caption": "空があなたの動きに合わせて動きます"
+      "file": "03-heute-nacht.webp",
+      "caption": "今夜の見どころ",
+      "section": 2
     },
     {
-      "file": "05-finsternis.webp",
-      "caption": "日食と月食"
+      "file": "05-finsternis-ansehen.webp",
+      "caption": "タップすれば、早送りでたどれます。",
+      "section": 5
     }
   ],
   "pt": [
     {
-      "file": "01-objekt-info.webp",
-      "caption": "TOQUE E ENTENDA"
+      "file": "01-himmel.webp",
+      "caption": "O CÉU ACOMPANHA O SEU MOVIMENTO",
+      "section": 0
     },
     {
-      "file": "02-heute-nacht.webp",
-      "caption": "Visível hoje à noite"
+      "file": "02-objekt-info.webp",
+      "caption": "TOQUE E ENTENDA",
+      "section": 1
     },
     {
-      "file": "03-himmel.webp",
-      "caption": "O CÉU ACOMPANHA O SEU MOVIMENTO"
+      "file": "03-heute-nacht.webp",
+      "caption": "Visível hoje à noite",
+      "section": 2
     },
     {
-      "file": "05-finsternis.webp",
-      "caption": "ECLIPSES DO SOL E DA LUA"
+      "file": "05-finsternis-ansehen.webp",
+      "caption": "Um toque e você acompanha o eclipse na câmera rápida.",
+      "section": 5
     }
   ]
 }

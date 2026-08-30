@@ -65,17 +65,22 @@
      Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
   .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
   .play img { height: 56px; width: auto; display: block; }
-  .shots {
-    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
-    margin: 0 0 28px;
-  }
-  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
-  .shots img {
+  /* Bild neben seinem Abschnitt statt in einem Streifen, durch den man
+     scrollen muss (Nutzer-Vorgabe 30.08.2026). Wer die Seite liest, sieht
+     die Funktion und ihre Erklärung nebeneinander — und nichts liegt außer
+     Sicht. */
+  .feature { display: flex; gap: 28px; align-items: flex-start; }
+  .feature-text { flex: 1 1 auto; min-width: 0; }
+  .feature-shot { flex: 0 0 200px; margin: 0; }
+  .feature-shot img {
     width: 100%; height: auto; display: block;
-    border: 1px solid var(--outline); border-radius: 12px;
+    border: 1px solid var(--outline); border-radius: 14px;
   }
-  .shots figcaption {
-    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  @media (max-width: 640px) {
+    /* Auf schmalen Geräten untereinander — nebeneinander bliebe für beides
+       zu wenig Platz. */
+    .feature { display: block; }
+    .feature-shot { max-width: 240px; margin: 14px auto 4px; }
   }
   section.doc {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
@@ -116,32 +121,34 @@
     </a>
   </section>
 
-  <div class="shots">
-    <figure>
-      <img src="assets/shots/pt/01-objekt-info.webp" alt="TOQUE E ENTENDA" loading="lazy">
-      <figcaption>TOQUE E ENTENDA</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/pt/02-heute-nacht.webp" alt="Visível hoje à noite" loading="lazy">
-      <figcaption>Visível hoje à noite</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/pt/03-himmel.webp" alt="O CÉU ACOMPANHA O SEU MOVIMENTO" loading="lazy">
-      <figcaption>O CÉU ACOMPANHA O SEU MOVIMENTO</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/pt/05-finsternis.webp" alt="ECLIPSES DO SOL E DA LUA" loading="lazy">
-      <figcaption>ECLIPSES DO SOL E DA LUA</figcaption>
-    </figure>
-  </div>
-
   <section class="doc">
-    <h2>O CÉU ACOMPANHA O SEU MOVIMENTO</h2>
-    <p>No modo ao vivo, o sensor de orientação comanda a vista: mova o aparelho e o mapa acompanha — com suavidade e com correção da declinação magnética da sua localização. Prefere do jeito clássico? Explore o céu arrastando e beliscando para aproximar.</p>
-    <h2>TOQUE E ENTENDA</h2>
-    <p>Toque num objeto para saber mais sem sair da vista: nome próprio e designação de catálogo, distância, brilho, classe espectral e temperatura, e em muitas estrelas brilhantes também raio e massa — além dos horários de nascer, culminação e pôr para o seu lugar.</p>
-    <h2>ENCONTRE O QUE VOCÊ PROCURA</h2>
-    <p>Procure estrelas, planetas, constelações e objetos do céu profundo pelo nome ou número de catálogo — M 31, NGC 224 e Andrômeda levam ao mesmo objeto. Se o alvo estiver fora da tela, uma seta aponta o caminho e a distância angular. E quando você ainda não sabe o que procurar: «Visível hoje à noite» indica os objetos mais interessantes da noite que vem, em palavras claras, com altura e janela de observação. Uma entrada na astronomia sem conhecimento prévio, e no primeiro início um passeio curto mostra como tudo funciona.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>O CÉU ACOMPANHA O SEU MOVIMENTO</h2>
+      <p>No modo ao vivo, o sensor de orientação comanda a vista: mova o aparelho e o mapa acompanha — com suavidade e com correção da declinação magnética da sua localização. Prefere do jeito clássico? Explore o céu arrastando e beliscando para aproximar.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/pt/01-himmel.webp" alt="O CÉU ACOMPANHA O SEU MOVIMENTO" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>TOQUE E ENTENDA</h2>
+      <p>Toque num objeto para saber mais sem sair da vista: nome próprio e designação de catálogo, distância, brilho, classe espectral e temperatura, e em muitas estrelas brilhantes também raio e massa — além dos horários de nascer, culminação e pôr para o seu lugar.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/pt/02-objekt-info.webp" alt="TOQUE E ENTENDA" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>ENCONTRE O QUE VOCÊ PROCURA</h2>
+      <p>Procure estrelas, planetas, constelações e objetos do céu profundo pelo nome ou número de catálogo — M 31, NGC 224 e Andrômeda levam ao mesmo objeto. Se o alvo estiver fora da tela, uma seta aponta o caminho e a distância angular. E quando você ainda não sabe o que procurar: «Visível hoje à noite» indica os objetos mais interessantes da noite que vem, em palavras claras, com altura e janela de observação. Uma entrada na astronomia sem conhecimento prévio, e no primeiro início um passeio curto mostra como tudo funciona.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/pt/03-heute-nacht.webp" alt="Visível hoje à noite" loading="lazy">
+      </figure>
+    </div>
     <h2>O QUE VOCÊ VAI VER</h2>
     <ul>
       <li>Cerca de 8.900 estrelas — todas as visíveis a olho nu (até a magnitude 6,5)</li>
@@ -152,8 +159,15 @@
     </ul>
     <h2>O TEMPO EM CÂMERA RÁPIDA</h2>
     <p>A câmera rápida mostra as estrelas cruzarem o céu, para a frente e para trás. Assim você vê um objeto se pôr, percorre uma noite inteira ou acompanha a Lua pelas suas fases.</p>
-    <h2>ECLIPSES DO SOL E DA LUA</h2>
-    <p>O Astira calcula quais eclipses dá para ver do seu lugar: quando começam e quanto fica coberto. Um toque e você acompanha o eclipse na câmera rápida.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>ECLIPSES DO SOL E DA LUA</h2>
+      <p>O Astira calcula quais eclipses dá para ver do seu lugar: quando começam e quanto fica coberto. Um toque e você acompanha o eclipse na câmera rápida.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/pt/05-finsternis-ansehen.webp" alt="Um toque e você acompanha o eclipse na câmera rápida." loading="lazy">
+      </figure>
+    </div>
     <h2>ALINHAMENTO PRECISO</h2>
     <p>O mapa está um pouco fora? Isso acontece com toda bússola de celular. Mire numa estrela que você conhece, toque nela, aperte «Alinhar aqui» — pronto. O mapa bate com o seu céu em vez de deixar você adivinhando.</p>
     <h2>O CÉU SOBRE O QUE ESTÁ AO SEU REDOR</h2>

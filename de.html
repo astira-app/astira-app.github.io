@@ -65,17 +65,22 @@
      Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
   .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
   .play img { height: 56px; width: auto; display: block; }
-  .shots {
-    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
-    margin: 0 0 28px;
-  }
-  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
-  .shots img {
+  /* Bild neben seinem Abschnitt statt in einem Streifen, durch den man
+     scrollen muss (Nutzer-Vorgabe 30.08.2026). Wer die Seite liest, sieht
+     die Funktion und ihre Erklärung nebeneinander — und nichts liegt außer
+     Sicht. */
+  .feature { display: flex; gap: 28px; align-items: flex-start; }
+  .feature-text { flex: 1 1 auto; min-width: 0; }
+  .feature-shot { flex: 0 0 200px; margin: 0; }
+  .feature-shot img {
     width: 100%; height: auto; display: block;
-    border: 1px solid var(--outline); border-radius: 12px;
+    border: 1px solid var(--outline); border-radius: 14px;
   }
-  .shots figcaption {
-    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  @media (max-width: 640px) {
+    /* Auf schmalen Geräten untereinander — nebeneinander bliebe für beides
+       zu wenig Platz. */
+    .feature { display: block; }
+    .feature-shot { max-width: 240px; margin: 14px auto 4px; }
   }
   section.doc {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
@@ -116,32 +121,34 @@
     </a>
   </section>
 
-  <div class="shots">
-    <figure>
-      <img src="assets/shots/de/01-objekt-info.webp" alt="ANTIPPEN UND VERSTEHEN" loading="lazy">
-      <figcaption>ANTIPPEN UND VERSTEHEN</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/de/02-heute-nacht.webp" alt="Heute Nacht sichtbar" loading="lazy">
-      <figcaption>Heute Nacht sichtbar</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/de/03-himmel.webp" alt="DER HIMMEL FOLGT DEINER BEWEGUNG" loading="lazy">
-      <figcaption>DER HIMMEL FOLGT DEINER BEWEGUNG</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/de/05-finsternis.webp" alt="SONNEN- UND MONDFINSTERNISSE" loading="lazy">
-      <figcaption>SONNEN- UND MONDFINSTERNISSE</figcaption>
-    </figure>
-  </div>
-
   <section class="doc">
-    <h2>DER HIMMEL FOLGT DEINER BEWEGUNG</h2>
-    <p>Im Live-Modus steuert der Lagesensor die Ansicht: Gerät schwenken, und die Karte schwenkt mit — ruhig, flüssig und mit Kompass-Korrektur für das Erdmagnetfeld. Alternativ erkundest du den Himmel klassisch per Wischen und Zoomen.</p>
-    <h2>ANTIPPEN UND VERSTEHEN</h2>
-    <p>Tippe ein Objekt an und erfahre mehr, ohne die Ansicht zu verlassen: Eigenname und Katalogbezeichnung, Entfernung, Helligkeit, Spektralklasse und Temperatur, bei vielen hellen Sternen auch Radius und Masse — dazu Auf-, Kulminations- und Untergangszeit für deinen Standort.</p>
-    <h2>FINDEN, WAS DU SUCHST</h2>
-    <p>Suche Sterne, Planeten, Sternbilder und Deep-Sky-Objekte nach Namen oder Katalognummer — M 31, NGC 224 und Andromeda führen zum selben Objekt. Steht das Ziel außerhalb des Bildes, weist ein Pfeil den Weg samt Winkelabstand. Und wenn du noch gar nicht weißt, wonach du suchen sollst: „Heute Nacht sichtbar" nennt dir die lohnendsten Objekte der kommenden Nacht — in klaren Worten, mit Höhe und Beobachtungsfenster. Ein Einstieg in die Astronomie ohne Vorwissen, und beim ersten Start führt dich ein kurzer Rundgang durch die Bedienung.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>DER HIMMEL FOLGT DEINER BEWEGUNG</h2>
+      <p>Im Live-Modus steuert der Lagesensor die Ansicht: Gerät schwenken, und die Karte schwenkt mit — ruhig, flüssig und mit Kompass-Korrektur für das Erdmagnetfeld. Alternativ erkundest du den Himmel klassisch per Wischen und Zoomen.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/de/01-himmel.webp" alt="DER HIMMEL FOLGT DEINER BEWEGUNG" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>ANTIPPEN UND VERSTEHEN</h2>
+      <p>Tippe ein Objekt an und erfahre mehr, ohne die Ansicht zu verlassen: Eigenname und Katalogbezeichnung, Entfernung, Helligkeit, Spektralklasse und Temperatur, bei vielen hellen Sternen auch Radius und Masse — dazu Auf-, Kulminations- und Untergangszeit für deinen Standort.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/de/02-objekt-info.webp" alt="ANTIPPEN UND VERSTEHEN" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>FINDEN, WAS DU SUCHST</h2>
+      <p>Suche Sterne, Planeten, Sternbilder und Deep-Sky-Objekte nach Namen oder Katalognummer — M 31, NGC 224 und Andromeda führen zum selben Objekt. Steht das Ziel außerhalb des Bildes, weist ein Pfeil den Weg samt Winkelabstand. Und wenn du noch gar nicht weißt, wonach du suchen sollst: „Heute Nacht sichtbar" nennt dir die lohnendsten Objekte der kommenden Nacht — in klaren Worten, mit Höhe und Beobachtungsfenster. Ein Einstieg in die Astronomie ohne Vorwissen, und beim ersten Start führt dich ein kurzer Rundgang durch die Bedienung.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/de/03-heute-nacht.webp" alt="Heute Nacht sichtbar" loading="lazy">
+      </figure>
+    </div>
     <h2>WAS DU SIEHST</h2>
     <ul>
       <li>Rund 8.900 Sterne — alle, die mit bloßem Auge sichtbar sind (bis Größenklasse 6,5)</li>
@@ -152,8 +159,15 @@
     </ul>
     <h2>DIE ZEIT IM ZEITRAFFER</h2>
     <p>Der Zeitraffer zeigt dir, wie die Sterne über den Himmel ziehen — vorwärts wie rückwärts. So siehst du ein Objekt untergehen, eine ganze Nacht durchlaufen oder den Mond durch seine Phasen wandern.</p>
-    <h2>SONNEN- UND MONDFINSTERNISSE</h2>
-    <p>Astira rechnet aus, welche Finsternisse von deinem Standort aus zu sehen sind — wann sie beginnen und wie viel bedeckt wird. Ein Tipp, und du verfolgst sie im Zeitraffer.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>SONNEN- UND MONDFINSTERNISSE</h2>
+      <p>Astira rechnet aus, welche Finsternisse von deinem Standort aus zu sehen sind — wann sie beginnen und wie viel bedeckt wird. Ein Tipp, und du verfolgst sie im Zeitraffer.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/de/05-finsternis-ansehen.webp" alt="Ein Tipp, und du verfolgst sie im Zeitraffer." loading="lazy">
+      </figure>
+    </div>
     <h2>PRÄZISIONS-AUSRICHTUNG</h2>
     <p>Zeigt die Karte mal daneben (das passiert jedem Smartphone-Kompass): Stern anpeilen, antippen, „Hierher ausrichten" — fertig. So deckt sich die Karte mit deinem Himmel, statt dich raten zu lassen.</p>
     <h2>DER HIMMEL ÜBER DEINER UMGEBUNG</h2>

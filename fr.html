@@ -65,17 +65,22 @@
      Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
   .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
   .play img { height: 56px; width: auto; display: block; }
-  .shots {
-    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
-    margin: 0 0 28px;
-  }
-  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
-  .shots img {
+  /* Bild neben seinem Abschnitt statt in einem Streifen, durch den man
+     scrollen muss (Nutzer-Vorgabe 30.08.2026). Wer die Seite liest, sieht
+     die Funktion und ihre Erklärung nebeneinander — und nichts liegt außer
+     Sicht. */
+  .feature { display: flex; gap: 28px; align-items: flex-start; }
+  .feature-text { flex: 1 1 auto; min-width: 0; }
+  .feature-shot { flex: 0 0 200px; margin: 0; }
+  .feature-shot img {
     width: 100%; height: auto; display: block;
-    border: 1px solid var(--outline); border-radius: 12px;
+    border: 1px solid var(--outline); border-radius: 14px;
   }
-  .shots figcaption {
-    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  @media (max-width: 640px) {
+    /* Auf schmalen Geräten untereinander — nebeneinander bliebe für beides
+       zu wenig Platz. */
+    .feature { display: block; }
+    .feature-shot { max-width: 240px; margin: 14px auto 4px; }
   }
   section.doc {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
@@ -116,32 +121,34 @@
     </a>
   </section>
 
-  <div class="shots">
-    <figure>
-      <img src="assets/shots/fr/01-objekt-info.webp" alt="TOUCHE POUR COMPRENDRE" loading="lazy">
-      <figcaption>TOUCHE POUR COMPRENDRE</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/fr/02-heute-nacht.webp" alt="Visible cette nuit" loading="lazy">
-      <figcaption>Visible cette nuit</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/fr/03-himmel.webp" alt="LE CIEL SUIT TON MOUVEMENT" loading="lazy">
-      <figcaption>LE CIEL SUIT TON MOUVEMENT</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/shots/fr/05-finsternis.webp" alt="ÉCLIPSES DE SOLEIL ET DE LUNE" loading="lazy">
-      <figcaption>ÉCLIPSES DE SOLEIL ET DE LUNE</figcaption>
-    </figure>
-  </div>
-
   <section class="doc">
-    <h2>LE CIEL SUIT TON MOUVEMENT</h2>
-    <p>En mode direct, le capteur d'orientation pilote la vue : déplace l'appareil et la carte suit — en douceur, avec la correction de la déclinaison magnétique de ta position. Tu préfères la manière classique ? Balaie et pince pour zoomer.</p>
-    <h2>TOUCHE POUR COMPRENDRE</h2>
-    <p>Touche un objet pour en savoir plus sans quitter la vue : nom propre et désignation de catalogue, distance, éclat, type spectral et température, et pour de nombreuses étoiles brillantes aussi le rayon et la masse — avec les heures de lever, de culmination et de coucher pour ton lieu.</p>
-    <h2>TROUVE CE QUE TU CHERCHES</h2>
-    <p>Cherche étoiles, planètes, constellations et objets du ciel profond par nom ou numéro de catalogue — M 31, NGC 224 et Andromède mènent au même objet. Hors de l'écran, une flèche indique le chemin et l'angle. Et si tu ne sais pas quoi chercher : « Visible cette nuit » liste les objets les plus intéressants de la nuit, avec hauteur et fenêtre d'observation. Une entrée en astronomie sans connaissances préalables, et au premier lancement une courte visite te guide dans l'application.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>LE CIEL SUIT TON MOUVEMENT</h2>
+      <p>En mode direct, le capteur d'orientation pilote la vue : déplace l'appareil et la carte suit — en douceur, avec la correction de la déclinaison magnétique de ta position. Tu préfères la manière classique ? Balaie et pince pour zoomer.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/fr/01-himmel.webp" alt="LE CIEL SUIT TON MOUVEMENT" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>TOUCHE POUR COMPRENDRE</h2>
+      <p>Touche un objet pour en savoir plus sans quitter la vue : nom propre et désignation de catalogue, distance, éclat, type spectral et température, et pour de nombreuses étoiles brillantes aussi le rayon et la masse — avec les heures de lever, de culmination et de coucher pour ton lieu.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/fr/02-objekt-info.webp" alt="TOUCHE POUR COMPRENDRE" loading="lazy">
+      </figure>
+    </div>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>TROUVE CE QUE TU CHERCHES</h2>
+      <p>Cherche étoiles, planètes, constellations et objets du ciel profond par nom ou numéro de catalogue — M 31, NGC 224 et Andromède mènent au même objet. Hors de l'écran, une flèche indique le chemin et l'angle. Et si tu ne sais pas quoi chercher : « Visible cette nuit » liste les objets les plus intéressants de la nuit, avec hauteur et fenêtre d'observation. Une entrée en astronomie sans connaissances préalables, et au premier lancement une courte visite te guide dans l'application.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/fr/03-heute-nacht.webp" alt="Visible cette nuit" loading="lazy">
+      </figure>
+    </div>
     <h2>CE QUE TU VERRAS</h2>
     <ul>
       <li>Environ 8 900 étoiles — toutes celles visibles à l'œil nu (jusqu'à la magnitude 6,5)</li>
@@ -152,8 +159,15 @@
     </ul>
     <h2>LE TEMPS EN ACCÉLÉRÉ</h2>
     <p>L'accéléré te montre les étoiles traverser le ciel, dans les deux sens. Vois un objet se coucher, parcours une nuit, suis la Lune au fil de ses phases.</p>
-    <h2>ÉCLIPSES DE SOLEIL ET DE LUNE</h2>
-    <p>Astira calcule quelles éclipses sont visibles depuis chez toi : quand elles commencent et quelle part est couverte. Une touche, et tu la suis en accéléré.</p>
+    <div class="feature">
+      <div class="feature-text">
+      <h2>ÉCLIPSES DE SOLEIL ET DE LUNE</h2>
+      <p>Astira calcule quelles éclipses sont visibles depuis chez toi : quand elles commencent et quelle part est couverte. Une touche, et tu la suis en accéléré.</p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/shots/fr/05-finsternis-ansehen.webp" alt="Une touche, et tu la suis en accéléré." loading="lazy">
+      </figure>
+    </div>
     <h2>ALIGNEMENT PRÉCIS</h2>
     <p>La carte est légèrement décalée ? Cela arrive à toutes les boussoles de téléphone. Vise une étoile que tu connais, touche-la, appuie sur « Aligner ici » — c'est fait. La carte colle à ton ciel au lieu de te laisser deviner.</p>
     <h2>LE CIEL AU-DESSUS DE TON ENVIRONNEMENT</h2>
