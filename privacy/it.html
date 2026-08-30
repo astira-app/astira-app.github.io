@@ -163,6 +163,14 @@
     background: none; border: 0; border-radius: 0;
     padding: 0; margin-bottom: 30px;
   }
+  /* **Der erste Kasten einer Seite behält seinen Rahmen** (Vorgabe
+     30.08.2026) — der mit der Überschrift. Er gibt der Seite einen Anfang,
+     während die Abschnitte darunter frei stehen. Zwei Klassen schlagen die
+     `.card`-Regel darüber, gleich in welcher Reihenfolge sie steht. */
+  .card.intro {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px 24px; margin-bottom: 26px;
+  }
   .note { color: var(--muted); }
   .addr { line-height: 1.5; }
   .prevails {
@@ -289,7 +297,7 @@
 </aside>
 <main class="main">
 <div class="inner">
-  <section class="card">
+  <section class="card intro">
     <h1>Informativa sulla privacy</h1>
     <p class="note">Aggiornamento: 23.07.2026</p>
     <p class="note"><a href="https://astira-app.github.io/privacy/it.html">https://astira-app.github.io/privacy/it.html</a></p>
