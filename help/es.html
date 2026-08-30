@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Ayuda">
+<title>Ayuda – Astira</title>
+<link rel="canonical" href="https://astira-app.github.io/help/es.html">
+<link rel="alternate" hreflang="de" href="https://astira-app.github.io/help/de.html">
+<link rel="alternate" hreflang="en" href="https://astira-app.github.io/help/">
+<link rel="alternate" hreflang="es" href="https://astira-app.github.io/help/es.html">
+<link rel="alternate" hreflang="fr" href="https://astira-app.github.io/help/fr.html">
+<link rel="alternate" hreflang="it" href="https://astira-app.github.io/help/it.html">
+<link rel="alternate" hreflang="pt" href="https://astira-app.github.io/help/pt.html">
+<link rel="alternate" hreflang="ja" href="https://astira-app.github.io/help/ja.html">
+<link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/help/">
+<!-- Erzeugt von tools/build_website.py aus docs/store/play_listing.md und lib/l10n/app_*.arb — nicht von Hand bearbeiten. -->
+<style>
+  :root {
+    --bg: #060913;
+    --surface: #0B101E;
+    --card: #141A29;
+    --text: #DCE4F2;
+    --muted: #93A7C9;
+    --accent: #8FA7E8;
+    --line: #2A3348;
+    --outline: #45536E;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; }
+  header.top {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px;
+  }
+  header.top .app { font-weight: 700; font-size: 1.15rem; letter-spacing: .5px; }
+  header.top .sub { color: var(--muted); font-size: .9rem; }
+  .sitenav { margin: 14px 0 4px; font-size: .95rem; }
+  .langnav { margin: 8px 0 28px; font-size: .92rem; }
+  .sitenav a, .langnav a { color: var(--accent); text-decoration: none; }
+  .sitenav a:hover, .langnav a:hover { text-decoration: underline; }
+  .sitenav strong, .langnav strong { font-weight: 600; }
+  a { color: var(--accent); }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; line-height: 1.25; }
+  h2 { font-size: 1.15rem; margin: 30px 0 6px; color: var(--accent); }
+  p, ul { margin: 8px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 5px 0; }
+  .hero { margin: 8px 0 28px; }
+  .hero .lead { font-size: 1.15rem; color: var(--text); margin: 0 0 14px; }
+  .hero .intro { color: var(--muted); }
+  /* Das Badge bekommt **nur** eine Höhe: kein Hintergrund, keine Ecken,
+     kein Filter, kein Effekt beim Überfahren. Googles Richtlinie verbietet
+     jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
+     nimmt nur die Unterlänge weg, die eine Zeile sonst darunter setzt.
+     Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
+  .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
+  .play img { height: 56px; width: auto; display: block; }
+  .shots {
+    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
+    margin: 0 0 28px;
+  }
+  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--outline); border-radius: 12px;
+  }
+  .shots figcaption {
+    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  }
+  section.doc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px 26px; margin-bottom: 28px;
+  }
+  section.doc > h2:first-child { margin-top: 4px; }
+  section.doc > h1 + .note { margin: 0 0 6px; }
+  .note { color: var(--muted); font-size: .9rem; }
+  dl { margin: 6px 0 0; }
+  dt { font-weight: 600; margin-top: 16px; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+  .hint {
+    margin-top: 24px; padding: 14px 16px; color: var(--text);
+    background: rgba(143, 167, 232, .10);
+    border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
+  }
+  footer {
+    color: var(--muted); font-size: .85rem; text-align: center;
+    border-top: 1px solid var(--line); padding-top: 18px; margin-top: 8px;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="app">Astira</span>
+  </header>
+  <nav class="sitenav"><a href="../es.html">Astira</a> · <strong>Ayuda</strong> · <a href="../privacy/es.html">Política de privacidad</a> · <a href="../legal/es.html">Aviso legal</a></nav>
+  <nav class="langnav"><a href="de.html" lang="de">Deutsch</a> · <a href="./" lang="en">English</a> · <strong>Español</strong> · <a href="fr.html" lang="fr">Français</a> · <a href="it.html" lang="it">Italiano</a> · <a href="pt.html" lang="pt">Português (Brasil)</a> · <a href="ja.html" lang="ja">日本語</a></nav>
+
+  <section class="doc">
+    <h1>Ayuda</h1>
+    <p class="note">Explicación de los controles</p>
+
+    <h2>Arriba</h2>
+    <dl>
+      <dt>Ubicación</dt>
+      <dd>Indica para qué lugar se calcula el cielo. Tócala para fijarla por GPS o introducirla a mano.</dd>
+      <dt>Momento</dt>
+      <dd>Indica la hora de observación. Tócala para elegir cualquier fecha y hora, o para volver al momento actual.</dd>
+      <dt>Modo nocturno</dt>
+      <dd>Cambia toda la pantalla a rojo oscuro. Los ojos necesitan unos veinte minutos para acostumbrarse a la oscuridad, y una pantalla clara lo deshace en un instante — la luz roja casi no.</dd>
+      <dt>Buscar</dt>
+      <dd>Encuentra estrellas, planetas, constelaciones y objetos de cielo profundo por su nombre. Si el objetivo queda fuera de la pantalla, una flecha señala el camino.</dd>
+      <dt>Ajustes</dt>
+      <dd>Idioma, fecha y hora, unidades, la imagen de la cámara y las explicaciones de los controles.</dd>
+    </dl>
+
+    <h2>Abajo, al alcance del pulgar</h2>
+    <dl>
+      <dt>Visible esta noche</dt>
+      <dd>El punto de partida cuando aún no sabes qué buscar: los objetos más interesantes de la noche que viene.</dd>
+      <dt>Cámara rápida</dt>
+      <dd>Adelanta el tiempo para ver cómo las estrellas recorren el cielo: desde la puesta de un objeto hasta las fases de la Luna. Mientras ves un eclipse, el mismo botón te devuelve a la vista anterior.</dd>
+      <dt>Capas</dt>
+      <dd>Activa y desactiva lo que se ve: constelaciones, Vía Láctea, órbitas de los planetas, nombres.</dd>
+      <dt>Imagen de la cámara</dt>
+      <dd>Superpone el mapa a la imagen de tu cámara para que el horizonte, los árboles y los tejados sigan visibles. Necesita el modo en vivo. Mantén el dedo pulsado en el cielo para ver solo la imagen de la cámara un momento.</dd>
+      <dt>Modo en vivo</dt>
+      <dd>Apunta el dispositivo al cielo y el mapa sigue tu movimiento. Es la forma más rápida de identificar un objeto brillante.</dd>
+      <dt>Recalibrar</dt>
+      <dd>¿El mapa aparece torcido? En cuanto la brújula pierde precisión, aparece un aviso que puedes tocar en el modo en vivo; en los ajustes lo tienes siempre a mano. Después mueve el dispositivo trazando un ocho tumbado mientras lo inclinas.</dd>
+      <dt>Ocultar los controles</dt>
+      <dd>Retira todos los botones y despeja el cielo — también se ocultan las barras del sistema. El mismo botón los devuelve, y se queda en su sitio.</dd>
+    </dl>
+
+    <p class="hint">No hace falta memorizar nada: mantén pulsado un botón y él mismo te dice para qué sirve.</p>
+  </section>
+
+  <footer>
+    <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="../privacy/es.html">Política de privacidad</a> · <a href="../legal/es.html">Aviso legal</a>
+  </footer>
+</div>
+</body>
+</html>

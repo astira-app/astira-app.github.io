@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="description" content="ヘルプ">
+<title>ヘルプ – Astira</title>
+<link rel="canonical" href="https://astira-app.github.io/help/ja.html">
+<link rel="alternate" hreflang="de" href="https://astira-app.github.io/help/de.html">
+<link rel="alternate" hreflang="en" href="https://astira-app.github.io/help/">
+<link rel="alternate" hreflang="es" href="https://astira-app.github.io/help/es.html">
+<link rel="alternate" hreflang="fr" href="https://astira-app.github.io/help/fr.html">
+<link rel="alternate" hreflang="it" href="https://astira-app.github.io/help/it.html">
+<link rel="alternate" hreflang="pt" href="https://astira-app.github.io/help/pt.html">
+<link rel="alternate" hreflang="ja" href="https://astira-app.github.io/help/ja.html">
+<link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/help/">
+<!-- Erzeugt von tools/build_website.py aus docs/store/play_listing.md und lib/l10n/app_*.arb — nicht von Hand bearbeiten. -->
+<style>
+  :root {
+    --bg: #060913;
+    --surface: #0B101E;
+    --card: #141A29;
+    --text: #DCE4F2;
+    --muted: #93A7C9;
+    --accent: #8FA7E8;
+    --line: #2A3348;
+    --outline: #45536E;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; }
+  header.top {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px;
+  }
+  header.top .app { font-weight: 700; font-size: 1.15rem; letter-spacing: .5px; }
+  header.top .sub { color: var(--muted); font-size: .9rem; }
+  .sitenav { margin: 14px 0 4px; font-size: .95rem; }
+  .langnav { margin: 8px 0 28px; font-size: .92rem; }
+  .sitenav a, .langnav a { color: var(--accent); text-decoration: none; }
+  .sitenav a:hover, .langnav a:hover { text-decoration: underline; }
+  .sitenav strong, .langnav strong { font-weight: 600; }
+  a { color: var(--accent); }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; line-height: 1.25; }
+  h2 { font-size: 1.15rem; margin: 30px 0 6px; color: var(--accent); }
+  p, ul { margin: 8px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 5px 0; }
+  .hero { margin: 8px 0 28px; }
+  .hero .lead { font-size: 1.15rem; color: var(--text); margin: 0 0 14px; }
+  .hero .intro { color: var(--muted); }
+  /* Das Badge bekommt **nur** eine Höhe: kein Hintergrund, keine Ecken,
+     kein Filter, kein Effekt beim Überfahren. Googles Richtlinie verbietet
+     jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
+     nimmt nur die Unterlänge weg, die eine Zeile sonst darunter setzt.
+     Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
+  .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
+  .play img { height: 56px; width: auto; display: block; }
+  .shots {
+    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
+    margin: 0 0 28px;
+  }
+  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--outline); border-radius: 12px;
+  }
+  .shots figcaption {
+    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  }
+  section.doc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px 26px; margin-bottom: 28px;
+  }
+  section.doc > h2:first-child { margin-top: 4px; }
+  section.doc > h1 + .note { margin: 0 0 6px; }
+  .note { color: var(--muted); font-size: .9rem; }
+  dl { margin: 6px 0 0; }
+  dt { font-weight: 600; margin-top: 16px; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+  .hint {
+    margin-top: 24px; padding: 14px 16px; color: var(--text);
+    background: rgba(143, 167, 232, .10);
+    border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
+  }
+  footer {
+    color: var(--muted); font-size: .85rem; text-align: center;
+    border-top: 1px solid var(--line); padding-top: 18px; margin-top: 8px;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="app">Astira</span>
+  </header>
+  <nav class="sitenav"><a href="../ja.html">Astira</a> · <strong>ヘルプ</strong> · <a href="../privacy/ja.html">プライバシーポリシー</a> · <a href="../legal/ja.html">運営者情報</a></nav>
+  <nav class="langnav"><a href="de.html" lang="de">Deutsch</a> · <a href="./" lang="en">English</a> · <a href="es.html" lang="es">Español</a> · <a href="fr.html" lang="fr">Français</a> · <a href="it.html" lang="it">Italiano</a> · <a href="pt.html" lang="pt">Português (Brasil)</a> · <strong>日本語</strong></nav>
+
+  <section class="doc">
+    <h1>ヘルプ</h1>
+    <p class="note">操作の説明</p>
+
+    <h2>画面の上</h2>
+    <dl>
+      <dt>現在地</dt>
+      <dd>どの場所の空を計算しているかを示します。タップして GPS で設定するか、手で入力できます。</dd>
+      <dt>日時</dt>
+      <dd>観測する日時を示します。タップすると好きな日付と時刻を選べ、現在に戻すこともできます。</dd>
+      <dt>夜間モード</dt>
+      <dd>画面全体を暗い赤に切り替えます。目が暗さに慣れるには二十分ほどかかりますが、明るい画面はそれを一瞬で元に戻します—赤い光ならほとんど影響しません。</dd>
+      <dt>さがす</dt>
+      <dd>恒星、惑星、星座、深宇宙天体を名前で探せます。画面の外にある場合は、矢印が向きを教えてくれます。</dd>
+      <dt>設定</dt>
+      <dd>言語、日付と時刻、単位、カメラの映像、そして操作の説明。</dd>
+    </dl>
+
+    <h2>画面の下 (親指の届くところ)</h2>
+    <dl>
+      <dt>今夜の見どころ</dt>
+      <dd>何を見ればいいか決まっていないときの入口です。これからの夜でいちばん見ごたえのある天体を挙げます。</dd>
+      <dt>早送り</dt>
+      <dd>時間を早送りして、星が空を横切っていく様子を見られます。天体が沈むところから月の満ち欠けまで。日食や月食を見ている間は、同じボタンで前の表示に戻ります。</dd>
+      <dt>レイヤー</dt>
+      <dd>表示する内容を切り替えます。星座、天の川、惑星の軌道、名前など。</dd>
+      <dt>カメラ映像</dt>
+      <dd>カメラの映像に星図を重ね、地平線や木や屋根が見えるようにします。ライブモードが必要です。 空を長押しすると、少しのあいだカメラ映像だけが見えます。</dd>
+      <dt>ライブモード</dt>
+      <dd>端末を空に向けると、星図が動きに合わせて追いかけます。明るい天体を見分けるのがいちばん速い方法です。</dd>
+      <dt>調整しなおす</dt>
+      <dd>星図がずれていますか。方位センサーの精度が落ちると、ライブモードでタップできる案内が出ます。設定からはいつでも開けます。そのうえで端末を横向きの八の字に振りながら傾けてください。</dd>
+      <dt>操作パネルを隠す</dt>
+      <dd>ボタンをすべて片づけて空を広く見せます — システムのバーも隠れます。同じボタンで戻せて、位置も動きません。</dd>
+    </dl>
+
+    <p class="hint">覚える必要はありません。ボタンを長めに押すと、そのボタン自身が用途を教えてくれます。</p>
+  </section>
+
+  <footer>
+    <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="../privacy/ja.html">プライバシーポリシー</a> · <a href="../legal/ja.html">運営者情報</a>
+  </footer>
+</div>
+</body>
+</html>

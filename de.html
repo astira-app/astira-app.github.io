@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Sternbilder, Planeten und Mond erkennen — ohne Internet.">
+<title>Astira – Sternenkarte</title>
+<link rel="canonical" href="https://astira-app.github.io/de.html">
+<link rel="alternate" hreflang="de" href="https://astira-app.github.io/de.html">
+<link rel="alternate" hreflang="en" href="https://astira-app.github.io/">
+<link rel="alternate" hreflang="es" href="https://astira-app.github.io/es.html">
+<link rel="alternate" hreflang="fr" href="https://astira-app.github.io/fr.html">
+<link rel="alternate" hreflang="it" href="https://astira-app.github.io/it.html">
+<link rel="alternate" hreflang="pt" href="https://astira-app.github.io/pt.html">
+<link rel="alternate" hreflang="ja" href="https://astira-app.github.io/ja.html">
+<link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/">
+<!-- Erzeugt von tools/build_website.py aus docs/store/play_listing.md und lib/l10n/app_*.arb — nicht von Hand bearbeiten. -->
+<style>
+  :root {
+    --bg: #060913;
+    --surface: #0B101E;
+    --card: #141A29;
+    --text: #DCE4F2;
+    --muted: #93A7C9;
+    --accent: #8FA7E8;
+    --line: #2A3348;
+    --outline: #45536E;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; }
+  header.top {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px;
+  }
+  header.top .app { font-weight: 700; font-size: 1.15rem; letter-spacing: .5px; }
+  header.top .sub { color: var(--muted); font-size: .9rem; }
+  .sitenav { margin: 14px 0 4px; font-size: .95rem; }
+  .langnav { margin: 8px 0 28px; font-size: .92rem; }
+  .sitenav a, .langnav a { color: var(--accent); text-decoration: none; }
+  .sitenav a:hover, .langnav a:hover { text-decoration: underline; }
+  .sitenav strong, .langnav strong { font-weight: 600; }
+  a { color: var(--accent); }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; line-height: 1.25; }
+  h2 { font-size: 1.15rem; margin: 30px 0 6px; color: var(--accent); }
+  p, ul { margin: 8px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 5px 0; }
+  .hero { margin: 8px 0 28px; }
+  .hero .lead { font-size: 1.15rem; color: var(--text); margin: 0 0 14px; }
+  .hero .intro { color: var(--muted); }
+  /* Das Badge bekommt **nur** eine Höhe: kein Hintergrund, keine Ecken,
+     kein Filter, kein Effekt beim Überfahren. Googles Richtlinie verbietet
+     jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
+     nimmt nur die Unterlänge weg, die eine Zeile sonst darunter setzt.
+     Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
+  .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
+  .play img { height: 56px; width: auto; display: block; }
+  .shots {
+    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
+    margin: 0 0 28px;
+  }
+  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--outline); border-radius: 12px;
+  }
+  .shots figcaption {
+    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  }
+  section.doc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px 26px; margin-bottom: 28px;
+  }
+  section.doc > h2:first-child { margin-top: 4px; }
+  section.doc > h1 + .note { margin: 0 0 6px; }
+  .note { color: var(--muted); font-size: .9rem; }
+  dl { margin: 6px 0 0; }
+  dt { font-weight: 600; margin-top: 16px; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+  .hint {
+    margin-top: 24px; padding: 14px 16px; color: var(--text);
+    background: rgba(143, 167, 232, .10);
+    border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
+  }
+  footer {
+    color: var(--muted); font-size: .85rem; text-align: center;
+    border-top: 1px solid var(--line); padding-top: 18px; margin-top: 8px;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="app">Astira</span>
+  </header>
+  <nav class="sitenav"><strong>Astira</strong> · <a href="help/de.html">Hilfe</a> · <a href="privacy/de.html">Datenschutzerklärung</a> · <a href="legal/de.html">Impressum</a></nav>
+  <nav class="langnav"><strong>Deutsch</strong> · <a href="./" lang="en">English</a> · <a href="es.html" lang="es">Español</a> · <a href="fr.html" lang="fr">Français</a> · <a href="it.html" lang="it">Italiano</a> · <a href="pt.html" lang="pt">Português (Brasil)</a> · <a href="ja.html" lang="ja">日本語</a></nav>
+
+  <section class="hero">
+    <h1>Astira – Sternenkarte</h1>
+    <p class="lead">Sternbilder, Planeten und Mond erkennen — ohne Internet.</p>
+    <p class="intro">Richte dein Handy auf den Himmel — Astira zeigt dir live, was du gerade siehst: Sterne und Sternbilder, Planeten, den Mond und ferne Galaxien. Exakt berechnet für deinen Standort und den Moment, komplett ohne Internet.</p>
+    <a class="play" href="https://play.google.com/store/apps/details?id=dev.astira.astira">
+      <img src="assets/badge/de.svg" alt="Google Play" height="56" width="189">
+    </a>
+  </section>
+
+  <div class="shots">
+    <figure>
+      <img src="assets/shots/de/01-objekt-info.webp" alt="ANTIPPEN UND VERSTEHEN" loading="lazy">
+      <figcaption>ANTIPPEN UND VERSTEHEN</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/shots/de/02-heute-nacht.webp" alt="Heute Nacht sichtbar" loading="lazy">
+      <figcaption>Heute Nacht sichtbar</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/shots/de/03-himmel.webp" alt="DER HIMMEL FOLGT DEINER BEWEGUNG" loading="lazy">
+      <figcaption>DER HIMMEL FOLGT DEINER BEWEGUNG</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/shots/de/05-finsternis.webp" alt="SONNEN- UND MONDFINSTERNISSE" loading="lazy">
+      <figcaption>SONNEN- UND MONDFINSTERNISSE</figcaption>
+    </figure>
+  </div>
+
+  <section class="doc">
+    <h2>DER HIMMEL FOLGT DEINER BEWEGUNG</h2>
+    <p>Im Live-Modus steuert der Lagesensor die Ansicht: Gerät schwenken, und die Karte schwenkt mit — ruhig, flüssig und mit Kompass-Korrektur für das Erdmagnetfeld. Alternativ erkundest du den Himmel klassisch per Wischen und Zoomen.</p>
+    <h2>ANTIPPEN UND VERSTEHEN</h2>
+    <p>Tippe ein Objekt an und erfahre mehr, ohne die Ansicht zu verlassen: Eigenname und Katalogbezeichnung, Entfernung, Helligkeit, Spektralklasse und Temperatur, bei vielen hellen Sternen auch Radius und Masse — dazu Auf-, Kulminations- und Untergangszeit für deinen Standort.</p>
+    <h2>FINDEN, WAS DU SUCHST</h2>
+    <p>Suche Sterne, Planeten, Sternbilder und Deep-Sky-Objekte nach Namen oder Katalognummer — M 31, NGC 224 und Andromeda führen zum selben Objekt. Steht das Ziel außerhalb des Bildes, weist ein Pfeil den Weg samt Winkelabstand. Und wenn du noch gar nicht weißt, wonach du suchen sollst: „Heute Nacht sichtbar" nennt dir die lohnendsten Objekte der kommenden Nacht — in klaren Worten, mit Höhe und Beobachtungsfenster. Ein Einstieg in die Astronomie ohne Vorwissen, und beim ersten Start führt dich ein kurzer Rundgang durch die Bedienung.</p>
+    <h2>WAS DU SIEHST</h2>
+    <ul>
+      <li>Rund 8.900 Sterne — alle, die mit bloßem Auge sichtbar sind (bis Größenklasse 6,5)</li>
+      <li>Sonne, Mond (mit Phase) und alle Planeten, inklusive Sichtbarkeits- und Dämmerungsstatus</li>
+      <li>Alle 109 Messier-Objekte und weitere helle Galaxien, Nebel und Sternhaufen</li>
+      <li>Ein- und ausblendbare Ebenen: Sternbilder, Milchstraße, Sonnensystem, Ekliptik, Planetenbahnen (±30 Tage)</li>
+      <li>Standort per GPS oder manuell, Zeitpunkt frei wählbar — so siehst du auch den Himmel von morgen</li>
+    </ul>
+    <h2>DIE ZEIT IM ZEITRAFFER</h2>
+    <p>Der Zeitraffer zeigt dir, wie die Sterne über den Himmel ziehen — vorwärts wie rückwärts. So siehst du ein Objekt untergehen, eine ganze Nacht durchlaufen oder den Mond durch seine Phasen wandern.</p>
+    <h2>SONNEN- UND MONDFINSTERNISSE</h2>
+    <p>Astira rechnet aus, welche Finsternisse von deinem Standort aus zu sehen sind — wann sie beginnen und wie viel bedeckt wird. Ein Tipp, und du verfolgst sie im Zeitraffer.</p>
+    <h2>PRÄZISIONS-AUSRICHTUNG</h2>
+    <p>Zeigt die Karte mal daneben (das passiert jedem Smartphone-Kompass): Stern anpeilen, antippen, „Hierher ausrichten" — fertig. So deckt sich die Karte mit deinem Himmel, statt dich raten zu lassen.</p>
+    <h2>DER HIMMEL ÜBER DEINER UMGEBUNG</h2>
+    <p>Schalte das Kamerabild zu, und die Sternkarte legt sich über das, was wirklich vor dir liegt: Horizont, Bäume, Dächer. Statt Karte und Wirklichkeit im Kopf zusammenzubringen, richtest du das Gerät einfach dorthin, wo du suchst. Das Bild wird nur angezeigt — nie aufgenommen, nie gespeichert, nie übertragen.</p>
+    <h2>FÜRS BEOBACHTEN GEMACHT</h2>
+    <ul>
+      <li>Nachtmodus in reinem Rot erhält deine Dunkeladaption</li>
+      <li>Der Bildschirm bleibt an, solange du beobachtest</li>
+      <li>Sterne mit realistischen Farben (nach Farbindex) und Helligkeits-Skalierung</li>
+      <li>Einstellbares Helligkeitslimit, Entfernungen in Lichtjahren oder Parsec</li>
+    </ul>
+    <h2>KOMPLETT OFFLINE — UND PRIVAT</h2>
+    <p>Astira braucht kein Internet: Alle Berechnungen laufen auf deinem Gerät. Die App hat keine Internet-Berechtigung, zeigt keine Werbung und enthält kein Tracking. Dein Standort wird nur lokal zur Berechnung der Himmelsansicht verwendet — perfekt auch für Beobachtungsplätze fernab jeder Stadt (und jedes Netzes).</p>
+    <h2>GENAUIGKEIT</h2>
+    <p>Die Positionsberechnung folgt den Standardverfahren der astronomischen Fachliteratur — Planetenpositionen weichen weniger als eine Bogenminute von der JPL-Referenz ab.</p>
+    <h2>DATENQUELLEN</h2>
+    <p>Sternkatalog: HYG-Datenbank (CC BY-SA) · Deep-Sky-Objekte: OpenNGC (CC BY-SA) · Details im Credits-Bildschirm der App.</p>
+  </section>
+  <p class="note">Hinweis: Die Kompass-Genauigkeit von Smartphones liegt typisch bei ±5–10°. Mit der geführten Kalibrierung und der Stern-Ausrichtung identifizierst du trotzdem jedes Objekt sicher.</p>
+
+  <footer>
+    <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="privacy/de.html">Datenschutzerklärung</a> · <a href="legal/de.html">Impressum</a>
+  </footer>
+</div>
+</body>
+</html>

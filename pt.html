@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Reconheça as constelações, os planetas e a Lua, sem internet.">
+<title>Astira – Mapa estelar</title>
+<link rel="canonical" href="https://astira-app.github.io/pt.html">
+<link rel="alternate" hreflang="de" href="https://astira-app.github.io/de.html">
+<link rel="alternate" hreflang="en" href="https://astira-app.github.io/">
+<link rel="alternate" hreflang="es" href="https://astira-app.github.io/es.html">
+<link rel="alternate" hreflang="fr" href="https://astira-app.github.io/fr.html">
+<link rel="alternate" hreflang="it" href="https://astira-app.github.io/it.html">
+<link rel="alternate" hreflang="pt" href="https://astira-app.github.io/pt.html">
+<link rel="alternate" hreflang="ja" href="https://astira-app.github.io/ja.html">
+<link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/">
+<!-- Erzeugt von tools/build_website.py aus docs/store/play_listing.md und lib/l10n/app_*.arb — nicht von Hand bearbeiten. -->
+<style>
+  :root {
+    --bg: #060913;
+    --surface: #0B101E;
+    --card: #141A29;
+    --text: #DCE4F2;
+    --muted: #93A7C9;
+    --accent: #8FA7E8;
+    --line: #2A3348;
+    --outline: #45536E;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; }
+  header.top {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px;
+  }
+  header.top .app { font-weight: 700; font-size: 1.15rem; letter-spacing: .5px; }
+  header.top .sub { color: var(--muted); font-size: .9rem; }
+  .sitenav { margin: 14px 0 4px; font-size: .95rem; }
+  .langnav { margin: 8px 0 28px; font-size: .92rem; }
+  .sitenav a, .langnav a { color: var(--accent); text-decoration: none; }
+  .sitenav a:hover, .langnav a:hover { text-decoration: underline; }
+  .sitenav strong, .langnav strong { font-weight: 600; }
+  a { color: var(--accent); }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; line-height: 1.25; }
+  h2 { font-size: 1.15rem; margin: 30px 0 6px; color: var(--accent); }
+  p, ul { margin: 8px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 5px 0; }
+  .hero { margin: 8px 0 28px; }
+  .hero .lead { font-size: 1.15rem; color: var(--text); margin: 0 0 14px; }
+  .hero .intro { color: var(--muted); }
+  /* Das Badge bekommt **nur** eine Höhe: kein Hintergrund, keine Ecken,
+     kein Filter, kein Effekt beim Überfahren. Googles Richtlinie verbietet
+     jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
+     nimmt nur die Unterlänge weg, die eine Zeile sonst darunter setzt.
+     Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
+  .play { display: inline-block; margin: 24px 0 8px; line-height: 0; }
+  .play img { height: 56px; width: auto; display: block; }
+  .shots {
+    display: flex; gap: 14px; overflow-x: auto; padding: 4px 0 12px;
+    margin: 0 0 28px;
+  }
+  .shots figure { margin: 0; flex: 0 0 auto; width: 220px; }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--outline); border-radius: 12px;
+  }
+  .shots figcaption {
+    color: var(--muted); font-size: .82rem; margin-top: 8px; line-height: 1.35;
+  }
+  section.doc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px 26px; margin-bottom: 28px;
+  }
+  section.doc > h2:first-child { margin-top: 4px; }
+  section.doc > h1 + .note { margin: 0 0 6px; }
+  .note { color: var(--muted); font-size: .9rem; }
+  dl { margin: 6px 0 0; }
+  dt { font-weight: 600; margin-top: 16px; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+  .hint {
+    margin-top: 24px; padding: 14px 16px; color: var(--text);
+    background: rgba(143, 167, 232, .10);
+    border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
+  }
+  footer {
+    color: var(--muted); font-size: .85rem; text-align: center;
+    border-top: 1px solid var(--line); padding-top: 18px; margin-top: 8px;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="app">Astira</span>
+  </header>
+  <nav class="sitenav"><strong>Astira</strong> · <a href="help/pt.html">Ajuda</a> · <a href="privacy/pt.html">Política de privacidade</a> · <a href="legal/pt.html">Informações legais</a></nav>
+  <nav class="langnav"><a href="de.html" lang="de">Deutsch</a> · <a href="./" lang="en">English</a> · <a href="es.html" lang="es">Español</a> · <a href="fr.html" lang="fr">Français</a> · <a href="it.html" lang="it">Italiano</a> · <strong>Português (Brasil)</strong> · <a href="ja.html" lang="ja">日本語</a></nav>
+
+  <section class="hero">
+    <h1>Astira – Mapa estelar</h1>
+    <p class="lead">Reconheça as constelações, os planetas e a Lua, sem internet.</p>
+    <p class="intro">Aponte o celular para o céu — o Astira mostra ao vivo o que você está vendo: estrelas e constelações, planetas, a Lua e galáxias distantes. Calculados com precisão para o seu lugar e o momento, totalmente sem internet.</p>
+    <a class="play" href="https://play.google.com/store/apps/details?id=dev.astira.astira">
+      <img src="assets/badge/pt.svg" alt="Google Play" height="56" width="189">
+    </a>
+  </section>
+
+  <div class="shots">
+    <figure>
+      <img src="assets/shots/pt/01-objekt-info.webp" alt="TOQUE E ENTENDA" loading="lazy">
+      <figcaption>TOQUE E ENTENDA</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/shots/pt/02-heute-nacht.webp" alt="Visível hoje à noite" loading="lazy">
+      <figcaption>Visível hoje à noite</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/shots/pt/03-himmel.webp" alt="O CÉU ACOMPANHA O SEU MOVIMENTO" loading="lazy">
+      <figcaption>O CÉU ACOMPANHA O SEU MOVIMENTO</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/shots/pt/05-finsternis.webp" alt="ECLIPSES DO SOL E DA LUA" loading="lazy">
+      <figcaption>ECLIPSES DO SOL E DA LUA</figcaption>
+    </figure>
+  </div>
+
+  <section class="doc">
+    <h2>O CÉU ACOMPANHA O SEU MOVIMENTO</h2>
+    <p>No modo ao vivo, o sensor de orientação comanda a vista: mova o aparelho e o mapa acompanha — com suavidade e com correção da declinação magnética da sua localização. Prefere do jeito clássico? Explore o céu arrastando e beliscando para aproximar.</p>
+    <h2>TOQUE E ENTENDA</h2>
+    <p>Toque num objeto para saber mais sem sair da vista: nome próprio e designação de catálogo, distância, brilho, classe espectral e temperatura, e em muitas estrelas brilhantes também raio e massa — além dos horários de nascer, culminação e pôr para o seu lugar.</p>
+    <h2>ENCONTRE O QUE VOCÊ PROCURA</h2>
+    <p>Procure estrelas, planetas, constelações e objetos do céu profundo pelo nome ou número de catálogo — M 31, NGC 224 e Andrômeda levam ao mesmo objeto. Se o alvo estiver fora da tela, uma seta aponta o caminho e a distância angular. E quando você ainda não sabe o que procurar: «Visível hoje à noite» indica os objetos mais interessantes da noite que vem, em palavras claras, com altura e janela de observação. Uma entrada na astronomia sem conhecimento prévio, e no primeiro início um passeio curto mostra como tudo funciona.</p>
+    <h2>O QUE VOCÊ VAI VER</h2>
+    <ul>
+      <li>Cerca de 8.900 estrelas — todas as visíveis a olho nu (até a magnitude 6,5)</li>
+      <li>O Sol, a Lua (com a fase) e todos os planetas, com visibilidade e estado do crepúsculo</li>
+      <li>Os 109 objetos Messier e mais galáxias, nebulosas e aglomerados brilhantes</li>
+      <li>Camadas que dá para ligar e desligar: constelações, Via Láctea, sistema solar, eclíptica, trajetórias orbitais (±30 dias)</li>
+      <li>Localização por GPS ou manual, momento livremente ajustável — veja hoje o céu de amanhã</li>
+    </ul>
+    <h2>O TEMPO EM CÂMERA RÁPIDA</h2>
+    <p>A câmera rápida mostra as estrelas cruzarem o céu, para a frente e para trás. Assim você vê um objeto se pôr, percorre uma noite inteira ou acompanha a Lua pelas suas fases.</p>
+    <h2>ECLIPSES DO SOL E DA LUA</h2>
+    <p>O Astira calcula quais eclipses dá para ver do seu lugar: quando começam e quanto fica coberto. Um toque e você acompanha o eclipse na câmera rápida.</p>
+    <h2>ALINHAMENTO PRECISO</h2>
+    <p>O mapa está um pouco fora? Isso acontece com toda bússola de celular. Mire numa estrela que você conhece, toque nela, aperte «Alinhar aqui» — pronto. O mapa bate com o seu céu em vez de deixar você adivinhando.</p>
+    <h2>O CÉU SOBRE O QUE ESTÁ AO SEU REDOR</h2>
+    <p>Ligue a imagem da câmera e o mapa celeste se assenta sobre o que está realmente à sua frente: o horizonte, as árvores, os telhados. Em vez de juntar mapa e realidade de cabeça, você aponta o aparelho para onde está procurando. A imagem é apenas exibida: nunca capturada, nunca armazenada, nunca transmitida.</p>
+    <h2>FEITO PARA OBSERVAR</h2>
+    <ul>
+      <li>O modo noturno em vermelho profundo preserva a sua adaptação ao escuro</li>
+      <li>A tela fica ligada enquanto você observa</li>
+      <li>Estrelas com cores realistas (pelo índice de cor) e tamanho conforme o brilho</li>
+      <li>Limite de magnitude ajustável, distâncias em anos-luz ou parsecs</li>
+    </ul>
+    <h2>TOTALMENTE OFFLINE — E PRIVADO</h2>
+    <p>O Astira não precisa de internet: todos os cálculos acontecem no seu aparelho. O aplicativo não tem permissão de internet, não mostra publicidade e não contém rastreamento. A sua localização é usada só no aparelho para calcular a vista do céu — perfeito também para locais de observação longe da cidade (e do sinal).</p>
+    <h2>PRECISÃO</h2>
+    <p>O cálculo das posições segue os métodos padrão da literatura astronômica — as posições dos planetas se desviam menos de um minuto de arco da referência do JPL.</p>
+    <h2>FONTES DE DADOS</h2>
+    <p>Catálogo de estrelas: banco de dados HYG (CC BY-SA) · Objetos do céu profundo: OpenNGC (CC BY-SA) · Detalhes na tela de créditos do aplicativo.</p>
+  </section>
+  <p class="note">Observação: a precisão da bússola de um celular fica tipicamente em ±5–10°. Com a calibração guiada e o alinhamento por estrela você identifica qualquer objeto com segurança mesmo assim.</p>
+
+  <footer>
+    <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="privacy/pt.html">Política de privacidade</a> · <a href="legal/pt.html">Informações legais</a>
+  </footer>
+</div>
+</body>
+</html>
