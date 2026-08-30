@@ -130,8 +130,25 @@
   /* ---------------------------------------------------- Inhalt rechts */
   .main { margin-left: var(--side); padding: calc(var(--bar) + 30px) 30px 64px; }
   /* Mittig in der Fläche neben der Seitenleiste (Vorgabe 30.08.2026) — der
-     Text darin bleibt linksbündig. */
-  .inner { max-width: var(--mitte); margin: 0 auto; }
+     Text darin bleibt linksbündig.
+
+     **Und hoch genug, dass die Fußzeile unten steht** (Vorgabe 30.08.2026):
+     Auf einer kurzen Seite — das Impressum ist die kürzeste — füllte der
+     Inhalt den Bildschirm nicht, und die Fußzeile hing mitten in der Fläche.
+     Als Spalte mit Mindesthöhe und `margin-top: auto` an der Fußzeile
+     rutscht sie ans untere Ende; auf langen Seiten steht sie weiterhin
+     hinter dem letzten Abschnitt.
+
+     `dvh` statt `vh` auf Geräten, die es kennen: Auf dem Handy wächst und
+     schrumpft die Adressleiste beim Scrollen, und `vh` rechnet mit der
+     größten Höhe — die Fußzeile stünde dann knapp unter dem sichtbaren
+     Rand. Die `vh`-Zeile davor bleibt als Rückfall stehen. */
+  .inner {
+    max-width: var(--mitte); margin: 0 auto;
+    display: flex; flex-direction: column;
+    min-height: calc(100vh - var(--bar) - 94px);
+    min-height: calc(100dvh - var(--bar) - 94px);
+  }
   h1 { margin: 0 0 6px; font-weight: 700; }
   h2 {
     margin: 0 0 8px; color: var(--accent); font-weight: 600;
@@ -171,7 +188,9 @@
   }
   footer {
     color: var(--muted); text-align: center;
-    border-top: 1px solid var(--line); padding-top: 20px; margin-top: 34px;
+    border-top: 1px solid var(--line); padding-top: 20px;
+    /* Schiebt die Fußzeile ans untere Ende der Spalte — siehe `.inner`. */
+    margin-top: auto; padding-bottom: 4px;
   }
   footer a { color: var(--muted); }
 
@@ -216,6 +235,11 @@
       bottom: 0; background: rgba(3, 6, 14, .6); z-index: 1; cursor: pointer;
     }
     .main { margin-left: 0; padding: calc(var(--bar) + 22px) 18px 56px; }
+    /* Andere Innenabstände, also andere Mindesthöhe. */
+    .inner {
+      min-height: calc(100vh - var(--bar) - 78px);
+      min-height: calc(100dvh - var(--bar) - 78px);
+    }
   }
   @media (max-width: 720px) {
     /* Bild und Text untereinander — nebeneinander bliebe für beides zu
