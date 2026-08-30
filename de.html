@@ -178,14 +178,15 @@
     padding-left: 12px; margin: 12px 0 0;
   }
   dl { margin: 6px 0 0; }
-  .entry { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; }
+  .entry { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
   .entry:first-child { margin-top: 4px; }
-  /* Das Symbol auf der ersten Zeile mittig — wie in den Einstellungen der
-     App: Der Kasten ist so hoch wie eine Textzeile, das SVG steht darin
-     mittig. */
+  /* Das Symbol steht mittig zum **ganzen** Eintrag, nicht auf dessen
+     erster Zeile. Die Beschreibungen sind unterschiedlich lang; klebte
+     das Symbol an der ersten Zeile, säße es mal weit oben, mal in der
+     Mitte — die Spalte wirkte unruhig (Nutzer-Befund 30.08.2026). */
   .entry .icon {
     flex: 0 0 auto; fill: var(--accent);
-    height: calc(1rem * 1.6); width: 20px;
+    height: 20px; width: 20px;
   }
   .entry dt { font-weight: 600; margin: 0; }
   .entry dd { margin: 0; color: var(--muted); }
@@ -234,6 +235,25 @@
   .feature-shot img {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--outline); border-radius: 12px;
+  }
+
+  /* ------------------------------------------------------- Ausdruck
+     Ein Rechtstext wird gespeichert und gedruckt. Auf Papier hilft weder
+     Kopfleiste noch Seitenleiste — dafür fehlt dort die Adresse, die am
+     Bildschirm in der Browser-Leiste steht. Deshalb: Bedienung weg,
+     Herkunft her. */
+  .only-print { display: none; }
+  @media print {
+    .topbar, .sidebar, .overlay, #menu, .play { display: none; }
+    .only-print { display: block; }
+    body { background: #fff; color: #000; }
+    .main { margin: 0; padding: 0; max-width: none; }
+    .inner { display: block; min-height: 0; max-width: none; }
+    .card, .card.intro, .card.tip {
+      background: none; border: 0; padding: 0; margin-bottom: 14px;
+    }
+    h2, a { color: #000; }
+    footer { border-top: 1px solid #999; }
   }
 
   /* --------------------------------------------------- schmale Geräte */
@@ -288,18 +308,18 @@
 <label class="overlay" for="menu"></label>
 <aside class="sidebar">
   <h2>Astira</h2>
-  <a href="#abschnitt-1">DER HIMMEL FOLGT DEINER BEWEGUNG</a>
-  <a href="#abschnitt-2">ANTIPPEN UND VERSTEHEN</a>
-  <a href="#abschnitt-3">FINDEN, WAS DU SUCHST</a>
-  <a href="#abschnitt-4">WAS DU SIEHST</a>
-  <a href="#abschnitt-5">DIE ZEIT IM ZEITRAFFER</a>
-  <a href="#abschnitt-6">SONNEN- UND MONDFINSTERNISSE</a>
-  <a href="#abschnitt-7">PRÄZISIONS-AUSRICHTUNG</a>
-  <a href="#abschnitt-8">DER HIMMEL ÜBER DEINER UMGEBUNG</a>
-  <a href="#abschnitt-9">FÜRS BEOBACHTEN GEMACHT</a>
-  <a href="#abschnitt-10">KOMPLETT OFFLINE — UND PRIVAT</a>
-  <a href="#abschnitt-11">GENAUIGKEIT</a>
-  <a href="#abschnitt-12">DATENQUELLEN</a>
+  <a href="#abschnitt-1">Der Himmel folgt deiner Bewegung</a>
+  <a href="#abschnitt-2">Antippen und verstehen</a>
+  <a href="#abschnitt-3">Finden, was du suchst</a>
+  <a href="#abschnitt-4">Was du siehst</a>
+  <a href="#abschnitt-5">Die Zeit im Zeitraffer</a>
+  <a href="#abschnitt-6">Sonnen- und Mondfinsternisse</a>
+  <a href="#abschnitt-7">Präzisions-Ausrichtung</a>
+  <a href="#abschnitt-8">Der Himmel über deiner Umgebung</a>
+  <a href="#abschnitt-9">Fürs Beobachten gemacht</a>
+  <a href="#abschnitt-10">Komplett offline — und privat</a>
+  <a href="#abschnitt-11">Genauigkeit</a>
+  <a href="#abschnitt-12">Datenquellen</a>
 </aside>
 <main class="main">
 <div class="inner">
@@ -313,7 +333,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-1">DER HIMMEL FOLGT DEINER BEWEGUNG</h2>
+      <h2 id="abschnitt-1">Der Himmel folgt deiner Bewegung</h2>
       <p>Im Live-Modus steuert der Lagesensor die Ansicht: Gerät schwenken, und die Karte schwenkt mit — ruhig, flüssig und mit Kompass-Korrektur für das Erdmagnetfeld. Alternativ erkundest du den Himmel klassisch per Wischen und Zoomen.</p>
       </div>
       <figure class="feature-shot">
@@ -325,7 +345,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-2">ANTIPPEN UND VERSTEHEN</h2>
+      <h2 id="abschnitt-2">Antippen und verstehen</h2>
       <p>Tippe ein Objekt an und erfahre mehr, ohne die Ansicht zu verlassen: Eigenname und Katalogbezeichnung, Entfernung, Helligkeit, Spektralklasse und Temperatur, bei vielen hellen Sternen auch Radius und Masse — dazu Auf-, Kulminations- und Untergangszeit für deinen Standort.</p>
       </div>
       <figure class="feature-shot">
@@ -337,7 +357,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-3">FINDEN, WAS DU SUCHST</h2>
+      <h2 id="abschnitt-3">Finden, was du suchst</h2>
       <p>Suche Sterne, Planeten, Sternbilder und Deep-Sky-Objekte nach Namen oder Katalognummer — M 31, NGC 224 und Andromeda führen zum selben Objekt. Steht das Ziel außerhalb des Bildes, weist ein Pfeil den Weg samt Winkelabstand. Und wenn du noch gar nicht weißt, wonach du suchen sollst: „Heute Nacht sichtbar" nennt dir die lohnendsten Objekte der kommenden Nacht — in klaren Worten, mit Höhe und Beobachtungsfenster. Ein Einstieg in die Astronomie ohne Vorwissen, und beim ersten Start führt dich ein kurzer Rundgang durch die Bedienung.</p>
       </div>
       <figure class="feature-shot">
@@ -347,7 +367,7 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-4">WAS DU SIEHST</h2>
+    <h2 id="abschnitt-4">Was du siehst</h2>
     <ul>
       <li>Rund 8.900 Sterne — alle, die mit bloßem Auge sichtbar sind (bis Größenklasse 6,5)</li>
       <li>Sonne, Mond (mit Phase) und alle Planeten, inklusive Sichtbarkeits- und Dämmerungsstatus</li>
@@ -358,14 +378,14 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-5">DIE ZEIT IM ZEITRAFFER</h2>
+    <h2 id="abschnitt-5">Die Zeit im Zeitraffer</h2>
     <p>Der Zeitraffer zeigt dir, wie die Sterne über den Himmel ziehen — vorwärts wie rückwärts. So siehst du ein Objekt untergehen, eine ganze Nacht durchlaufen oder den Mond durch seine Phasen wandern.</p>
   </section>
 
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-6">SONNEN- UND MONDFINSTERNISSE</h2>
+      <h2 id="abschnitt-6">Sonnen- und Mondfinsternisse</h2>
       <p>Astira rechnet aus, welche Finsternisse von deinem Standort aus zu sehen sind — wann sie beginnen und wie viel bedeckt wird. Ein Tipp, und du verfolgst sie im Zeitraffer.</p>
       </div>
       <figure class="feature-shot">
@@ -375,17 +395,17 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-7">PRÄZISIONS-AUSRICHTUNG</h2>
+    <h2 id="abschnitt-7">Präzisions-Ausrichtung</h2>
     <p>Zeigt die Karte mal daneben (das passiert jedem Smartphone-Kompass): Stern anpeilen, antippen, „Hierher ausrichten" — fertig. So deckt sich die Karte mit deinem Himmel, statt dich raten zu lassen.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-8">DER HIMMEL ÜBER DEINER UMGEBUNG</h2>
+    <h2 id="abschnitt-8">Der Himmel über deiner Umgebung</h2>
     <p>Schalte das Kamerabild zu, und die Sternkarte legt sich über das, was wirklich vor dir liegt: Horizont, Bäume, Dächer. Statt Karte und Wirklichkeit im Kopf zusammenzubringen, richtest du das Gerät einfach dorthin, wo du suchst. Das Bild wird nur angezeigt — nie aufgenommen, nie gespeichert, nie übertragen.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-9">FÜRS BEOBACHTEN GEMACHT</h2>
+    <h2 id="abschnitt-9">Fürs Beobachten gemacht</h2>
     <ul>
       <li>Nachtmodus in reinem Rot erhält deine Dunkeladaption</li>
       <li>Der Bildschirm bleibt an, solange du beobachtest</li>
@@ -395,22 +415,23 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-10">KOMPLETT OFFLINE — UND PRIVAT</h2>
+    <h2 id="abschnitt-10">Komplett offline — und privat</h2>
     <p>Astira braucht kein Internet: Alle Berechnungen laufen auf deinem Gerät. Die App hat keine Internet-Berechtigung, zeigt keine Werbung und enthält kein Tracking. Dein Standort wird nur lokal zur Berechnung der Himmelsansicht verwendet — perfekt auch für Beobachtungsplätze fernab jeder Stadt (und jedes Netzes).</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-11">GENAUIGKEIT</h2>
+    <h2 id="abschnitt-11">Genauigkeit</h2>
     <p>Die Positionsberechnung folgt den Standardverfahren der astronomischen Fachliteratur — Planetenpositionen weichen weniger als eine Bogenminute von der JPL-Referenz ab.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-12">DATENQUELLEN</h2>
+    <h2 id="abschnitt-12">Datenquellen</h2>
     <p>Sternkatalog: HYG-Datenbank (CC BY-SA) · Deep-Sky-Objekte: OpenNGC (CC BY-SA) · Details im Credits-Bildschirm der App.</p>
   </section>
   <p class="note">Hinweis: Die Kompass-Genauigkeit von Smartphones liegt typisch bei ±5–10°. Mit der geführten Kalibrierung und der Stern-Ausrichtung identifizierst du trotzdem jedes Objekt sicher.</p>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="privacy/de.html">Datenschutzerklärung</a> · <a href="legal/de.html">Impressum</a>
+    <span class="only-print">https://astira-app.github.io/de.html</span>
   </footer>
 </div>
 </main>

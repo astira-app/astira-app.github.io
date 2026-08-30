@@ -178,14 +178,15 @@
     padding-left: 12px; margin: 12px 0 0;
   }
   dl { margin: 6px 0 0; }
-  .entry { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; }
+  .entry { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
   .entry:first-child { margin-top: 4px; }
-  /* Das Symbol auf der ersten Zeile mittig — wie in den Einstellungen der
-     App: Der Kasten ist so hoch wie eine Textzeile, das SVG steht darin
-     mittig. */
+  /* Das Symbol steht mittig zum **ganzen** Eintrag, nicht auf dessen
+     erster Zeile. Die Beschreibungen sind unterschiedlich lang; klebte
+     das Symbol an der ersten Zeile, säße es mal weit oben, mal in der
+     Mitte — die Spalte wirkte unruhig (Nutzer-Befund 30.08.2026). */
   .entry .icon {
     flex: 0 0 auto; fill: var(--accent);
-    height: calc(1rem * 1.6); width: 20px;
+    height: 20px; width: 20px;
   }
   .entry dt { font-weight: 600; margin: 0; }
   .entry dd { margin: 0; color: var(--muted); }
@@ -234,6 +235,25 @@
   .feature-shot img {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--outline); border-radius: 12px;
+  }
+
+  /* ------------------------------------------------------- Ausdruck
+     Ein Rechtstext wird gespeichert und gedruckt. Auf Papier hilft weder
+     Kopfleiste noch Seitenleiste — dafür fehlt dort die Adresse, die am
+     Bildschirm in der Browser-Leiste steht. Deshalb: Bedienung weg,
+     Herkunft her. */
+  .only-print { display: none; }
+  @media print {
+    .topbar, .sidebar, .overlay, #menu, .play { display: none; }
+    .only-print { display: block; }
+    body { background: #fff; color: #000; }
+    .main { margin: 0; padding: 0; max-width: none; }
+    .inner { display: block; min-height: 0; max-width: none; }
+    .card, .card.intro, .card.tip {
+      background: none; border: 0; padding: 0; margin-bottom: 14px;
+    }
+    h2, a { color: #000; }
+    footer { border-top: 1px solid #999; }
   }
 
   /* --------------------------------------------------- schmale Geräte */
@@ -288,18 +308,18 @@
 <label class="overlay" for="menu"></label>
 <aside class="sidebar">
   <h2>Astira</h2>
-  <a href="#abschnitt-1">EL CIELO SIGUE TU MOVIMIENTO</a>
-  <a href="#abschnitt-2">TOCA Y ENTIENDE</a>
-  <a href="#abschnitt-3">ENCUENTRA LO QUE BUSCAS</a>
-  <a href="#abschnitt-4">LO QUE VERÁS</a>
-  <a href="#abschnitt-5">EL TIEMPO EN CÁMARA RÁPIDA</a>
-  <a href="#abschnitt-6">ECLIPSES DE SOL Y DE LUNA</a>
-  <a href="#abschnitt-7">ALINEACIÓN PRECISA</a>
-  <a href="#abschnitt-8">EL CIELO SOBRE TU ENTORNO</a>
-  <a href="#abschnitt-9">HECHO PARA OBSERVAR</a>
-  <a href="#abschnitt-10">COMPLETAMENTE SIN CONEXIÓN — Y PRIVADO</a>
-  <a href="#abschnitt-11">PRECISIÓN</a>
-  <a href="#abschnitt-12">FUENTES DE DATOS</a>
+  <a href="#abschnitt-1">El cielo sigue tu movimiento</a>
+  <a href="#abschnitt-2">Toca y entiende</a>
+  <a href="#abschnitt-3">Encuentra lo que buscas</a>
+  <a href="#abschnitt-4">Lo que verás</a>
+  <a href="#abschnitt-5">El tiempo en cámara rápida</a>
+  <a href="#abschnitt-6">Eclipses de sol y de luna</a>
+  <a href="#abschnitt-7">Alineación precisa</a>
+  <a href="#abschnitt-8">El cielo sobre tu entorno</a>
+  <a href="#abschnitt-9">Hecho para observar</a>
+  <a href="#abschnitt-10">Completamente sin conexión — y privado</a>
+  <a href="#abschnitt-11">Precisión</a>
+  <a href="#abschnitt-12">Fuentes de datos</a>
 </aside>
 <main class="main">
 <div class="inner">
@@ -313,7 +333,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-1">EL CIELO SIGUE TU MOVIMIENTO</h2>
+      <h2 id="abschnitt-1">El cielo sigue tu movimiento</h2>
       <p>En el modo en vivo, el sensor de orientación dirige la vista: mueve el dispositivo y el mapa se mueve contigo — con suavidad y con corrección de la declinación magnética de tu ubicación. ¿Prefieres la forma clásica? Explora el cielo deslizando y pellizcando para acercar.</p>
       </div>
       <figure class="feature-shot">
@@ -325,7 +345,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-2">TOCA Y ENTIENDE</h2>
+      <h2 id="abschnitt-2">Toca y entiende</h2>
       <p>Toca cualquier objeto para saber más sin salir de la vista: nombre propio y designación de catálogo, distancia, brillo, clase espectral y temperatura, y en muchas estrellas brillantes también radio y masa — además de las horas de salida, culminación y puesta para tu lugar.</p>
       </div>
       <figure class="feature-shot">
@@ -337,7 +357,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-3">ENCUENTRA LO QUE BUSCAS</h2>
+      <h2 id="abschnitt-3">Encuentra lo que buscas</h2>
       <p>Busca estrellas, planetas, constelaciones y objetos de cielo profundo por nombre o número de catálogo — M 31, NGC 224 y Andrómeda llevan al mismo objeto. Si queda fuera de la pantalla, una flecha señala el camino y el ángulo. Y si aún no sabes qué buscar: «Visible esta noche» te nombra los objetos más interesantes de la noche, con altura y ventana de observación. Una entrada a la astronomía sin conocimientos previos, y en el primer inicio un breve recorrido te guía por el manejo.</p>
       </div>
       <figure class="feature-shot">
@@ -347,7 +367,7 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-4">LO QUE VERÁS</h2>
+    <h2 id="abschnitt-4">Lo que verás</h2>
     <ul>
       <li>Unas 8.900 estrellas — todas las visibles a simple vista (hasta magnitud 6,5)</li>
       <li>El Sol, la Luna (con su fase) y todos los planetas, con su visibilidad y el estado del crepúsculo</li>
@@ -358,14 +378,14 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-5">EL TIEMPO EN CÁMARA RÁPIDA</h2>
+    <h2 id="abschnitt-5">El tiempo en cámara rápida</h2>
     <p>La cámara rápida te muestra cómo las estrellas recorren el cielo, hacia delante y hacia atrás. Así ves ponerse un objeto, recorres una noche entera o sigues a la Luna por sus fases.</p>
   </section>
 
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-6">ECLIPSES DE SOL Y DE LUNA</h2>
+      <h2 id="abschnitt-6">Eclipses de sol y de luna</h2>
       <p>Astira calcula qué eclipses se ven desde tu lugar: cuándo empiezan y cuánto queda cubierto. Un toque y la cámara rápida lo reproduce.</p>
       </div>
       <figure class="feature-shot">
@@ -375,17 +395,17 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-7">ALINEACIÓN PRECISA</h2>
+    <h2 id="abschnitt-7">Alineación precisa</h2>
     <p>¿El mapa se desvía un poco? Le pasa a toda brújula de teléfono. Apunta a una estrella que conozcas, tócala, pulsa «Alinear aquí» — listo. El mapa coincide con tu cielo en vez de dejarte adivinando.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-8">EL CIELO SOBRE TU ENTORNO</h2>
+    <h2 id="abschnitt-8">El cielo sobre tu entorno</h2>
     <p>Activa la imagen de la cámara y el mapa estelar se superpone a lo que tienes realmente delante: el horizonte, los árboles, los tejados. En vez de unir mapa y realidad mentalmente, apuntas el dispositivo hacia donde buscas. La imagen solo se muestra: nunca se captura, ni se guarda, ni se transmite.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-9">HECHO PARA OBSERVAR</h2>
+    <h2 id="abschnitt-9">Hecho para observar</h2>
     <ul>
       <li>El modo nocturno en rojo intenso conserva tu adaptación a la oscuridad</li>
       <li>La pantalla se mantiene encendida mientras observas</li>
@@ -395,22 +415,23 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-10">COMPLETAMENTE SIN CONEXIÓN — Y PRIVADO</h2>
+    <h2 id="abschnitt-10">Completamente sin conexión — y privado</h2>
     <p>Astira no necesita internet: todos los cálculos se hacen en tu dispositivo. La aplicación no tiene permiso de internet, no muestra publicidad y no contiene rastreo. Tu ubicación solo se usa en el dispositivo para calcular la vista del cielo — ideal también para lugares de observación lejos de la ciudad (y de la cobertura).</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-11">PRECISIÓN</h2>
+    <h2 id="abschnitt-11">Precisión</h2>
     <p>El cálculo de posiciones sigue los métodos estándar de la literatura astronómica — las posiciones de los planetas se desvían menos de un minuto de arco de la referencia del JPL.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-12">FUENTES DE DATOS</h2>
+    <h2 id="abschnitt-12">Fuentes de datos</h2>
     <p>Catálogo de estrellas: base de datos HYG (CC BY-SA) · Objetos de cielo profundo: OpenNGC (CC BY-SA) · Detalles en la pantalla de créditos de la aplicación.</p>
   </section>
   <p class="note">Nota: la precisión de la brújula de un teléfono suele ser de ±5–10°. Con la calibración guiada y la alineación con estrellas identificarás igualmente cualquier objeto con seguridad.</p>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="privacy/es.html">Política de privacidad</a> · <a href="legal/es.html">Aviso legal</a>
+    <span class="only-print">https://astira-app.github.io/es.html</span>
   </footer>
 </div>
 </main>

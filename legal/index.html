@@ -178,14 +178,15 @@
     padding-left: 12px; margin: 12px 0 0;
   }
   dl { margin: 6px 0 0; }
-  .entry { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; }
+  .entry { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
   .entry:first-child { margin-top: 4px; }
-  /* Das Symbol auf der ersten Zeile mittig — wie in den Einstellungen der
-     App: Der Kasten ist so hoch wie eine Textzeile, das SVG steht darin
-     mittig. */
+  /* Das Symbol steht mittig zum **ganzen** Eintrag, nicht auf dessen
+     erster Zeile. Die Beschreibungen sind unterschiedlich lang; klebte
+     das Symbol an der ersten Zeile, säße es mal weit oben, mal in der
+     Mitte — die Spalte wirkte unruhig (Nutzer-Befund 30.08.2026). */
   .entry .icon {
     flex: 0 0 auto; fill: var(--accent);
-    height: calc(1rem * 1.6); width: 20px;
+    height: 20px; width: 20px;
   }
   .entry dt { font-weight: 600; margin: 0; }
   .entry dd { margin: 0; color: var(--muted); }
@@ -234,6 +235,25 @@
   .feature-shot img {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--outline); border-radius: 12px;
+  }
+
+  /* ------------------------------------------------------- Ausdruck
+     Ein Rechtstext wird gespeichert und gedruckt. Auf Papier hilft weder
+     Kopfleiste noch Seitenleiste — dafür fehlt dort die Adresse, die am
+     Bildschirm in der Browser-Leiste steht. Deshalb: Bedienung weg,
+     Herkunft her. */
+  .only-print { display: none; }
+  @media print {
+    .topbar, .sidebar, .overlay, #menu, .play { display: none; }
+    .only-print { display: block; }
+    body { background: #fff; color: #000; }
+    .main { margin: 0; padding: 0; max-width: none; }
+    .inner { display: block; min-height: 0; max-width: none; }
+    .card, .card.intro, .card.tip {
+      background: none; border: 0; padding: 0; margin-bottom: 14px;
+    }
+    h2, a { color: #000; }
+    footer { border-top: 1px solid #999; }
   }
 
   /* --------------------------------------------------- schmale Geräte */
@@ -317,6 +337,7 @@
   </section>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="../privacy/">Privacy policy</a> · <a href="./">Legal notice</a>
+    <span class="only-print">https://astira-app.github.io/legal/</span>
   </footer>
 </div>
 </main>

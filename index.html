@@ -178,14 +178,15 @@
     padding-left: 12px; margin: 12px 0 0;
   }
   dl { margin: 6px 0 0; }
-  .entry { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; }
+  .entry { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
   .entry:first-child { margin-top: 4px; }
-  /* Das Symbol auf der ersten Zeile mittig — wie in den Einstellungen der
-     App: Der Kasten ist so hoch wie eine Textzeile, das SVG steht darin
-     mittig. */
+  /* Das Symbol steht mittig zum **ganzen** Eintrag, nicht auf dessen
+     erster Zeile. Die Beschreibungen sind unterschiedlich lang; klebte
+     das Symbol an der ersten Zeile, säße es mal weit oben, mal in der
+     Mitte — die Spalte wirkte unruhig (Nutzer-Befund 30.08.2026). */
   .entry .icon {
     flex: 0 0 auto; fill: var(--accent);
-    height: calc(1rem * 1.6); width: 20px;
+    height: 20px; width: 20px;
   }
   .entry dt { font-weight: 600; margin: 0; }
   .entry dd { margin: 0; color: var(--muted); }
@@ -234,6 +235,25 @@
   .feature-shot img {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--outline); border-radius: 12px;
+  }
+
+  /* ------------------------------------------------------- Ausdruck
+     Ein Rechtstext wird gespeichert und gedruckt. Auf Papier hilft weder
+     Kopfleiste noch Seitenleiste — dafür fehlt dort die Adresse, die am
+     Bildschirm in der Browser-Leiste steht. Deshalb: Bedienung weg,
+     Herkunft her. */
+  .only-print { display: none; }
+  @media print {
+    .topbar, .sidebar, .overlay, #menu, .play { display: none; }
+    .only-print { display: block; }
+    body { background: #fff; color: #000; }
+    .main { margin: 0; padding: 0; max-width: none; }
+    .inner { display: block; min-height: 0; max-width: none; }
+    .card, .card.intro, .card.tip {
+      background: none; border: 0; padding: 0; margin-bottom: 14px;
+    }
+    h2, a { color: #000; }
+    footer { border-top: 1px solid #999; }
   }
 
   /* --------------------------------------------------- schmale Geräte */
@@ -288,18 +308,18 @@
 <label class="overlay" for="menu"></label>
 <aside class="sidebar">
   <h2>Astira</h2>
-  <a href="#abschnitt-1">THE SKY FOLLOWS YOUR MOVEMENT</a>
-  <a href="#abschnitt-2">TAP TO UNDERSTAND</a>
-  <a href="#abschnitt-3">FIND WHAT YOU ARE LOOKING FOR</a>
-  <a href="#abschnitt-4">WHAT YOU WILL SEE</a>
-  <a href="#abschnitt-5">TIME LAPSE</a>
-  <a href="#abschnitt-6">SOLAR AND LUNAR ECLIPSES</a>
-  <a href="#abschnitt-7">PRECISION ALIGNMENT</a>
-  <a href="#abschnitt-8">THE SKY ABOVE YOUR SURROUNDINGS</a>
-  <a href="#abschnitt-9">MADE FOR OBSERVING</a>
-  <a href="#abschnitt-10">FULLY OFFLINE — AND PRIVATE</a>
-  <a href="#abschnitt-11">ACCURACY</a>
-  <a href="#abschnitt-12">DATA SOURCES</a>
+  <a href="#abschnitt-1">The sky follows your movement</a>
+  <a href="#abschnitt-2">Tap to understand</a>
+  <a href="#abschnitt-3">Find what you are looking for</a>
+  <a href="#abschnitt-4">What you will see</a>
+  <a href="#abschnitt-5">Time lapse</a>
+  <a href="#abschnitt-6">Solar and lunar eclipses</a>
+  <a href="#abschnitt-7">Precision alignment</a>
+  <a href="#abschnitt-8">The sky above your surroundings</a>
+  <a href="#abschnitt-9">Made for observing</a>
+  <a href="#abschnitt-10">Fully offline — and private</a>
+  <a href="#abschnitt-11">Accuracy</a>
+  <a href="#abschnitt-12">Data sources</a>
 </aside>
 <main class="main">
 <div class="inner">
@@ -313,7 +333,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-1">THE SKY FOLLOWS YOUR MOVEMENT</h2>
+      <h2 id="abschnitt-1">The sky follows your movement</h2>
       <p>In live mode the orientation sensor drives the view: pan your device and the map pans with it — smooth, steady, and with magnetic declination correction for your location. Prefer the classic way? Swipe and pinch-zoom across the sky instead.</p>
       </div>
       <figure class="feature-shot">
@@ -325,7 +345,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-2">TAP TO UNDERSTAND</h2>
+      <h2 id="abschnitt-2">Tap to understand</h2>
       <p>Tap any object to learn more without leaving the view: proper name and catalog designation, distance, brightness, spectral class and temperature, radius and mass for many bright stars — plus rise, culmination and set times for your location.</p>
       </div>
       <figure class="feature-shot">
@@ -337,7 +357,7 @@
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-3">FIND WHAT YOU ARE LOOKING FOR</h2>
+      <h2 id="abschnitt-3">Find what you are looking for</h2>
       <p>Search stars, planets, constellations and deep-sky objects by name or catalogue number — M 31, NGC 224 and Andromeda all lead to the same object. If the target is off screen, an arrow points the way and tells you how far to turn. And when you don't yet know what to look for: "Visible tonight" names the most rewarding objects of the coming night — in plain words, with altitude and observing window. An entry into astronomy without prior knowledge, and on first launch a short tour walks you through the controls.</p>
       </div>
       <figure class="feature-shot">
@@ -347,7 +367,7 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-4">WHAT YOU WILL SEE</h2>
+    <h2 id="abschnitt-4">What you will see</h2>
     <ul>
       <li>About 8,900 stars — every star visible to the naked eye (down to magnitude 6.5)</li>
       <li>Sun, Moon (with phase) and all planets, including visibility and twilight status</li>
@@ -358,14 +378,14 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-5">TIME LAPSE</h2>
+    <h2 id="abschnitt-5">Time lapse</h2>
     <p>Time lapse shows you how the stars move across the sky — forwards and backwards. Watch an object set, run through a whole night, or follow the Moon through its phases.</p>
   </section>
 
   <section class="card">
     <div class="feature">
       <div class="feature-text">
-      <h2 id="abschnitt-6">SOLAR AND LUNAR ECLIPSES</h2>
+      <h2 id="abschnitt-6">Solar and lunar eclipses</h2>
       <p>Astira works out which eclipses are visible from where you are — when they begin and how much gets covered. One tap and you can follow it in time lapse.</p>
       </div>
       <figure class="feature-shot">
@@ -375,17 +395,17 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-7">PRECISION ALIGNMENT</h2>
+    <h2 id="abschnitt-7">Precision alignment</h2>
     <p>Map slightly off? That happens to every phone compass. Point at a star you know, tap it, hit "Align here" — done. The map matches your sky instead of leaving you guessing.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-8">THE SKY ABOVE YOUR SURROUNDINGS</h2>
+    <h2 id="abschnitt-8">The sky above your surroundings</h2>
     <p>Switch on the camera view and the star map settles over what is really in front of you: the horizon, trees, rooftops. Instead of matching map and reality in your head, simply point the device where you are searching. The picture is only displayed — never captured, never stored, never transmitted.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-9">MADE FOR OBSERVING</h2>
+    <h2 id="abschnitt-9">Made for observing</h2>
     <ul>
       <li>Pure-red night mode preserves your dark adaptation</li>
       <li>The screen stays on while you are observing</li>
@@ -395,22 +415,23 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-10">FULLY OFFLINE — AND PRIVATE</h2>
+    <h2 id="abschnitt-10">Fully offline — and private</h2>
     <p>Astira needs no internet: all calculations run on your device. The app has no internet permission, shows no ads and contains no tracking. Your location is only used on-device to compute the sky view — perfect for dark-sky sites far from any city (or signal).</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-11">ACCURACY</h2>
+    <h2 id="abschnitt-11">Accuracy</h2>
     <p>Positions follow the standard methods of the astronomical literature — planet positions deviate by less than one arcminute from the JPL reference.</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-12">DATA SOURCES</h2>
+    <h2 id="abschnitt-12">Data sources</h2>
     <p>Star catalog: HYG database (CC BY-SA) · Deep-sky objects: OpenNGC (CC BY-SA) · Details on the in-app credits screen.</p>
   </section>
   <p class="note">Note: smartphone compass accuracy is typically ±5–10°. With guided calibration and star alignment you will still identify every object reliably.</p>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="privacy/">Privacy policy</a> · <a href="legal/">Legal notice</a>
+    <span class="only-print">https://astira-app.github.io/</span>
   </footer>
 </div>
 </main>

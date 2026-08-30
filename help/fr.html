@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="Explication des commandes">
+<meta name="description" content="Explication des commandes de l&#x27;application">
 <title>Aide – Astira</title>
 <link rel="icon" href="../assets/icon.png">
 <link rel="canonical" href="https://astira-app.github.io/help/fr.html">
@@ -178,14 +178,15 @@
     padding-left: 12px; margin: 12px 0 0;
   }
   dl { margin: 6px 0 0; }
-  .entry { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; }
+  .entry { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
   .entry:first-child { margin-top: 4px; }
-  /* Das Symbol auf der ersten Zeile mittig — wie in den Einstellungen der
-     App: Der Kasten ist so hoch wie eine Textzeile, das SVG steht darin
-     mittig. */
+  /* Das Symbol steht mittig zum **ganzen** Eintrag, nicht auf dessen
+     erster Zeile. Die Beschreibungen sind unterschiedlich lang; klebte
+     das Symbol an der ersten Zeile, säße es mal weit oben, mal in der
+     Mitte — die Spalte wirkte unruhig (Nutzer-Befund 30.08.2026). */
   .entry .icon {
     flex: 0 0 auto; fill: var(--accent);
-    height: calc(1rem * 1.6); width: 20px;
+    height: 20px; width: 20px;
   }
   .entry dt { font-weight: 600; margin: 0; }
   .entry dd { margin: 0; color: var(--muted); }
@@ -234,6 +235,25 @@
   .feature-shot img {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--outline); border-radius: 12px;
+  }
+
+  /* ------------------------------------------------------- Ausdruck
+     Ein Rechtstext wird gespeichert und gedruckt. Auf Papier hilft weder
+     Kopfleiste noch Seitenleiste — dafür fehlt dort die Adresse, die am
+     Bildschirm in der Browser-Leiste steht. Deshalb: Bedienung weg,
+     Herkunft her. */
+  .only-print { display: none; }
+  @media print {
+    .topbar, .sidebar, .overlay, #menu, .play { display: none; }
+    .only-print { display: block; }
+    body { background: #fff; color: #000; }
+    .main { margin: 0; padding: 0; max-width: none; }
+    .inner { display: block; min-height: 0; max-width: none; }
+    .card, .card.intro, .card.tip {
+      background: none; border: 0; padding: 0; margin-bottom: 14px;
+    }
+    h2, a { color: #000; }
+    footer { border-top: 1px solid #999; }
   }
 
   /* --------------------------------------------------- schmale Geräte */
@@ -288,18 +308,18 @@
 <label class="overlay" for="menu"></label>
 <aside class="sidebar">
   <h2>Aide</h2>
-  <a href="#abschnitt-1">En haut</a>
-  <a href="#abschnitt-2">En bas, à portée du pouce</a>
+  <a href="#abschnitt-1">Barre de menu en haut de l'écran</a>
+  <a href="#abschnitt-2">Barre de menu en bas de l'écran</a>
 </aside>
 <main class="main">
 <div class="inner">
   <section class="card intro">
     <h1>Aide</h1>
-    <p class="note">Explication des commandes</p>
+    <p class="note">Explication des commandes de l'application</p>
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-1">En haut</h2>
+    <h2 id="abschnitt-1">Barre de menu en haut de l'écran</h2>
     <dl>
       <div class="entry">
         <svg class="icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M12.0 12.0C10.921875 12.0 9.984375 11.109375 9.984375 9.984375C9.984375 8.90625 10.921875 8.015625 12.0 8.015625C13.078125 8.015625 14.015625 8.90625 14.015625 9.984375C14.015625 11.109375 13.078125 12.0 12.0 12.0ZM18.0 10.21875C18.0 6.5625 15.328125 3.984375 12.0 3.984375C8.671875 3.984375 6.0 6.5625 6.0 10.21875C6.0 12.5625 7.96875 15.65625 12.0 19.359375C16.03125 15.65625 18.0 12.5625 18.0 10.21875ZM12.0 2.015625C16.21875 2.015625 20.015625 5.203125 20.015625 10.21875C20.015625 13.5 17.34375 17.4375 12.0 21.984375C6.65625 17.4375 3.984375 13.5 3.984375 10.21875C3.984375 5.203125 7.78125 2.015625 12.0 2.015625Z"/></svg>
@@ -340,7 +360,7 @@
   </section>
 
   <section class="card">
-    <h2 id="abschnitt-2">En bas, à portée du pouce</h2>
+    <h2 id="abschnitt-2">Barre de menu en bas de l'écran</h2>
     <dl>
       <div class="entry">
         <svg class="icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M18.984375 9.0 20.25 6.234375 23.015625 5.015625 20.25 3.75 18.984375 0.984375 17.765625 3.75 15.0 5.015625 17.765625 6.234375 18.984375 9.0ZM11.484375 9.515625 9.0 3.984375 6.515625 9.515625 0.984375 12.0 6.515625 14.484375 9.0 20.015625 11.484375 14.484375 17.015625 12.0 11.484375 9.515625ZM18.984375 15.0 17.765625 17.765625 15.0 18.984375 17.765625 20.25 18.984375 23.015625 20.25 20.25 23.015625 18.984375 20.25 17.765625 18.984375 15.0Z"/></svg>
@@ -399,6 +419,7 @@
   </section>
   <footer>
     <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="../privacy/fr.html">Politique de confidentialité</a> · <a href="../legal/fr.html">Mentions légales</a>
+    <span class="only-print">https://astira-app.github.io/help/fr.html</span>
   </footer>
 </div>
 </main>
