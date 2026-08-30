@@ -231,7 +231,13 @@
      klebt es oben und hängt unter kurzen Absätzen in der Luft. */
   .feature { display: flex; gap: 26px; align-items: center; }
   .feature-text { flex: 1 1 auto; min-width: 0; }
-  .feature-shot { flex: 0 0 180px; margin: 0; }
+  /* 360 px, das Doppelte von vorher (Nutzer-Vorgabe 30.08.2026: am PC
+     war nichts zu erkennen). Der Bildschirm der Aufnahme ist 1080 Punkte
+     breit, also 360 logische — bei 360 px steht ein Punkt der App auf
+     einem Punkt der Seite, und die Schrift im Bild misst rund 14 px
+     gegen die 16 px der Seite. Für **alle** Bilder derselbe Wert, damit
+     keines aus der Reihe fällt. */
+  .feature-shot { flex: 0 0 360px; margin: 0; }
   .feature-shot img {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--outline); border-radius: 12px;
@@ -273,11 +279,13 @@
       min-height: calc(100dvh - var(--bar) - 78px);
     }
   }
-  @media (max-width: 720px) {
-    /* Bild und Text untereinander — nebeneinander bliebe für beides zu
-       wenig Platz. */
+  /* Bild und Text untereinander — nebeneinander bliebe für beides zu
+     wenig Platz. Die Grenze liegt bei 860 px, seit das Bild 360 statt
+     180 px misst: Darunter blieben dem Text keine 400 px mehr, und eine
+     Zeile aus 45 Zeichen liest sich schlecht. */
+  @media (max-width: 860px) {
     .feature { display: block; }
-    .feature-shot { max-width: 230px; margin: 14px auto 4px; }
+    .feature-shot { max-width: min(360px, 100%); margin: 14px auto 4px; }
   }
 </style>
 </head>
@@ -337,7 +345,7 @@
       <p>En el modo en vivo, el sensor de orientación dirige la vista: mueve el dispositivo y el mapa se mueve contigo — con suavidad y con corrección de la declinación magnética de tu ubicación. ¿Prefieres la forma clásica? Explora el cielo deslizando y pellizcando para acercar.</p>
       </div>
       <figure class="feature-shot">
-        <img src="assets/shots/es/01-himmel.webp" alt="EL CIELO SIGUE TU MOVIMIENTO" loading="lazy">
+        <img src="assets/shots/es/01-himmel.webp" alt="El cielo sigue tu movimiento" loading="lazy">
       </figure>
     </div>
   </section>
@@ -349,7 +357,7 @@
       <p>Toca cualquier objeto para saber más sin salir de la vista: nombre propio y designación de catálogo, distancia, brillo, clase espectral y temperatura, y en muchas estrellas brillantes también radio y masa — además de las horas de salida, culminación y puesta para tu lugar.</p>
       </div>
       <figure class="feature-shot">
-        <img src="assets/shots/es/02-objekt-info.webp" alt="TOCA Y ENTIENDE" loading="lazy">
+        <img src="assets/shots/es/02-objekt-info.webp" alt="Toca y entiende" loading="lazy">
       </figure>
     </div>
   </section>
