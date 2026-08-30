@@ -69,7 +69,14 @@
      scrollen muss (Nutzer-Vorgabe 30.08.2026). Wer die Seite liest, sieht
      die Funktion und ihre Erklärung nebeneinander — und nichts liegt außer
      Sicht. */
-  .feature { display: flex; gap: 28px; align-items: flex-start; }
+  .feature { display: flex; gap: 28px; align-items: flex-start; margin: 30px 0; }
+  /* Der Abstand muss an der **Zeile** hängen, nicht an der Überschrift: Das
+     Bild sitzt oben in der Zeile und ist höher als ein kurzer Absatz — ohne
+     eigenen Abstand stoßen zwei Bilder aneinander, sobald der Text darunter
+     endet (Nutzer-Befund 30.08.2026). Aus demselben Grund verliert die
+     Überschrift hier ihren oberen Abstand, sonst stünde sie tiefer als die
+     Oberkante des Bildes daneben. */
+  .feature-text > h2:first-child { margin-top: 0; }
   .feature-text { flex: 1 1 auto; min-width: 0; }
   .feature-shot { flex: 0 0 200px; margin: 0; }
   .feature-shot img {
