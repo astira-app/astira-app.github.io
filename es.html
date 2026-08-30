@@ -186,9 +186,18 @@
      jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
      nimmt nur die Unterlänge weg, die eine Zeile sonst darunter setzt.
      Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
-  .play { display: inline-block; margin: 20px 0 26px; line-height: 0; }
+  /* Mittig unter dem Aufmacher, auf derselben Breite wie die Kästen
+     (Nutzer-Vorgabe 30.08.2026). `width: fit-content` plus `margin: auto`
+     zentriert den Knopf, ohne ihn zu strecken — an der Grafik selbst
+     ändert sich nichts, was Googles Richtlinie auch verbietet. */
+  .play {
+    display: block; width: fit-content; margin: 20px auto 26px;
+    line-height: 0;
+  }
   .play img { height: 56px; width: auto; display: block; }
-  .feature { display: flex; gap: 26px; align-items: flex-start; }
+  /* Bild senkrecht mittig im Kasten (Nutzer-Vorgabe 30.08.2026) — sonst
+     klebt es oben und hängt unter kurzen Absätzen in der Luft. */
+  .feature { display: flex; gap: 26px; align-items: center; }
   .feature-text { flex: 1 1 auto; min-width: 0; }
   .feature-shot { flex: 0 0 180px; margin: 0; }
   .feature-shot img {
