@@ -222,6 +222,12 @@
 
   /* ------------------------------------------- nur auf der Startseite */
   .hero { margin: 0 0 18px; }
+  /* Die Kurzbeschreibung unter dem Aufmacher. Kein eigener Hintergrund
+     (Nutzer-Vorgabe 31.08.2026): Das Banner darüber trägt schon einen,
+     wie ihn sonst eine Überschrift hat — zwei Flächen übereinander wären
+     eine zu viel. */
+  .card.lead { margin-bottom: 0; }
+  .card.lead p { margin: 0; }
   .hero img {
     width: 100%; height: auto; display: block; border-radius: 14px;
     border: 1px solid var(--line);
@@ -235,8 +241,12 @@
      (Nutzer-Vorgabe 30.08.2026). `width: fit-content` plus `margin: auto`
      zentriert den Knopf, ohne ihn zu strecken — an der Grafik selbst
      ändert sich nichts, was Googles Richtlinie auch verbietet. */
+  /* Der Knopf braucht Luft (Nutzer-Befund 31.08.2026): Zwischen Aufmacher
+     und erstem Abschnitt eingeklemmt wirkte er gedrängt. 44 px oben,
+     52 px unten — unten etwas mehr, weil dort ein neuer Abschnitt
+     beginnt. */
   .play {
-    display: block; width: fit-content; margin: 20px auto 26px;
+    display: block; width: fit-content; margin: 44px auto 52px;
     line-height: 0;
   }
   .play img { height: 56px; width: auto; display: block; }
@@ -358,7 +368,10 @@
 <main class="main">
 <div class="inner">
   <section class="hero">
-    <img src="assets/hero/de.webp" alt="Astira – Sternenkarte Sternbilder, Planeten und Mond erkennen — ohne Internet. Richte dein Handy auf den Himmel — Astira zeigt dir live, was du gerade siehst: Sterne und Sternbilder, Planeten, den Mond und ferne Galaxien. Exakt berechnet für deinen Standort und den Moment, komplett ohne Internet.">
+    <img src="assets/hero/de.webp" alt="Astira – Sternenkarte">
+  </section>
+  <section class="card lead">
+    <p>Sternbilder, Planeten und Mond erkennen — ohne Internet.</p>
   </section>
   <a class="play" href="https://play.google.com/store/apps/details?id=dev.astira.astira">
     <img src="assets/badge/de.svg" alt="Google Play" height="56" width="189">
