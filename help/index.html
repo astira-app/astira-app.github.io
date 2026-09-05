@@ -75,6 +75,7 @@
   .langs summary {
     list-style: none; cursor: pointer; padding: 7px 12px; border-radius: 8px;
     color: var(--text); white-space: nowrap; border: 1px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
   }
   .langs summary::-webkit-details-marker { display: none; }
   .langs summary::after { content: " \25BE"; color: var(--muted); }
@@ -86,11 +87,19 @@
     border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
   }
   .langs li a, .langs li strong {
-    display: block; padding: 8px 12px; border-radius: 6px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 6px;
     text-decoration: none; color: var(--muted);
   }
   .langs li a:hover { background: var(--surface); color: var(--text); }
   .langs li strong { color: var(--text); }
+  /* Die Flaggen liegen als `symbol` einmal in der Seite. Der helle Rand
+     trennt eine weisse Flagge (Japan) vom dunklen Grund — ohne ihn schwebt
+     dort ein roter Punkt im Nichts. */
+  .flag {
+    width: 18px; height: 12px; flex: none; border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .22);
+  }
 
   /* -------------------------------------------------- Seitenleiste links */
   .burger {
@@ -320,6 +329,7 @@
 </head>
 <body>
 <input type="checkbox" id="menu" aria-hidden="true" tabindex="-1">
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="flag-de" viewBox="0 0 30 20"><rect width="30" height="20" fill="#000"/><rect y="6.667" width="30" height="6.667" fill="#DD0000"/><rect y="13.333" width="30" height="6.667" fill="#FFCE00"/></symbol><symbol id="flag-en" viewBox="0 0 30 20"><rect width="30" height="20" fill="#FFF"/><g fill="#B22234"><rect y="0.000" width="30" height="1.538"/><rect y="3.077" width="30" height="1.538"/><rect y="6.154" width="30" height="1.538"/><rect y="9.231" width="30" height="1.538"/><rect y="12.308" width="30" height="1.538"/><rect y="15.385" width="30" height="1.538"/><rect y="18.462" width="30" height="1.538"/></g><rect width="12" height="10.769" fill="#3C3B6E"/><g fill="#FFF"><circle cx="1.2" cy="1.35" r=".6"/><circle cx="3.6" cy="1.35" r=".6"/><circle cx="6.0" cy="1.35" r=".6"/><circle cx="8.4" cy="1.35" r=".6"/><circle cx="10.8" cy="1.35" r=".6"/><circle cx="2.4" cy="4.04" r=".6"/><circle cx="4.8" cy="4.04" r=".6"/><circle cx="7.2" cy="4.04" r=".6"/><circle cx="9.6" cy="4.04" r=".6"/><circle cx="1.2" cy="6.73" r=".6"/><circle cx="3.6" cy="6.73" r=".6"/><circle cx="6.0" cy="6.73" r=".6"/><circle cx="8.4" cy="6.73" r=".6"/><circle cx="10.8" cy="6.73" r=".6"/><circle cx="2.4" cy="9.42" r=".6"/><circle cx="4.8" cy="9.42" r=".6"/><circle cx="7.2" cy="9.42" r=".6"/><circle cx="9.6" cy="9.42" r=".6"/></g></symbol><symbol id="flag-es" viewBox="0 0 30 20"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></symbol><symbol id="flag-fr" viewBox="0 0 30 20"><rect width="30" height="20" fill="#FFF"/><rect width="10" height="20" fill="#002395"/><rect x="20" width="10" height="20" fill="#ED2939"/></symbol><symbol id="flag-it" viewBox="0 0 30 20"><rect width="30" height="20" fill="#F4F5F0"/><rect width="10" height="20" fill="#008C45"/><rect x="20" width="10" height="20" fill="#CD212A"/></symbol><symbol id="flag-pt" viewBox="0 0 30 20"><rect width="30" height="20" fill="#009B3A"/><path d="M15 2 28 10 15 18 2 10Z" fill="#FEDF00"/><circle cx="15" cy="10" r="3.6" fill="#002776"/></symbol><symbol id="flag-ja" viewBox="0 0 30 20"><rect width="30" height="20" fill="#FFF"/><circle cx="15" cy="10" r="6" fill="#BC002D"/></symbol></svg>
 <header class="topbar">
   <label class="burger" for="menu" title="Help – Astira">&#9776;</label>
   <a class="brand" href="../">
@@ -330,15 +340,15 @@
     <a href="../legal/">Legal notice</a>
   </nav>
   <details class="langs">
-    <summary>English</summary>
+    <summary><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-en"/></svg>English</summary>
     <ul>
-      <li><a href="de.html" lang="de">Deutsch</a></li>
-      <li><strong>English</strong></li>
-      <li><a href="es.html" lang="es">Español</a></li>
-      <li><a href="fr.html" lang="fr">Français</a></li>
-      <li><a href="it.html" lang="it">Italiano</a></li>
-      <li><a href="pt.html" lang="pt">Português (Brasil)</a></li>
-      <li><a href="ja.html" lang="ja">日本語</a></li>
+      <li><a href="de.html" lang="de"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-de"/></svg>Deutsch</a></li>
+      <li><strong><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-en"/></svg>English</strong></li>
+      <li><a href="es.html" lang="es"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-es"/></svg>Español</a></li>
+      <li><a href="fr.html" lang="fr"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-fr"/></svg>Français</a></li>
+      <li><a href="it.html" lang="it"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-it"/></svg>Italiano</a></li>
+      <li><a href="pt.html" lang="pt"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-pt"/></svg>Português (Brasil)</a></li>
+      <li><a href="ja.html" lang="ja"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-ja"/></svg>日本語</a></li>
     </ul>
   </details>
 </header>
