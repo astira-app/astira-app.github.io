@@ -78,6 +78,83 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/"/>
   </url>
   <url>
+    <loc>https://astira-app.github.io/eclipse/de.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/"/>
+  </url>
+  <url>
+    <loc>https://astira-app.github.io/eclipse/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/"/>
+  </url>
+  <url>
+    <loc>https://astira-app.github.io/eclipse/es.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/"/>
+  </url>
+  <url>
+    <loc>https://astira-app.github.io/eclipse/fr.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/"/>
+  </url>
+  <url>
+    <loc>https://astira-app.github.io/eclipse/it.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/"/>
+  </url>
+  <url>
+    <loc>https://astira-app.github.io/eclipse/pt.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/"/>
+  </url>
+  <url>
+    <loc>https://astira-app.github.io/eclipse/ja.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/"/>
+  </url>
+  <url>
     <loc>https://astira-app.github.io/help/de.html</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://astira-app.github.io/help/de.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://astira-app.github.io/help/"/>

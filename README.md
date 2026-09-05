@@ -4,6 +4,7 @@ Die öffentliche Website der Android-App **Astira** (interaktive
 Echtzeit-Sternenkarte), ausgeliefert über GitHub Pages.
 
 - 🌐 Startseite: https://astira-app.github.io/
+- 🌘 Nächste Finsternis: https://astira-app.github.io/eclipse/
 - 🧭 Hilfe: https://astira-app.github.io/help/
 - 📄 Datenschutzerklärung: https://astira-app.github.io/privacy/
 - ⚖️ Impressum: https://astira-app.github.io/legal/

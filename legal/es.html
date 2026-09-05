@@ -231,6 +231,45 @@
     border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
   }
   .card.tip p { margin: 0; }
+  /* --------------------------------- nur auf der Finsternis-Seite */
+  /* Die Ortswahl steht **über** den beiden Terminen: Erst der Ort, dann
+     was dort zu sehen ist — in dieser Reihenfolge liest man es auch. */
+  .ortwahl { display: flex; align-items: center; gap: 10px; margin: 0; }
+  .ortwahl select {
+    font: inherit; color: var(--text); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
+  }
+  /* Der Countdown ist die eine Zahl, für die jemand herkommt. Trotzdem
+     **keine zweite Schriftgröße**: Die Regel vom 31.08.2026 gilt für die
+     ganze Website — Überschriften heben sich über Farbe und Gewicht ab, nie
+     über die Größe. Er hebt sich hier über die Akzentfarbe und einen etwas
+     größeren Abstand darunter ab.
+
+     Ohne JavaScript bleibt die Zeile leer und verschwindet (`:empty`),
+     statt eine Lücke zu hinterlassen: Ein fester Text könnte nur den Stand
+     des Bautags nennen, und „noch 40 Tage" wäre nach 41 Tagen falsch. */
+  .countdown {
+    color: var(--accent); font-weight: 600; margin: 0 0 10px;
+  }
+  .countdown:empty { display: none; }
+  .termin p { margin: 0 0 6px; }
+  .termin p:last-child { margin-bottom: 0; }
+  .datum { color: var(--text); font-weight: 600; }
+  /* Die Warnung vor dem Blick in die Sonne. Sie steht bei jeder
+     Sonnenfinsternis und nicht erst nach einem Klick — dieselbe Auflage
+     wie in der App (PROJEKTPLAN, Phase 19). */
+  .warn {
+    margin: 10px 0 0; padding: 10px 12px; border-radius: 10px;
+    background: rgba(232, 176, 143, .10);
+    border: 1px solid rgba(232, 176, 143, .45);
+  }
+  /* Der Hinweis auf die App, ganz unten: Was die Seite bewusst nicht kann
+     — Zeiten für den eigenen Standort — ist der Grund, sie zu laden
+     (Nutzer-Entwurf 05.09.2026). Der Knopf darunter ist derselbe wie auf
+     der Startseite. */
+  .card.cta { text-align: center; margin-bottom: 0; }
+  .card.cta p { margin: 0; }
+  .card.cta + .play { margin-top: 28px; }
   footer {
     color: var(--muted); text-align: center;
     border-top: 1px solid var(--line); padding-top: 20px;
@@ -345,6 +384,7 @@
   <a class="brand" href="../es.html">
     <img src="../assets/icon.png?v=44a7abc7" alt="" width="28" height="28">Astira</a>
   <nav class="pages">
+    <a href="../eclipse/es.html">Próximo eclipse</a>
     <a href="../help/es.html">Ayuda</a>
     <a href="../privacy/es.html">Política de privacidad</a>
     <strong>Aviso legal</strong>
@@ -366,6 +406,7 @@
 <aside class="sidebar">
   <nav class="drawer-pages">
     <a href="../es.html">Astira</a>
+    <a href="../eclipse/es.html">Próximo eclipse</a>
     <a href="../help/es.html">Ayuda</a>
     <a href="../privacy/es.html">Política de privacidad</a>
     <strong>Aviso legal</strong>

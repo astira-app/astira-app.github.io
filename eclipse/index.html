@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="description" content="The next solar and the next lunar eclipse, computed for seven cities. All times are local to the selected city.">
+<title>Next eclipse – Astira</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Astira">
+<meta property="og:title" content="Next eclipse – Astira">
+<meta property="og:description" content="The next solar and the next lunar eclipse, computed for seven cities. All times are local to the selected city.">
+<meta property="og:url" content="https://astira-app.github.io/eclipse/">
+<meta property="og:image" content="https://astira-app.github.io/assets/social.png?v=13f6657a">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Astira">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/icon.png?v=44a7abc7">
+<link rel="canonical" href="https://astira-app.github.io/eclipse/">
+<link rel="alternate" hreflang="de" href="https://astira-app.github.io/eclipse/de.html">
+<link rel="alternate" hreflang="en" href="https://astira-app.github.io/eclipse/">
+<link rel="alternate" hreflang="es" href="https://astira-app.github.io/eclipse/es.html">
+<link rel="alternate" hreflang="fr" href="https://astira-app.github.io/eclipse/fr.html">
+<link rel="alternate" hreflang="it" href="https://astira-app.github.io/eclipse/it.html">
+<link rel="alternate" hreflang="pt" href="https://astira-app.github.io/eclipse/pt.html">
+<link rel="alternate" hreflang="ja" href="https://astira-app.github.io/eclipse/ja.html">
+<link rel="alternate" hreflang="x-default" href="https://astira-app.github.io/eclipse/">
+<!-- Erzeugt von tools/build_website.py aus docs/store/play_listing.md und lib/l10n/app_*.arb — nicht von Hand bearbeiten. -->
+<style>
+  :root {
+    --bg: #060913;
+    --surface: #0B101E;
+    --card: #141A29;
+    --text: #DCE4F2;
+    --muted: #93A7C9;
+    --accent: #8FA7E8;
+    --line: #2A3348;
+    --outline: #45536E;
+    --bar: 52px;
+    --side: 250px;
+    --mitte: 820px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  /* **Eine Größe für alles** (Vorgabe 30.08.2026): Was hier steht, gilt für
+     jede Schrift auf der Seite. Überschriften heben sich über Gewicht und
+     Farbe ab, nicht über die Größe. */
+  body, h1, h2, dt, dd, p, li, a, summary, figcaption {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+  }
+  a { color: var(--accent); }
+
+  /* ---------------------------------------------------- Kopfleiste oben */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--bar);
+    display: flex; align-items: center; gap: 2px;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+    padding: 0 12px; z-index: 3;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px; padding: 0 12px;
+    font-weight: 700; letter-spacing: .5px;
+    color: var(--text); text-decoration: none;
+  }
+  .brand img { width: 28px; height: 28px; display: block; }
+  .pages { display: flex; gap: 2px; overflow: hidden; }
+  .pages a, .pages strong {
+    padding: 8px 12px; border-radius: 8px; text-decoration: none;
+    color: var(--muted); white-space: nowrap;
+  }
+  .pages a:hover { background: var(--card); color: var(--text); }
+  .pages strong { color: var(--text); font-weight: 600; }
+
+  /* Sprachauswahl als Klappmenü — `details` kann das ohne JavaScript. */
+  .langs { margin-left: auto; position: relative; }
+  .langs summary {
+    list-style: none; cursor: pointer; padding: 7px 12px; border-radius: 8px;
+    color: var(--text); white-space: nowrap; border: 1px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .langs summary::-webkit-details-marker { display: none; }
+  .langs summary::after { content: " \25BE"; color: var(--muted); }
+  .langs summary:hover { background: var(--card); }
+  .langs ul {
+    position: absolute; right: 0; top: calc(100% + 6px); margin: 0;
+    padding: 6px; list-style: none; min-width: 200px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+  }
+  .langs li a, .langs li strong {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 6px;
+    text-decoration: none; color: var(--muted);
+  }
+  .langs li a:hover { background: var(--surface); color: var(--text); }
+  .langs li strong { color: var(--text); }
+  /* Die Flaggen liegen als `symbol` einmal in der Seite. Der helle Rand
+     trennt eine weisse Flagge (Japan) vom dunklen Grund — ohne ihn schwebt
+     dort ein roter Punkt im Nichts. */
+  .flag {
+    width: 18px; height: 12px; flex: none; border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .22);
+  }
+
+  /* -------------------------------------------------- Seitenleiste links */
+  .burger {
+    display: none; cursor: pointer; padding: 8px 12px; border-radius: 8px;
+    color: var(--text); line-height: 1;
+  }
+  .burger:hover { background: var(--card); }
+  /* `fixed` und nicht `absolute`: Ein absolut gesetztes Kästchen sitzt am
+     Seitenanfang, und der Browser scrollt beim Anklicken des Labels dorthin
+     — die Seite sprang beim Zuklappen nach oben (Nutzer-Befund 30.08.2026).
+     Ein festes Element hat nichts, wohin gescrollt werden könnte. */
+  #menu {
+    position: fixed; top: 0; left: 0; width: 1px; height: 1px;
+    opacity: 0; pointer-events: none; margin: 0;
+  }
+  .sidebar {
+    position: fixed; top: var(--bar); bottom: 0; left: 0; width: var(--side);
+    background: var(--surface); border-right: 1px solid var(--line);
+    overflow-y: auto; padding: 18px 0 28px; z-index: 2;
+  }
+  .sidebar h2 {
+    color: var(--muted); margin: 0 0 8px; padding: 0 18px; font-weight: 600;
+  }
+  .sidebar a {
+    display: block; padding: 6px 18px; color: var(--muted);
+    text-decoration: none; border-left: 3px solid transparent;
+  }
+  .sidebar a:hover { background: var(--card); color: var(--text); }
+  /* Das Seitenmenü im Klappfach. Am Rechner verborgen — dort steht es in
+     der Kopfleiste; die Seite, auf der man ist, trägt dieselbe Marke wie
+     ein Abschnitt, bei dem man gerade steht. */
+  .drawer-pages { display: none; margin-bottom: 18px; }
+  .drawer-pages strong {
+    display: block; padding: 6px 18px; font-weight: 600;
+    color: var(--text); border-left: 3px solid var(--accent);
+    background: var(--card);
+  }
+  /* Wo man gerade ist. `current` setzt das Skript am Seitenende, `:target`
+     greift auch ohne JavaScript, sobald man einen Eintrag angeklickt hat. */
+  .sidebar a.current, .sidebar a:target {
+    color: var(--text); background: var(--card);
+    border-left-color: var(--accent);
+  }
+  .overlay { display: none; }
+
+  /* ---------------------------------------------------- Inhalt rechts */
+  .main { margin-left: var(--side); padding: calc(var(--bar) + 30px) 30px 64px; }
+  /* Mittig in der Fläche neben der Seitenleiste (Vorgabe 30.08.2026) — der
+     Text darin bleibt linksbündig.
+
+     **Und hoch genug, dass die Fußzeile unten steht** (Vorgabe 30.08.2026):
+     Auf einer kurzen Seite — das Impressum ist die kürzeste — füllte der
+     Inhalt den Bildschirm nicht, und die Fußzeile hing mitten in der Fläche.
+     Als Spalte mit Mindesthöhe und `margin-top: auto` an der Fußzeile
+     rutscht sie ans untere Ende; auf langen Seiten steht sie weiterhin
+     hinter dem letzten Abschnitt.
+
+     `dvh` statt `vh` auf Geräten, die es kennen: Auf dem Handy wächst und
+     schrumpft die Adressleiste beim Scrollen, und `vh` rechnet mit der
+     größten Höhe — die Fußzeile stünde dann knapp unter dem sichtbaren
+     Rand. Die `vh`-Zeile davor bleibt als Rückfall stehen. */
+  .inner {
+    max-width: var(--mitte); margin: 0 auto;
+    display: flex; flex-direction: column;
+    min-height: calc(100vh - var(--bar) - 94px);
+    min-height: calc(100dvh - var(--bar) - 94px);
+  }
+  h1 { margin: 0 0 6px; font-weight: 700; }
+  h2 {
+    margin: 0 0 8px; color: var(--accent); font-weight: 600;
+    scroll-margin-top: calc(var(--bar) + 16px);
+  }
+  p, ul { margin: 10px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 5px 0; }
+  /* Ohne Kasten: Die Abschnitte stehen frei und werden nur über den
+     Abstand getrennt. Zurück zu den Kästen: CARDS = True. */
+  .card {
+    background: none; border: 0; border-radius: 0;
+    padding: 0; margin-bottom: 30px;
+  }
+  /* **Der erste Kasten einer Seite behält seinen Rahmen** (Vorgabe
+     30.08.2026) — der mit der Überschrift. Er gibt der Seite einen Anfang,
+     während die Abschnitte darunter frei stehen. Zwei Klassen schlagen die
+     `.card`-Regel darüber, gleich in welcher Reihenfolge sie steht. */
+  .card.intro {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px 24px; margin-bottom: 26px;
+  }
+  .note { color: var(--muted); }
+  .addr { line-height: 1.5; }
+  /* Ohne Balken und Einzug (Nutzer-Vorgabe 30.08.2026): Der Satz gehört
+     zum Kopf der Seite, nicht in ein Zitat. */
+  .prevails { color: var(--muted); margin: 12px 0 0; }
+  dl { margin: 6px 0 0; }
+  .entry { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
+  .entry:first-child { margin-top: 4px; }
+  /* Das Symbol steht mittig zum **ganzen** Eintrag, nicht auf dessen
+     erster Zeile. Die Beschreibungen sind unterschiedlich lang; klebte
+     das Symbol an der ersten Zeile, säße es mal weit oben, mal in der
+     Mitte — die Spalte wirkte unruhig (Nutzer-Befund 30.08.2026). */
+  .entry .icon {
+    flex: 0 0 auto; fill: var(--accent);
+    height: 20px; width: 20px;
+  }
+  /* Genau wie ein Abschnitt der Hauptseite: Der Name steht in der
+     Akzentfarbe und im Gewicht einer Überschrift, die Erklärung in der
+     vollen Textfarbe. Bis zum 30.08.2026 war es umgekehrt — heller Name,
+     blasse Erklärung —, und damit las sich die Hilfe anders als der Rest
+     der Seite (Nutzer-Befund). */
+  .entry dt { font-weight: 600; margin: 0; color: var(--accent); }
+  .entry dd { margin: 0; }
+  /* Der Tipp auf der Hilfeseite. Er ist ein `card`, damit eine Änderung an
+     den Kästen ihn mitnimmt — behält aber sein eigenes Aussehen (Vorgabe
+     30.08.2026). Zwei Klassen schlagen die `.card`-Regel. */
+  .card.tip {
+    padding: 14px 16px; margin-bottom: 26px;
+    background: rgba(143, 167, 232, .10);
+    border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
+  }
+  .card.tip p { margin: 0; }
+  /* --------------------------------- nur auf der Finsternis-Seite */
+  /* Die Ortswahl steht **über** den beiden Terminen: Erst der Ort, dann
+     was dort zu sehen ist — in dieser Reihenfolge liest man es auch. */
+  .ortwahl { display: flex; align-items: center; gap: 10px; margin: 0; }
+  .ortwahl select {
+    font: inherit; color: var(--text); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
+  }
+  /* Der Countdown ist die eine Zahl, für die jemand herkommt. Trotzdem
+     **keine zweite Schriftgröße**: Die Regel vom 31.08.2026 gilt für die
+     ganze Website — Überschriften heben sich über Farbe und Gewicht ab, nie
+     über die Größe. Er hebt sich hier über die Akzentfarbe und einen etwas
+     größeren Abstand darunter ab.
+
+     Ohne JavaScript bleibt die Zeile leer und verschwindet (`:empty`),
+     statt eine Lücke zu hinterlassen: Ein fester Text könnte nur den Stand
+     des Bautags nennen, und „noch 40 Tage" wäre nach 41 Tagen falsch. */
+  .countdown {
+    color: var(--accent); font-weight: 600; margin: 0 0 10px;
+  }
+  .countdown:empty { display: none; }
+  .termin p { margin: 0 0 6px; }
+  .termin p:last-child { margin-bottom: 0; }
+  .datum { color: var(--text); font-weight: 600; }
+  /* Die Warnung vor dem Blick in die Sonne. Sie steht bei jeder
+     Sonnenfinsternis und nicht erst nach einem Klick — dieselbe Auflage
+     wie in der App (PROJEKTPLAN, Phase 19). */
+  .warn {
+    margin: 10px 0 0; padding: 10px 12px; border-radius: 10px;
+    background: rgba(232, 176, 143, .10);
+    border: 1px solid rgba(232, 176, 143, .45);
+  }
+  /* Der Hinweis auf die App, ganz unten: Was die Seite bewusst nicht kann
+     — Zeiten für den eigenen Standort — ist der Grund, sie zu laden
+     (Nutzer-Entwurf 05.09.2026). Der Knopf darunter ist derselbe wie auf
+     der Startseite. */
+  .card.cta { text-align: center; margin-bottom: 0; }
+  .card.cta p { margin: 0; }
+  .card.cta + .play { margin-top: 28px; }
+  footer {
+    color: var(--muted); text-align: center;
+    border-top: 1px solid var(--line); padding-top: 20px;
+    /* Schiebt die Fußzeile ans untere Ende der Spalte — siehe `.inner`. */
+    margin-top: auto; padding-bottom: 4px;
+  }
+  footer a { color: var(--muted); }
+
+  /* ------------------------------------------- nur auf der Startseite */
+  .hero { margin: 0 0 18px; }
+  /* Die Kurzbeschreibung unter dem Aufmacher. Kein eigener Hintergrund
+     (Nutzer-Vorgabe 31.08.2026): Das Banner darüber trägt schon einen,
+     wie ihn sonst eine Überschrift hat — zwei Flächen übereinander wären
+     eine zu viel. Mittig wie der Knopf darunter, damit Grafik, Satz und
+     Knopf auf einer Achse stehen. */
+  .card.lead { margin-bottom: 0; text-align: center; }
+  .card.lead p { margin: 0; }
+  .hero img {
+    width: 100%; height: auto; display: block; border-radius: 14px;
+    border: 1px solid var(--line);
+  }
+  /* Das Badge bekommt **nur** eine Höhe: kein Hintergrund, keine Ecken,
+     kein Filter, kein Effekt beim Überfahren. Googles Richtlinie verbietet
+     jede Änderung an Farbe, Anordnung und Größenverhältnis; `line-height: 0`
+     nimmt nur die Unterlänge weg, die eine Zeile sonst darunter setzt.
+     Der Abstand ringsum liegt über dem geforderten Viertel der Höhe. */
+  /* Mittig unter dem Aufmacher, auf derselben Breite wie die Kästen
+     (Nutzer-Vorgabe 30.08.2026). `width: fit-content` plus `margin: auto`
+     zentriert den Knopf, ohne ihn zu strecken — an der Grafik selbst
+     ändert sich nichts, was Googles Richtlinie auch verbietet. */
+  /* Der Knopf braucht Luft (Nutzer-Befund 31.08.2026): Zwischen Aufmacher
+     und erstem Abschnitt eingeklemmt wirkte er gedrängt. 44 px oben,
+     52 px unten — unten etwas mehr, weil dort ein neuer Abschnitt
+     beginnt. */
+  .play {
+    display: block; width: fit-content; margin: 44px auto 52px;
+    line-height: 0;
+  }
+  .play img { height: 56px; width: auto; display: block; }
+  /* Bild senkrecht mittig im Kasten (Nutzer-Vorgabe 30.08.2026) — sonst
+     klebt es oben und hängt unter kurzen Absätzen in der Luft. */
+  .feature { display: flex; gap: 26px; align-items: center; }
+  .feature-text { flex: 1 1 auto; min-width: 0; }
+  /* 360 px, das Doppelte von vorher (Nutzer-Vorgabe 30.08.2026: am PC
+     war nichts zu erkennen). Der Bildschirm der Aufnahme ist 1080 Punkte
+     breit, also 360 logische — bei 360 px steht ein Punkt der App auf
+     einem Punkt der Seite, und die Schrift im Bild misst rund 14 px
+     gegen die 16 px der Seite. Für **alle** Bilder derselbe Wert, damit
+     keines aus der Reihe fällt. */
+  .feature-shot { flex: 0 0 360px; margin: 0; }
+  .feature-shot img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--outline); border-radius: 12px;
+  }
+
+  /* ------------------------------------------------------- Ausdruck
+     Ein Rechtstext wird gespeichert und gedruckt. Auf Papier hilft weder
+     Kopfleiste noch Seitenleiste — dafür fehlt dort die Adresse, die am
+     Bildschirm in der Browser-Leiste steht. Deshalb: Bedienung weg,
+     Herkunft her. */
+  .only-print { display: none; }
+  @media print {
+    .topbar, .sidebar, .overlay, #menu, .play { display: none; }
+    .only-print { display: block; }
+    body { background: #fff; color: #000; }
+    .main { margin: 0; padding: 0; max-width: none; }
+    .inner { display: block; min-height: 0; max-width: none; }
+    .card, .card.intro, .card.tip {
+      background: none; border: 0; padding: 0; margin-bottom: 14px;
+    }
+    h2, a { color: #000; }
+    footer { border-top: 1px solid #999; }
+  }
+
+  /* --------------------------------------------------- schmale Geräte */
+  @media (max-width: 992px) {
+    .burger { display: block; }
+    .pages { display: none; }
+    /* Die Kopfleiste hat für die Seiten keinen Platz mehr — also führt das
+       Klappfach zu ihnen, und die Sprungliste der Abschnitte weicht ihnen
+       (Nutzer-Vorgabe 30.08.2026). */
+    .drawer-pages { display: block; margin-bottom: 0; }
+    .anchors { display: none; }
+    .sidebar { transform: translateX(-100%); transition: transform .18s; }
+    #menu:checked ~ .sidebar { transform: none; }
+    #menu:checked ~ .overlay {
+      display: block; position: fixed; top: var(--bar); left: 0; right: 0;
+      bottom: 0; background: rgba(3, 6, 14, .6); z-index: 1; cursor: pointer;
+    }
+    .main { margin-left: 0; padding: calc(var(--bar) + 22px) 18px 56px; }
+    /* Andere Innenabstände, also andere Mindesthöhe. */
+    .inner {
+      min-height: calc(100vh - var(--bar) - 78px);
+      min-height: calc(100dvh - var(--bar) - 78px);
+    }
+  }
+  /* Bild und Text untereinander — nebeneinander bliebe für beides zu
+     wenig Platz. Die Grenze liegt bei 860 px, seit das Bild 360 statt
+     180 px misst: Darunter blieben dem Text keine 400 px mehr, und eine
+     Zeile aus 45 Zeichen liest sich schlecht. */
+  @media (max-width: 860px) {
+    .feature { display: block; }
+    .feature-shot { max-width: min(360px, 100%); margin: 14px auto 4px; }
+  }
+</style>
+</head>
+<body>
+<input type="checkbox" id="menu" aria-hidden="true" tabindex="-1">
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="flag-de" viewBox="0 0 30 20"><rect width="30" height="20" fill="#000"/><rect y="6.667" width="30" height="6.667" fill="#DD0000"/><rect y="13.333" width="30" height="6.667" fill="#FFCE00"/></symbol><symbol id="flag-en" viewBox="0 0 30 20"><rect width="30" height="20" fill="#FFF"/><g fill="#B22234"><rect y="0.000" width="30" height="1.538"/><rect y="3.077" width="30" height="1.538"/><rect y="6.154" width="30" height="1.538"/><rect y="9.231" width="30" height="1.538"/><rect y="12.308" width="30" height="1.538"/><rect y="15.385" width="30" height="1.538"/><rect y="18.462" width="30" height="1.538"/></g><rect width="12" height="10.769" fill="#3C3B6E"/><g fill="#FFF"><circle cx="1.2" cy="1.35" r=".6"/><circle cx="3.6" cy="1.35" r=".6"/><circle cx="6.0" cy="1.35" r=".6"/><circle cx="8.4" cy="1.35" r=".6"/><circle cx="10.8" cy="1.35" r=".6"/><circle cx="2.4" cy="4.04" r=".6"/><circle cx="4.8" cy="4.04" r=".6"/><circle cx="7.2" cy="4.04" r=".6"/><circle cx="9.6" cy="4.04" r=".6"/><circle cx="1.2" cy="6.73" r=".6"/><circle cx="3.6" cy="6.73" r=".6"/><circle cx="6.0" cy="6.73" r=".6"/><circle cx="8.4" cy="6.73" r=".6"/><circle cx="10.8" cy="6.73" r=".6"/><circle cx="2.4" cy="9.42" r=".6"/><circle cx="4.8" cy="9.42" r=".6"/><circle cx="7.2" cy="9.42" r=".6"/><circle cx="9.6" cy="9.42" r=".6"/></g></symbol><symbol id="flag-es" viewBox="0 0 30 20"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></symbol><symbol id="flag-fr" viewBox="0 0 30 20"><rect width="30" height="20" fill="#FFF"/><rect width="10" height="20" fill="#002395"/><rect x="20" width="10" height="20" fill="#ED2939"/></symbol><symbol id="flag-it" viewBox="0 0 30 20"><rect width="30" height="20" fill="#F4F5F0"/><rect width="10" height="20" fill="#008C45"/><rect x="20" width="10" height="20" fill="#CD212A"/></symbol><symbol id="flag-pt" viewBox="0 0 30 20"><rect width="30" height="20" fill="#009B3A"/><path d="M15 2 28 10 15 18 2 10Z" fill="#FEDF00"/><circle cx="15" cy="10" r="3.6" fill="#002776"/></symbol><symbol id="flag-ja" viewBox="0 0 30 20"><rect width="30" height="20" fill="#FFF"/><circle cx="15" cy="10" r="6" fill="#BC002D"/></symbol></svg>
+<header class="topbar">
+  <label class="burger" for="menu" title="Next eclipse – Astira">&#9776;</label>
+  <a class="brand" href="../">
+    <img src="../assets/icon.png?v=44a7abc7" alt="" width="28" height="28">Astira</a>
+  <nav class="pages">
+    <strong>Next eclipse</strong>
+    <a href="../help/">Help</a>
+    <a href="../privacy/">Privacy policy</a>
+    <a href="../legal/">Legal notice</a>
+  </nav>
+  <details class="langs">
+    <summary><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-en"/></svg>English</summary>
+    <ul>
+      <li><a href="de.html" lang="de"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-de"/></svg>Deutsch</a></li>
+      <li><strong><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-en"/></svg>English</strong></li>
+      <li><a href="es.html" lang="es"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-es"/></svg>Español</a></li>
+      <li><a href="fr.html" lang="fr"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-fr"/></svg>Français</a></li>
+      <li><a href="it.html" lang="it"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-it"/></svg>Italiano</a></li>
+      <li><a href="pt.html" lang="pt"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-pt"/></svg>Português (Brasil)</a></li>
+      <li><a href="ja.html" lang="ja"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-ja"/></svg>日本語</a></li>
+    </ul>
+  </details>
+</header>
+<label class="overlay" for="menu"></label>
+<aside class="sidebar">
+  <nav class="drawer-pages">
+    <a href="../">Astira</a>
+    <strong>Next eclipse</strong>
+    <a href="../help/">Help</a>
+    <a href="../privacy/">Privacy policy</a>
+    <a href="../legal/">Legal notice</a>
+  </nav>
+  <div class="anchors">
+    <h2>Next eclipse</h2>
+  </div>
+</aside>
+<main class="main">
+<div class="inner">
+  <section class="card intro">
+    <h1>Next eclipse</h1>
+    <p class="note">The next solar and the next lunar eclipse, computed for seven cities. All times are local to the selected city.</p>
+    <p class="ortwahl">
+      <label for="ort">Place</label>
+      <select id="ort">
+        <option value="berlin">Berlin</option>
+        <option value="newyork" selected>New York</option>
+        <option value="madrid">Madrid</option>
+        <option value="paris">Paris</option>
+        <option value="rom">Rome</option>
+        <option value="saopaulo">São Paulo</option>
+        <option value="tokio">Tokyo</option>
+      </select>
+    </p>
+  </section>
+
+  <section class="card termin" data-art="solar">
+    <h2>Next solar eclipse</h2>
+    <p class="countdown"></p>
+    <p class="datum">2028-01-26 · 3 % covered</p>
+    <p>Part of the Sun is covered.</p>
+    <p>From 09:18 to 10:48 · deepest at 10:02</p>
+    <p class="warn">Never look at the Sun without certified eclipse glasses — not through sunglasses, a camera or binoculars either. It damages the eye within seconds, and you feel nothing while it happens.</p>
+  </section>
+
+  <section class="card termin" data-art="lunar">
+    <h2>Next lunar eclipse</h2>
+    <p class="countdown"></p>
+    <p class="datum">2028-01-11 · 3 % covered</p>
+    <p>Part of the Moon moves into Earth's shadow.</p>
+    <p>From 21:07 to 01:19 · deepest at 23:13</p>
+    <p class="note davor">Before that: 2027-02-20 · The Moon only grazes the edge of Earth's shadow and barely dims — worth knowing, not much to look at.</p>
+  </section>
+
+  <section class="card cta">
+    <p>Want to know when the next solar or lunar eclipse is visible from where you are?</p>
+  </section>
+  <a class="play" href="https://play.google.com/store/apps/details?id=dev.astira.astira">
+    <img src="../assets/badge/en.svg?v=4ffa4c7e" alt="Google Play" height="56" width="189">
+  </a>
+
+  <p class="note">
+    Times far in the future are predictions. How far the Earth will have turned by then can be stated to within about half a minute fifty years ahead. The bigger uncertainty is daylight saving time: whether it still applies is decided by politics, not by arithmetic. If the rules change, the time shown moves by a full hour.
+    (As of: 2026-09-05)
+  </p>
+  <footer>
+    <a href="mailto:astira.info@gmail.com">astira.info@gmail.com</a> · <a href="../privacy/">Privacy policy</a> · <a href="../legal/">Legal notice</a>
+    <span class="only-print">https://astira-app.github.io/eclipse/</span>
+  </footer>
+</div>
+</main>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(
+    document.querySelectorAll('.sidebar a[href^="#"]')
+  );
+  if (!links.length) return;
+  var marks = links.map(function (a) {
+    return document.getElementById(a.getAttribute('href').slice(1));
+  });
+  function update() {
+    var y = window.scrollY + 96;
+    var current = 0;
+    for (var i = 0; i < marks.length; i++) {
+      if (marks[i] && marks[i].getBoundingClientRect().top + window.scrollY <= y) {
+        current = i;
+      }
+    }
+    for (var j = 0; j < links.length; j++) {
+      links[j].classList.toggle('current', j === current);
+    }
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();
+</script>
+<script>
+window.ASTIRA_ECLIPSE={"sprache":"en","vorgabe":"newyork","davor":"Before that: ","felder":["art","hier","weltweit","bedeckung","anfang","hoehepunkt","ende","voll_anfang","voll_ende","anfang_unter_horizont","ende_unter_horizont","hoehepunkt_utc"],"texte":{"eclipseNextSolar":"Next solar eclipse","eclipseNextLunar":"Next lunar eclipse","eclipseNoneSolar":"No solar eclipse can be seen from here in the coming years.","eclipseNoneLunar":"No lunar eclipse can be seen from here in the coming years.","eclipseDateCovered":"{date} · {percent} % covered","eclipseWhatTotalSun":"The Sun is covered completely.","eclipseWhatAnnular":"A ring of the Sun stays visible around the Moon.","eclipseWhatPartialSun":"Part of the Sun is covered.","eclipseWhatTotalMoon":"The Moon moves fully into Earth's shadow and turns a deep copper red.","eclipseWhatPartialMoon":"Part of the Moon moves into Earth's shadow.","eclipseWhatPenumbral":"The Moon only grazes the edge of Earth's shadow and barely dims — worth knowing, not much to look at.","eclipseTimes":"From {from} to {to} · deepest at {peak}","eclipseFullTimes":"Completely covered from {from} to {to}","eclipseRingTimes":"Ring visible from {from} to {to}","eclipseStartBelowHorizon":"The beginning happens below the horizon.","eclipseEndBelowHorizon":"The end happens below the horizon.","eclipseSunWarning":"Never look at the Sun without certified eclipse glasses — not through sunglasses, a camera or binoculars either. It damages the eye within seconds, and you feel nothing while it happens."},"staedte":{"berlin":[["lunar","penumbral","penumbral",0,"2027-02-20T22:12+01:00","2027-02-21T00:13+01:00","2027-02-21T02:13+01:00",null,null,0,0,"2027-02-20T23:13Z"],["solar","partial","total",34,"2027-08-02T10:17+02:00","2027-08-02T11:14+02:00","2027-08-02T12:12+02:00",null,null,0,0,"2027-08-02T09:14Z"],["lunar","partial","partial",3,"2028-01-12T03:07+01:00","2028-01-12T05:13+01:00","2028-01-12T07:19+01:00",null,null,0,0,"2028-01-12T04:13Z"],["lunar","partial","partial",33,"2028-07-06T17:44+02:00","2028-07-06T20:20+02:00","2028-07-06T22:55+02:00",null,null,1,0,"2028-07-06T18:20Z"],["lunar","total","total",100,"2028-12-31T15:03+01:00","2028-12-31T17:52+01:00","2028-12-31T20:40+01:00","2028-12-31T17:16+01:00","2028-12-31T18:28+01:00",1,0,"2028-12-31T16:52Z"],["solar","partial","partial",8,"2029-06-12T04:28+02:00","2029-06-12T04:58+02:00","2029-06-12T05:29+02:00",null,null,1,0,"2029-06-12T02:58Z"],["lunar","total","total",100,"2029-06-26T02:34+02:00","2029-06-26T05:22+02:00","2029-06-26T08:10+02:00","2029-06-26T04:31+02:00","2029-06-26T06:13+02:00",0,1,"2029-06-26T03:22Z"],["lunar","total","total",100,"2029-12-20T20:43+01:00","2029-12-20T23:42+01:00","2029-12-21T02:41+01:00","2029-12-20T23:15+01:00","2029-12-21T00:09+01:00",0,0,"2029-12-20T22:42Z"],["solar","partial","annular",57,"2030-06-01T06:20+02:00","2030-06-01T07:22+02:00","2030-06-01T08:29+02:00",null,null,0,0,"2030-06-01T05:22Z"],["lunar","partial","partial",47,"2030-06-15T18:14+02:00","2030-06-15T20:33+02:00","2030-06-15T22:53+02:00",null,null,1,0,"2030-06-15T18:33Z"],["lunar","penumbral","penumbral",0,"2030-12-09T21:08+01:00","2030-12-09T23:28+01:00","2030-12-10T01:47+01:00",null,null,0,0,"2030-12-09T22:28Z"],["lunar","penumbral","penumbral",0,"2031-05-07T03:52+02:00","2031-05-07T05:51+02:00","2031-05-07T07:50+02:00",null,null,0,1,"2031-05-07T03:51Z"],["lunar","penumbral","penumbral",0,"2031-10-30T06:49+01:00","2031-10-30T08:45+01:00","2031-10-30T10:42+01:00",null,null,0,1,"2031-10-30T07:45Z"],["lunar","total","total",100,"2032-10-18T18:25+02:00","2032-10-18T21:02+02:00","2032-10-18T23:40+02:00","2032-10-18T20:38+02:00","2032-10-18T21:26+02:00",0,0,"2032-10-18T19:02Z"],["lunar","total","total",100,"2033-04-14T18:12+02:00","2033-04-14T21:13+02:00","2033-04-15T00:13+02:00","2033-04-14T20:48+02:00","2033-04-14T21:38+02:00",1,0,"2033-04-14T19:13Z"],["solar","partial","total",3,"2034-03-20T11:11+01:00","2034-03-20T11:40+01:00","2034-03-20T12:08+01:00",null,null,0,0,"2034-03-20T10:40Z"],["lunar","penumbral","penumbral",0,"2034-04-03T18:53+02:00","2034-04-03T21:06+02:00","2034-04-03T23:19+02:00",null,null,1,0,"2034-04-03T19:06Z"],["lunar","partial","partial",0,"2034-09-28T02:42+02:00","2034-09-28T04:46+02:00","2034-09-28T06:51+02:00",null,null,0,0,"2034-09-28T02:46Z"],["lunar","partial","partial",5,"2035-08-19T00:46+02:00","2035-08-19T03:11+02:00","2035-08-19T05:36+02:00",null,null,0,0,"2035-08-19T01:11Z"],["lunar","total","total",100,"2036-02-11T20:34+01:00","2036-02-11T23:12+01:00","2036-02-12T01:50+01:00","2036-02-11T22:34+01:00","2036-02-11T23:49+01:00",0,0,"2036-02-11T22:12Z"],["lunar","total","total",100,"2036-08-07T01:45+02:00","2036-08-07T04:51+02:00","2036-08-07T07:57+02:00","2036-08-07T04:03+02:00","2036-08-07T05:39+02:00",0,1,"2036-08-07T02:51Z"],["solar","partial","partial",67,"2036-08-21T19:13+02:00","2036-08-21T20:03+02:00","2036-08-21T20:50+02:00",null,null,0,1,"2036-08-21T18:03Z"],["solar","partial","partial",52,"2037-01-16T09:02+01:00","2037-01-16T10:25+01:00","2037-01-16T11:54+01:00",null,null,0,0,"2037-01-16T09:25Z"],["lunar","total","total",100,"2037-01-31T12:24+01:00","2037-01-31T15:00+01:00","2037-01-31T17:37+01:00","2037-01-31T14:28+01:00","2037-01-31T15:32+01:00",1,0,"2037-01-31T14:00Z"],["lunar","partial","partial",85,"2037-07-27T03:18+02:00","2037-07-27T06:08+02:00","2037-07-27T08:59+02:00",null,null,0,1,"2037-07-27T04:08Z"],["solar","partial","annular",10,"2038-01-05T15:01+01:00","2038-01-05T15:48+01:00","2038-01-05T16:32+01:00",null,null,0,1,"2038-01-05T14:48Z"],["lunar","penumbral","penumbral",0,"2038-01-21T02:45+01:00","2038-01-21T04:48+01:00","2038-01-21T06:52+01:00",null,null,0,0,"2038-01-21T03:48Z"],["lunar","penumbral","penumbral",0,"2038-06-17T02:15+01:00","2038-06-17T03:44+01:00","2038-06-17T05:12+01:00",null,null,0,1,"2038-06-17T02:44Z"],["solar","partial","annular",2,"2038-07-02T14:51+01:00","2038-07-02T15:17+01:00","2038-07-02T15:42+01:00",null,null,0,0,"2038-07-02T14:17Z"],["lunar","penumbral","penumbral",0,"2038-12-11T16:34+01:00","2038-12-11T18:44+01:00","2038-12-11T20:53+01:00",null,null,0,0,"2038-12-11T17:44Z"],["lunar","partial","partial",93,"2039-06-06T17:25+01:00","2039-06-06T19:53+01:00","2039-06-06T22:22+01:00",null,null,1,0,"2039-06-06T18:53Z"],["solar","partial","annular",76,"2039-06-21T18:27+01:00","2039-06-21T19:29+01:00","2039-06-21T20:27+01:00",null,null,0,1,"2039-06-21T18:29Z"],["lunar","partial","partial",97,"2039-11-30T14:55+01:00","2039-11-30T17:55+01:00","2039-11-30T20:55+01:00",null,null,1,0,"2039-11-30T16:55Z"],["lunar","total","total",100,"2040-11-18T17:06+01:00","2040-11-18T20:03+01:00","2040-11-18T23:00+01:00","2040-11-18T19:19+01:00","2040-11-18T20:47+01:00",0,0,"2040-11-18T19:03Z"],["lunar","partial","partial",3,"2041-05-15T23:27+01:00","2041-05-16T01:42+01:00","2041-05-16T03:57+01:00",null,null,0,0,"2041-05-16T00:42Z"],["lunar","partial","partial",10,"2041-11-08T03:19+01:00","2041-11-08T05:34+01:00","2041-11-08T07:48+01:00",null,null,0,1,"2041-11-08T04:34Z"],["lunar","total","total",100,"2043-09-19T00:07+01:00","2043-09-19T02:50+01:00","2043-09-19T05:33+01:00","2043-09-19T02:14+01:00","2043-09-19T03:27+01:00",0,0,"2043-09-19T01:50Z"],["lunar","total","total",100,"2044-03-13T17:48+01:00","2044-03-13T20:37+01:00","2044-03-13T23:27+01:00","2044-03-13T20:04+01:00","2044-03-13T21:11+01:00",1,0,"2044-03-13T19:37Z"],["lunar","partial","partial",17,"2046-07-17T23:35+01:00","2046-07-18T02:05+01:00","2046-07-18T04:34+01:00",null,null,0,1,"2046-07-18T01:05Z"],["lunar","total","total",100,"2047-01-11T23:36+01:00","2047-01-12T02:25+01:00","2047-01-12T05:14+01:00","2047-01-12T01:49+01:00","2047-01-12T03:00+01:00",0,0,"2047-01-12T01:25Z"],["lunar","total","total",100,"2048-01-01T04:52+01:00","2048-01-01T07:52+01:00","2048-01-01T10:52+01:00","2048-01-01T07:24+01:00","2048-01-01T08:21+01:00",0,1,"2048-01-01T06:52Z"],["solar","partial","annular",74,"2048-06-11T13:11+01:00","2048-06-11T14:42+01:00","2048-06-11T16:04+01:00",null,null,0,0,"2048-06-11T13:42Z"],["lunar","partial","partial",64,"2048-06-26T00:38+01:00","2048-06-26T03:01+01:00","2048-06-26T05:24+01:00",null,null,0,1,"2048-06-26T02:01Z"],["lunar","penumbral","penumbral",0,"2048-12-20T05:05+01:00","2048-12-20T07:26+01:00","2048-12-20T09:47+01:00",null,null,0,1,"2048-12-20T06:26Z"],["lunar","penumbral","penumbral",0,"2049-06-15T19:06+01:00","2049-06-15T20:13+01:00","2049-06-15T21:19+01:00",null,null,1,0,"2049-06-15T19:13Z"],["lunar","penumbral","penumbral",0,"2049-11-09T14:57+01:00","2049-11-09T16:51+01:00","2049-11-09T18:44+01:00",null,null,1,0,"2049-11-09T15:51Z"],["lunar","total","total",100,"2050-05-06T20:40+01:00","2050-05-06T23:31+01:00","2050-05-07T02:21+01:00","2050-05-06T23:09+01:00","2050-05-06T23:53+01:00",0,0,"2050-05-06T22:31Z"],["lunar","total","total",100,"2050-10-30T01:43+01:00","2050-10-30T04:20+01:00","2050-10-30T06:57+01:00","2050-10-30T04:02+01:00","2050-10-30T04:38+01:00",0,0,"2050-10-30T03:20Z"],["solar","partial","partial",71,"2050-11-14T13:41+01:00","2050-11-14T15:04+01:00","2050-11-14T16:21+01:00",null,null,0,1,"2050-11-14T14:04Z"],["lunar","total","total",100,"2051-04-26T00:12+01:00","2051-04-26T03:15+01:00","2051-04-26T06:18+01:00","2051-04-26T02:40+01:00","2051-04-26T03:50+01:00",0,1,"2051-04-26T02:15Z"],["lunar","total","total",100,"2051-10-19T17:33+01:00","2051-10-19T20:10+01:00","2051-10-19T22:48+01:00","2051-10-19T19:28+01:00","2051-10-19T20:52+01:00",0,0,"2051-10-19T19:10Z"],["lunar","penumbral","penumbral",0,"2052-04-14T00:58+01:00","2052-04-14T03:16+01:00","2052-04-14T05:35+01:00",null,null,0,1,"2052-04-14T02:16Z"],["lunar","penumbral","penumbral",0,"2053-03-04T16:15+01:00","2053-03-04T18:21+01:00","2053-03-04T20:26+01:00",null,null,1,0,"2053-03-04T17:21Z"],["solar","partial","total",35,"2053-09-12T08:28+01:00","2053-09-12T09:27+01:00","2053-09-12T10:29+01:00",null,null,0,0,"2053-09-12T08:27Z"],["lunar","total","total",100,"2054-02-22T05:12+01:00","2054-02-22T07:50+01:00","2054-02-22T10:27+01:00","2054-02-22T07:13+01:00","2054-02-22T08:26+01:00",0,1,"2054-02-22T06:50Z"],["lunar","total","total",100,"2055-02-11T21:08+01:00","2055-02-11T23:45+01:00","2055-02-12T02:21+01:00","2055-02-11T23:11+01:00","2055-02-12T00:18+01:00",0,0,"2055-02-11T22:45Z"],["lunar","penumbral","penumbral",0,"2056-07-26T17:54+01:00","2056-07-26T19:42+01:00","2056-07-26T21:29+01:00",null,null,1,0,"2056-07-26T18:42Z"],["lunar","penumbral","penumbral",0,"2056-12-22T00:39+01:00","2056-12-22T02:47+01:00","2056-12-22T04:56+01:00",null,null,0,0,"2056-12-22T01:47Z"],["lunar","partial","partial",79,"2057-06-17T00:59+01:00","2057-06-17T03:25+01:00","2057-06-17T05:50+01:00",null,null,0,1,"2057-06-17T02:25Z"],["lunar","partial","partial",96,"2057-12-10T22:52+01:00","2057-12-11T01:52+01:00","2057-12-11T04:51+01:00",null,null,0,0,"2057-12-11T00:52Z"],["lunar","total","total",100,"2058-06-06T17:32+01:00","2058-06-06T20:14+01:00","2058-06-06T22:56+01:00","2058-06-06T19:25+01:00","2058-06-06T21:03+01:00",1,0,"2058-06-06T19:14Z"],["lunar","total","total",100,"2058-11-30T01:18+01:00","2058-11-30T04:14+01:00","2058-11-30T07:11+01:00","2058-11-30T03:29+01:00","2058-11-30T04:59+01:00",0,0,"2058-11-30T03:14Z"],["solar","partial","annular",55,"2059-11-05T07:34+01:00","2059-11-05T08:45+01:00","2059-11-05T10:02+01:00",null,null,0,0,"2059-11-05T07:45Z"],["lunar","partial","partial",14,"2059-11-19T11:44+01:00","2059-11-19T14:00+01:00","2059-11-19T16:15+01:00",null,null,1,0,"2059-11-19T13:00Z"],["lunar","penumbral","penumbral",0,"2060-04-15T20:27+01:00","2060-04-15T22:35+01:00","2060-04-16T00:43+01:00",null,null,0,0,"2060-04-15T21:35Z"],["solar","partial","total",24,"2060-04-30T10:38+01:00","2060-04-30T11:31+01:00","2060-04-30T12:25+01:00",null,null,0,0,"2060-04-30T10:31Z"],["lunar","penumbral","penumbral",0,"2060-10-09T17:56+01:00","2060-10-09T19:52+01:00","2060-10-09T21:48+01:00",null,null,0,0,"2060-10-09T18:52Z"],["lunar","penumbral","penumbral",0,"2060-11-08T04:39+01:00","2060-11-08T05:02+01:00","2060-11-08T05:26+01:00",null,null,0,0,"2060-11-08T04:02Z"],["lunar","total","total",100,"2061-04-04T19:54+01:00","2061-04-04T22:52+01:00","2061-04-05T01:50+01:00","2061-04-04T22:36+01:00","2061-04-04T23:08+01:00",0,0,"2061-04-04T21:52Z"],["lunar","total","total",100,"2062-03-25T01:43+01:00","2062-03-25T04:32+01:00","2062-03-25T07:21+01:00","2062-03-25T03:54+01:00","2062-03-25T05:09+01:00",0,1,"2062-03-25T03:32Z"],["lunar","total","total",100,"2062-09-18T16:37+01:00","2062-09-18T19:32+01:00","2062-09-18T22:27+01:00","2062-09-18T19:02+01:00","2062-09-18T20:02+01:00",1,0,"2062-09-18T18:32Z"],["lunar","partial","partial",1,"2063-03-14T15:00+01:00","2063-03-14T17:04+01:00","2063-03-14T19:08+01:00",null,null,1,0,"2063-03-14T16:04Z"],["lunar","penumbral","penumbral",0,"2063-09-07T19:29+01:00","2063-09-07T21:39+01:00","2063-09-07T23:50+01:00",null,null,0,0,"2063-09-07T20:39Z"],["lunar","partial","partial",1,"2064-02-02T20:42+01:00","2064-02-02T22:47+01:00","2064-02-03T00:52+01:00",null,null,0,0,"2064-02-02T21:47Z"],["solar","partial","partial",70,"2065-02-05T09:49+01:00","2065-02-05T11:11+01:00","2065-02-05T12:34+01:00",null,null,0,0,"2065-02-05T10:11Z"],["lunar","total","total",100,"2065-07-17T16:01+01:00","2065-07-17T18:47+01:00","2065-07-17T21:32+01:00","2065-07-17T17:58+01:00","2065-07-17T19:35+01:00",1,0,"2065-07-17T17:47Z"],["lunar","total","total",100,"2066-01-11T13:02+01:00","2066-01-11T16:03+01:00","2066-01-11T19:03+01:00","2066-01-11T15:33+01:00","2066-01-11T16:32+01:00",1,0,"2066-01-11T15:03Z"],["solar","partial","annular",51,"2066-06-22T20:10+01:00","2066-06-22T21:03+01:00","2066-06-22T21:53+01:00",null,null,0,1,"2066-06-22T20:03Z"],["lunar","penumbral","penumbral",0,"2066-12-31T13:06+01:00","2066-12-31T15:28+01:00","2066-12-31T17:50+01:00",null,null,1,0,"2066-12-31T14:28Z"],["lunar","penumbral","penumbral",0,"2067-05-28T18:09+01:00","2067-05-28T19:54+01:00","2067-05-28T21:39+01:00",null,null,1,0,"2067-05-28T18:54Z"],["lunar","penumbral","penumbral",0,"2067-06-27T02:19+01:00","2067-06-27T03:39+01:00","2067-06-27T04:59+01:00",null,null,0,1,"2067-06-27T02:39Z"],["lunar","penumbral","penumbral",0,"2067-11-20T23:11+01:00","2067-11-21T01:03+01:00","2067-11-21T02:54+01:00",null,null,0,0,"2067-11-21T00:03Z"],["lunar","partial","partial",98,"2068-05-17T03:52+01:00","2068-05-17T06:40+01:00","2068-05-17T09:29+01:00",null,null,0,1,"2068-05-17T05:40Z"],["solar","partial","partial",15,"2069-04-21T10:19+01:00","2069-04-21T11:06+01:00","2069-04-21T11:54+01:00",null,null,0,0,"2069-04-21T10:06Z"],["lunar","total","total",100,"2069-10-30T01:55+01:00","2069-10-30T04:33+01:00","2069-10-30T07:11+01:00","2069-10-30T03:49+01:00","2069-10-30T05:17+01:00",0,1,"2069-10-30T03:33Z"],["lunar","partial","partial",8,"2070-10-19T17:37+01:00","2070-10-19T19:49+01:00","2070-10-19T22:01+01:00",null,null,0,0,"2070-10-19T18:49Z"],["lunar","penumbral","penumbral",0,"2071-03-16T00:26+01:00","2071-03-16T02:29+01:00","2071-03-16T04:32+01:00",null,null,0,0,"2071-03-16T01:29Z"],["lunar","total","total",100,"2072-03-04T13:44+01:00","2072-03-04T16:21+01:00","2072-03-04T18:58+01:00","2072-03-04T15:46+01:00","2072-03-04T16:55+01:00",1,0,"2072-03-04T15:21Z"],["lunar","total","total",100,"2072-08-28T14:00+01:00","2072-08-28T17:03+01:00","2072-08-28T20:07+01:00","2072-08-28T16:31+01:00","2072-08-28T17:36+01:00",1,0,"2072-08-28T16:03Z"],["solar","partial","total",19,"2072-09-12T08:05+01:00","2072-09-12T08:51+01:00","2072-09-12T09:39+01:00",null,null,0,0,"2072-09-12T07:51Z"],["lunar","total","total",100,"2073-02-22T05:45+01:00","2073-02-22T08:23+01:00","2073-02-22T11:00+01:00","2073-02-22T07:48+01:00","2073-02-22T08:57+01:00",0,1,"2073-02-22T07:23Z"],["lunar","total","total",100,"2073-08-17T15:45+01:00","2073-08-17T18:40+01:00","2073-08-17T21:36+01:00","2073-08-17T18:15+01:00","2073-08-17T19:06+01:00",1,0,"2073-08-17T17:40Z"],["lunar","penumbral","penumbral",0,"2074-02-11T19:49+01:00","2074-02-11T21:54+01:00","2074-02-11T23:59+01:00",null,null,0,0,"2074-02-11T20:54Z"],["lunar","penumbral","penumbral",0,"2074-08-07T00:57+01:00","2074-08-07T02:54+01:00","2074-08-07T04:50+01:00",null,null,0,1,"2074-08-07T01:54Z"],["solar","partial","annular",80,"2075-07-13T04:46+01:00","2075-07-13T05:48+01:00","2075-07-13T06:55+01:00",null,null,0,0,"2075-07-13T04:48Z"],["lunar","partial","partial",94,"2075-12-22T06:54+01:00","2075-12-22T09:53+01:00","2075-12-22T12:53+01:00",null,null,0,1,"2075-12-22T08:53Z"],["lunar","total","total",100,"2076-06-17T00:54+01:00","2076-06-17T03:37+01:00","2076-06-17T06:20+01:00","2076-06-17T02:47+01:00","2076-06-17T04:28+01:00",0,1,"2076-06-17T02:37Z"]],"newyork":[["lunar","penumbral","penumbral",0,"2027-02-20T16:12-05:00","2027-02-20T18:13-05:00","2027-02-20T20:13-05:00",null,null,1,0,"2027-02-20T23:13Z"],["lunar","penumbral","penumbral",0,"2027-08-17T01:24-04:00","2027-08-17T03:14-04:00","2027-08-17T05:03-04:00",null,null,0,0,"2027-08-17T07:14Z"],["lunar","partial","partial",3,"2028-01-11T21:07-05:00","2028-01-11T23:13-05:00","2028-01-12T01:19-05:00",null,null,0,0,"2028-01-12T04:13Z"],["solar","partial","annular",3,"2028-01-26T09:18-05:00","2028-01-26T10:02-05:00","2028-01-26T10:48-05:00",null,null,0,0,"2028-01-26T15:02Z"],["solar","partial","partial",41,"2029-01-14T11:25-05:00","2029-01-14T12:50-05:00","2029-01-14T14:11-05:00",null,null,0,0,"2029-01-14T17:50Z"],["lunar","total","total",100,"2029-06-25T20:34-04:00","2029-06-25T23:22-04:00","2029-06-26T02:10-04:00","2029-06-25T22:31-04:00","2029-06-26T00:13-04:00",0,0,"2029-06-26T03:22Z"],["lunar","total","total",100,"2029-12-20T14:43-05:00","2029-12-20T17:42-05:00","2029-12-20T20:41-05:00","2029-12-20T17:15-05:00","2029-12-20T18:09-05:00",1,0,"2029-12-20T22:42Z"],["lunar","penumbral","penumbral",0,"2030-12-09T15:08-05:00","2030-12-09T17:28-05:00","2030-12-09T19:47-05:00",null,null,1,0,"2030-12-09T22:28Z"],["lunar","penumbral","penumbral",0,"2031-05-06T21:52-04:00","2031-05-06T23:51-04:00","2031-05-07T01:50-04:00",null,null,0,0,"2031-05-07T03:51Z"],["lunar","penumbral","penumbral",0,"2031-10-30T01:49-04:00","2031-10-30T03:45-04:00","2031-10-30T05:42-04:00",null,null,0,0,"2031-10-30T07:45Z"],["solar","partial","total",1,"2033-03-30T14:27-04:00","2033-03-30T14:48-04:00","2033-03-30T15:08-04:00",null,null,0,0,"2033-03-30T18:48Z"],["lunar","total","total",100,"2033-10-08T04:19-04:00","2033-10-08T06:55-04:00","2033-10-08T09:32-04:00","2033-10-08T06:16-04:00","2033-10-08T07:35-04:00",0,1,"2033-10-08T10:55Z"],["lunar","partial","partial",0,"2034-09-27T20:42-04:00","2034-09-27T22:46-04:00","2034-09-28T00:51-04:00",null,null,0,0,"2034-09-28T02:46Z"],["lunar","penumbral","penumbral",0,"2035-02-22T01:57-05:00","2035-02-22T04:05-05:00","2035-02-22T06:13-05:00",null,null,0,0,"2035-02-22T09:05Z"],["lunar","partial","partial",5,"2035-08-18T18:46-04:00","2035-08-18T21:11-04:00","2035-08-18T23:36-04:00",null,null,1,0,"2035-08-19T01:11Z"],["lunar","total","total",100,"2036-02-11T14:34-05:00","2036-02-11T17:12-05:00","2036-02-11T19:50-05:00","2036-02-11T16:34-05:00","2036-02-11T17:49-05:00",1,0,"2036-02-11T22:12Z"],["lunar","total","total",100,"2036-08-06T19:45-04:00","2036-08-06T22:51-04:00","2036-08-07T01:57-04:00","2036-08-06T22:03-04:00","2036-08-06T23:39-04:00",1,0,"2036-08-07T02:51Z"],["lunar","total","total",100,"2037-01-31T06:24-05:00","2037-01-31T09:00-05:00","2037-01-31T11:37-05:00","2037-01-31T08:28-05:00","2037-01-31T09:32-05:00",0,1,"2037-01-31T14:00Z"],["lunar","partial","partial",85,"2037-07-26T21:18-04:00","2037-07-27T00:08-04:00","2037-07-27T02:59-04:00",null,null,0,0,"2037-07-27T04:08Z"],["solar","partial","annular",34,"2038-01-05T06:26-05:00","2038-01-05T07:23-05:00","2038-01-05T08:26-05:00",null,null,1,0,"2038-01-05T12:23Z"],["lunar","penumbral","penumbral",0,"2038-01-20T20:45-05:00","2038-01-20T22:48-05:00","2038-01-21T00:52-05:00",null,null,0,0,"2038-01-21T03:48Z"],["lunar","penumbral","penumbral",0,"2038-06-16T20:15-05:00","2038-06-16T21:44-05:00","2038-06-16T23:12-05:00",null,null,0,0,"2038-06-17T02:44Z"],["solar","partial","annular",6,"2038-07-02T06:46-05:00","2038-07-02T07:21-05:00","2038-07-02T07:57-05:00",null,null,0,0,"2038-07-02T12:21Z"],["solar","partial","annular",0,"2039-06-21T11:56-05:00","2039-06-21T12:22-05:00","2039-06-21T12:48-05:00",null,null,0,0,"2039-06-21T17:22Z"],["lunar","total","total",100,"2040-05-26T04:04-05:00","2040-05-26T06:45-05:00","2040-05-26T09:26-05:00","2040-05-26T05:59-05:00","2040-05-26T07:32-05:00",0,1,"2040-05-26T11:45Z"],["solar","partial","partial",57,"2040-11-04T13:07-05:00","2040-11-04T14:26-05:00","2040-11-04T15:39-05:00",null,null,0,0,"2040-11-04T19:26Z"],["lunar","total","total",100,"2040-11-18T11:06-05:00","2040-11-18T14:03-05:00","2040-11-18T17:00-05:00","2040-11-18T13:19-05:00","2040-11-18T14:47-05:00",1,0,"2040-11-18T19:03Z"],["lunar","partial","partial",3,"2041-05-15T17:27-05:00","2041-05-15T19:42-05:00","2041-05-15T21:57-05:00",null,null,1,0,"2041-05-16T00:42Z"],["lunar","partial","partial",10,"2041-11-07T21:19-05:00","2041-11-07T23:34-05:00","2041-11-08T01:48-05:00",null,null,0,0,"2041-11-08T04:34Z"],["lunar","penumbral","penumbral",0,"2042-09-29T03:45-05:00","2042-09-29T05:45-05:00","2042-09-29T07:44-05:00",null,null,0,1,"2042-09-29T10:45Z"],["lunar","total","total",100,"2043-09-18T18:07-05:00","2043-09-18T20:50-05:00","2043-09-18T23:33-05:00","2043-09-18T20:14-05:00","2043-09-18T21:27-05:00",0,0,"2043-09-19T01:50Z"],["lunar","total","total",100,"2044-09-07T03:27-05:00","2044-09-07T06:19-05:00","2044-09-07T09:12-05:00","2044-09-07T06:02-05:00","2044-09-07T06:37-05:00",0,1,"2044-09-07T11:19Z"],["lunar","penumbral","penumbral",0,"2045-03-03T00:40-05:00","2045-03-03T02:42-05:00","2045-03-03T04:44-05:00",null,null,0,0,"2045-03-03T07:42Z"],["solar","partial","total",51,"2045-08-12T11:17-05:00","2045-08-12T12:26-05:00","2045-08-12T13:33-05:00",null,null,0,0,"2045-08-12T17:26Z"],["lunar","partial","partial",2,"2046-01-22T05:56-05:00","2046-01-22T08:01-05:00","2046-01-22T10:06-05:00",null,null,0,1,"2046-01-22T13:01Z"],["lunar","partial","partial",17,"2046-07-17T17:35-05:00","2046-07-17T20:05-05:00","2046-07-17T22:34-05:00",null,null,1,0,"2046-07-18T01:05Z"],["lunar","total","total",100,"2047-01-11T17:36-05:00","2047-01-11T20:25-05:00","2047-01-11T23:14-05:00","2047-01-11T19:49-05:00","2047-01-11T21:00-05:00",0,0,"2047-01-12T01:25Z"],["lunar","total","total",100,"2047-07-07T02:47-05:00","2047-07-07T05:34-05:00","2047-07-07T08:21-05:00","2047-07-07T04:44-05:00","2047-07-07T06:25-05:00",0,1,"2047-07-07T10:34Z"],["lunar","total","total",100,"2047-12-31T22:52-05:00","2048-01-01T01:52-05:00","2048-01-01T04:52-05:00","2048-01-01T01:24-05:00","2048-01-01T02:21-05:00",0,0,"2048-01-01T06:52Z"],["solar","partial","annular",70,"2048-06-11T05:19-05:00","2048-06-11T06:24-05:00","2048-06-11T07:36-05:00",null,null,0,0,"2048-06-11T11:24Z"],["lunar","partial","partial",64,"2048-06-25T18:38-05:00","2048-06-25T21:01-05:00","2048-06-25T23:24-05:00",null,null,1,0,"2048-06-26T02:01Z"],["lunar","penumbral","penumbral",0,"2048-12-19T23:05-05:00","2048-12-20T01:26-05:00","2048-12-20T03:47-05:00",null,null,0,0,"2048-12-20T06:26Z"],["lunar","total","total",100,"2050-05-06T14:40-05:00","2050-05-06T17:31-05:00","2050-05-06T20:21-05:00","2050-05-06T17:09-05:00","2050-05-06T17:53-05:00",1,0,"2050-05-06T22:31Z"],["lunar","total","total",100,"2050-10-29T19:43-05:00","2050-10-29T22:20-05:00","2050-10-30T00:57-05:00","2050-10-29T22:02-05:00","2050-10-29T22:38-05:00",0,0,"2050-10-30T03:20Z"],["solar","partial","partial",7,"2050-11-14T06:25-05:00","2050-11-14T07:04-05:00","2050-11-14T07:45-05:00",null,null,1,0,"2050-11-14T12:04Z"],["lunar","total","total",100,"2051-04-25T18:12-05:00","2051-04-25T21:15-05:00","2051-04-26T00:18-05:00","2051-04-25T20:40-05:00","2051-04-25T21:50-05:00",1,0,"2051-04-26T02:15Z"],["solar","partial","total",77,"2052-03-30T13:22-05:00","2052-03-30T14:38-05:00","2052-03-30T15:49-05:00",null,null,0,0,"2052-03-30T19:38Z"],["lunar","penumbral","penumbral",0,"2052-04-13T18:58-05:00","2052-04-13T21:16-05:00","2052-04-13T23:35-05:00",null,null,0,0,"2052-04-14T02:16Z"],["lunar","partial","partial",4,"2052-10-08T03:36-05:00","2052-10-08T05:44-05:00","2052-10-08T07:53-05:00",null,null,0,1,"2052-10-08T10:44Z"],["lunar","penumbral","penumbral",0,"2053-08-29T00:45-05:00","2053-08-29T03:04-05:00","2053-08-29T05:24-05:00",null,null,0,0,"2053-08-29T08:04Z"],["lunar","total","total",100,"2054-02-21T23:12-05:00","2054-02-22T01:50-05:00","2054-02-22T04:27-05:00","2054-02-22T01:13-05:00","2054-02-22T02:26-05:00",0,0,"2054-02-22T06:50Z"],["lunar","total","total",100,"2054-08-18T01:20-05:00","2054-08-18T04:25-05:00","2054-08-18T07:30-05:00","2054-08-18T03:43-05:00","2054-08-18T05:07-05:00",0,1,"2054-08-18T09:25Z"],["solar","partial","partial",21,"2055-01-27T12:15-05:00","2055-01-27T13:33-05:00","2055-01-27T14:45-05:00",null,null,0,0,"2055-01-27T18:33Z"],["lunar","total","total",100,"2055-02-11T15:08-05:00","2055-02-11T17:45-05:00","2055-02-11T20:21-05:00","2055-02-11T17:11-05:00","2055-02-11T18:18-05:00",1,0,"2055-02-11T22:45Z"],["lunar","partial","partial",99,"2055-08-07T02:58-05:00","2055-08-07T05:52-05:00","2055-08-07T08:45-05:00",null,null,0,1,"2055-08-07T10:52Z"],["lunar","penumbral","penumbral",0,"2056-02-01T05:20-05:00","2056-02-01T07:24-05:00","2056-02-01T09:28-05:00",null,null,0,1,"2056-02-01T12:24Z"],["lunar","penumbral","penumbral",0,"2056-06-27T03:46-05:00","2056-06-27T05:01-05:00","2056-06-27T06:17-05:00",null,null,0,1,"2056-06-27T10:01Z"],["lunar","penumbral","penumbral",0,"2056-12-21T18:39-05:00","2056-12-21T20:47-05:00","2056-12-21T22:56-05:00",null,null,0,0,"2056-12-22T01:47Z"],["lunar","partial","partial",79,"2057-06-16T18:59-05:00","2057-06-16T21:25-05:00","2057-06-16T23:50-05:00",null,null,1,0,"2057-06-17T02:25Z"],["solar","annular","annular",88,"2057-07-01T19:01-05:00","2057-07-01T19:58-05:00","2057-07-01T20:52-05:00","2057-07-01T19:57-05:00","2057-07-01T20:00-05:00",0,1,"2057-07-02T00:58Z"],["lunar","partial","partial",96,"2057-12-10T16:52-05:00","2057-12-10T19:52-05:00","2057-12-10T22:51-05:00",null,null,0,0,"2057-12-11T00:52Z"],["lunar","total","total",100,"2058-11-29T19:18-05:00","2058-11-29T22:14-05:00","2058-11-30T01:11-05:00","2058-11-29T21:29-05:00","2058-11-29T22:59-05:00",0,0,"2058-11-30T03:14Z"],["lunar","partial","partial",11,"2059-05-27T00:33-05:00","2059-05-27T02:54-05:00","2059-05-27T05:15-05:00",null,null,0,1,"2059-05-27T07:54Z"],["lunar","partial","partial",14,"2059-11-19T05:44-05:00","2059-11-19T08:00-05:00","2059-11-19T10:15-05:00",null,null,0,1,"2059-11-19T13:00Z"],["lunar","penumbral","penumbral",0,"2060-04-15T14:27-05:00","2060-04-15T16:35-05:00","2060-04-15T18:43-05:00",null,null,1,0,"2060-04-15T21:35Z"],["lunar","penumbral","penumbral",0,"2060-11-07T22:39-05:00","2060-11-07T23:02-05:00","2060-11-07T23:26-05:00",null,null,0,0,"2060-11-08T04:02Z"],["lunar","total","total",100,"2061-04-04T13:54-05:00","2061-04-04T16:52-05:00","2061-04-04T19:50-05:00","2061-04-04T16:36-05:00","2061-04-04T17:08-05:00",1,0,"2061-04-04T21:52Z"],["lunar","total","total",100,"2061-09-29T01:54-05:00","2061-09-29T04:36-05:00","2061-09-29T07:19-05:00","2061-09-29T04:06-05:00","2061-09-29T05:06-05:00",0,1,"2061-09-29T09:36Z"],["lunar","total","total",100,"2062-03-24T19:43-05:00","2062-03-24T22:32-05:00","2062-03-25T01:21-05:00","2062-03-24T21:54-05:00","2062-03-24T23:09-05:00",0,0,"2062-03-25T03:32Z"],["lunar","partial","partial",1,"2064-02-02T14:42-05:00","2064-02-02T16:47-05:00","2064-02-02T18:52-05:00",null,null,1,0,"2064-02-02T21:47Z"],["lunar","partial","partial",5,"2064-07-28T00:28-05:00","2064-07-28T02:51-05:00","2064-07-28T05:13-05:00",null,null,0,1,"2064-07-28T07:51Z"],["lunar","total","total",100,"2065-01-22T02:08-05:00","2065-01-22T04:57-05:00","2065-01-22T07:46-05:00","2065-01-22T04:22-05:00","2065-01-22T05:32-05:00",0,1,"2065-01-22T09:57Z"],["lunar","total","total",100,"2066-01-11T07:02-05:00","2066-01-11T10:03-05:00","2066-01-11T13:03-05:00","2066-01-11T09:33-05:00","2066-01-11T10:32-05:00",0,1,"2066-01-11T15:03Z"],["solar","partial","annular",43,"2066-06-22T14:17-05:00","2066-06-22T15:37-05:00","2066-06-22T16:47-05:00",null,null,0,0,"2066-06-22T20:37Z"],["lunar","partial","partial",81,"2066-07-07T02:02-05:00","2066-07-07T04:28-05:00","2066-07-07T06:55-05:00",null,null,0,1,"2066-07-07T09:28Z"],["lunar","penumbral","penumbral",0,"2066-12-31T07:06-05:00","2066-12-31T09:28-05:00","2066-12-31T11:50-05:00",null,null,0,1,"2066-12-31T14:28Z"],["lunar","penumbral","penumbral",0,"2067-06-26T20:19-05:00","2067-06-26T21:39-05:00","2067-06-26T22:59-05:00",null,null,0,0,"2067-06-27T02:39Z"],["lunar","penumbral","penumbral",0,"2067-11-20T17:11-05:00","2067-11-20T19:03-05:00","2067-11-20T20:54-05:00",null,null,0,0,"2067-11-21T00:03Z"],["solar","partial","total",9,"2067-12-06T07:01-05:00","2067-12-06T07:41-05:00","2067-12-06T08:24-05:00",null,null,1,0,"2067-12-06T12:41Z"],["lunar","partial","partial",98,"2068-05-16T21:52-05:00","2068-05-17T00:40-05:00","2068-05-17T03:29-05:00",null,null,0,0,"2068-05-17T05:40Z"],["lunar","total","total",100,"2068-11-09T04:09-05:00","2068-11-09T06:45-05:00","2068-11-09T09:21-05:00","2068-11-09T06:35-05:00","2068-11-09T06:55-05:00",0,1,"2068-11-09T11:45Z"],["lunar","total","total",100,"2069-05-06T01:03-05:00","2069-05-06T04:08-05:00","2069-05-06T07:12-05:00","2069-05-06T03:25-05:00","2069-05-06T04:50-05:00",0,1,"2069-05-06T09:08Z"],["lunar","total","total",100,"2069-10-29T19:55-05:00","2069-10-29T22:33-05:00","2069-10-30T01:11-05:00","2069-10-29T21:49-05:00","2069-10-29T23:17-05:00",0,0,"2069-10-30T03:33Z"],["lunar","penumbral","penumbral",0,"2070-04-25T01:55-05:00","2070-04-25T04:19-05:00","2070-04-25T06:43-05:00",null,null,0,1,"2070-04-25T09:19Z"],["lunar","penumbral","penumbral",0,"2071-03-15T18:26-05:00","2071-03-15T20:29-05:00","2071-03-15T22:32-05:00",null,null,0,0,"2071-03-16T01:29Z"],["solar","partial","total",21,"2071-09-23T10:50-05:00","2071-09-23T11:52-05:00","2071-09-23T12:54-05:00",null,null,0,0,"2071-09-23T16:52Z"],["lunar","total","total",100,"2073-02-21T23:45-05:00","2073-02-22T02:23-05:00","2073-02-22T05:00-05:00","2073-02-22T01:48-05:00","2073-02-22T02:57-05:00",0,0,"2073-02-22T07:23Z"],["lunar","penumbral","penumbral",0,"2074-02-11T13:49-05:00","2074-02-11T15:54-05:00","2074-02-11T17:59-05:00",null,null,1,0,"2074-02-11T20:54Z"],["lunar","penumbral","penumbral",0,"2074-08-06T18:57-05:00","2074-08-06T20:54-05:00","2074-08-06T22:50-05:00",null,null,1,0,"2074-08-07T01:54Z"],["lunar","penumbral","penumbral",0,"2075-01-02T02:45-05:00","2075-01-02T04:53-05:00","2075-01-02T07:00-05:00",null,null,0,0,"2075-01-02T09:53Z"],["lunar","partial","partial",62,"2075-06-28T02:31-05:00","2075-06-28T04:53-05:00","2075-06-28T07:15-05:00",null,null,0,1,"2075-06-28T09:53Z"],["lunar","partial","partial",94,"2075-12-22T00:54-05:00","2075-12-22T03:53-05:00","2075-12-22T06:53-05:00",null,null,0,0,"2075-12-22T08:53Z"],["lunar","total","total",100,"2076-06-16T18:54-05:00","2076-06-16T21:37-05:00","2076-06-17T00:20-05:00","2076-06-16T20:47-05:00","2076-06-16T22:28-05:00",1,0,"2076-06-17T02:37Z"]],"madrid":[["lunar","penumbral","penumbral",0,"2027-02-20T22:12+01:00","2027-02-21T00:13+01:00","2027-02-21T02:13+01:00",null,null,0,0,"2027-02-20T23:13Z"],["solar","partial","total",86,"2027-08-02T09:45+02:00","2027-08-02T10:51+02:00","2027-08-02T12:03+02:00",null,null,0,0,"2027-08-02T08:51Z"],["lunar","penumbral","penumbral",0,"2027-08-17T07:24+02:00","2027-08-17T09:14+02:00","2027-08-17T11:03+02:00",null,null,0,1,"2027-08-17T07:14Z"],["lunar","partial","partial",3,"2028-01-12T03:07+01:00","2028-01-12T05:13+01:00","2028-01-12T07:19+01:00",null,null,0,0,"2028-01-12T04:13Z"],["solar","partial","annular",82,"2028-01-26T16:36+01:00","2028-01-26T17:56+01:00","2028-01-26T19:06+01:00",null,null,0,1,"2028-01-26T16:56Z"],["lunar","partial","partial",33,"2028-07-06T17:44+02:00","2028-07-06T20:20+02:00","2028-07-06T22:55+02:00",null,null,1,0,"2028-07-06T18:20Z"],["lunar","total","total",100,"2028-12-31T15:03+01:00","2028-12-31T17:52+01:00","2028-12-31T20:40+01:00","2028-12-31T17:16+01:00","2028-12-31T18:28+01:00",1,0,"2028-12-31T16:52Z"],["lunar","total","total",100,"2029-06-26T02:34+02:00","2029-06-26T05:22+02:00","2029-06-26T08:10+02:00","2029-06-26T04:31+02:00","2029-06-26T06:13+02:00",0,1,"2029-06-26T03:22Z"],["lunar","total","total",100,"2029-12-20T20:43+01:00","2029-12-20T23:42+01:00","2029-12-21T02:41+01:00","2029-12-20T23:15+01:00","2029-12-21T00:09+01:00",0,0,"2029-12-20T22:42Z"],["solar","partial","annular",63,"2030-06-01T06:11+02:00","2030-06-01T07:07+02:00","2030-06-01T08:07+02:00",null,null,1,0,"2030-06-01T05:07Z"],["lunar","partial","partial",47,"2030-06-15T18:14+02:00","2030-06-15T20:33+02:00","2030-06-15T22:53+02:00",null,null,1,0,"2030-06-15T18:33Z"],["lunar","penumbral","penumbral",0,"2030-12-09T21:08+01:00","2030-12-09T23:28+01:00","2030-12-10T01:47+01:00",null,null,0,0,"2030-12-09T22:28Z"],["lunar","penumbral","penumbral",0,"2031-05-07T03:52+02:00","2031-05-07T05:51+02:00","2031-05-07T07:50+02:00",null,null,0,1,"2031-05-07T03:51Z"],["lunar","penumbral","penumbral",0,"2031-10-30T06:49+01:00","2031-10-30T08:45+01:00","2031-10-30T10:42+01:00",null,null,0,1,"2031-10-30T07:45Z"],["lunar","total","total",100,"2032-10-18T18:25+02:00","2032-10-18T21:02+02:00","2032-10-18T23:40+02:00","2032-10-18T20:38+02:00","2032-10-18T21:26+02:00",1,0,"2032-10-18T19:02Z"],["lunar","total","total",100,"2033-04-14T18:12+02:00","2033-04-14T21:13+02:00","2033-04-15T00:13+02:00","2033-04-14T20:48+02:00","2033-04-14T21:38+02:00",1,0,"2033-04-14T19:13Z"],["solar","partial","total",6,"2034-03-20T10:22+01:00","2034-03-20T11:00+01:00","2034-03-20T11:39+01:00",null,null,0,0,"2034-03-20T10:00Z"],["lunar","penumbral","penumbral",0,"2034-04-03T18:53+02:00","2034-04-03T21:06+02:00","2034-04-03T23:19+02:00",null,null,1,0,"2034-04-03T19:06Z"],["lunar","partial","partial",0,"2034-09-28T02:42+02:00","2034-09-28T04:46+02:00","2034-09-28T06:51+02:00",null,null,0,0,"2034-09-28T02:46Z"],["lunar","partial","partial",5,"2035-08-19T00:46+02:00","2035-08-19T03:11+02:00","2035-08-19T05:36+02:00",null,null,0,0,"2035-08-19T01:11Z"],["lunar","total","total",100,"2036-02-11T20:34+01:00","2036-02-11T23:12+01:00","2036-02-12T01:50+01:00","2036-02-11T22:34+01:00","2036-02-11T23:49+01:00",0,0,"2036-02-11T22:12Z"],["lunar","total","total",100,"2036-08-07T01:45+02:00","2036-08-07T04:51+02:00","2036-08-07T07:57+02:00","2036-08-07T04:03+02:00","2036-08-07T05:39+02:00",0,1,"2036-08-07T02:51Z"],["solar","partial","partial",40,"2036-08-21T19:38+02:00","2036-08-21T20:25+02:00","2036-08-21T21:09+02:00",null,null,0,1,"2036-08-21T18:25Z"],["solar","partial","partial",27,"2037-01-16T08:42+01:00","2037-01-16T09:48+01:00","2037-01-16T11:03+01:00",null,null,0,0,"2037-01-16T08:48Z"],["lunar","partial","partial",85,"2037-07-27T03:18+02:00","2037-07-27T06:08+02:00","2037-07-27T08:59+02:00",null,null,0,1,"2037-07-27T04:08Z"],["solar","partial","annular",15,"2038-01-05T14:40+01:00","2038-01-05T15:42+01:00","2038-01-05T16:40+01:00",null,null,0,0,"2038-01-05T14:42Z"],["lunar","penumbral","penumbral",0,"2038-01-21T02:45+01:00","2038-01-21T04:48+01:00","2038-01-21T06:52+01:00",null,null,0,0,"2038-01-21T03:48Z"],["lunar","penumbral","penumbral",0,"2038-06-17T02:15+01:00","2038-06-17T03:44+01:00","2038-06-17T05:12+01:00",null,null,0,0,"2038-06-17T02:44Z"],["solar","partial","annular",37,"2038-07-02T13:49+01:00","2038-07-02T15:09+01:00","2038-07-02T16:23+01:00",null,null,0,0,"2038-07-02T14:09Z"],["lunar","penumbral","penumbral",0,"2038-12-11T16:34+01:00","2038-12-11T18:44+01:00","2038-12-11T20:53+01:00",null,null,1,0,"2038-12-11T17:44Z"],["lunar","partial","partial",93,"2039-06-06T17:25+01:00","2039-06-06T19:53+01:00","2039-06-06T22:22+01:00",null,null,1,0,"2039-06-06T18:53Z"],["solar","partial","annular",39,"2039-06-21T18:55+01:00","2039-06-21T19:52+01:00","2039-06-21T20:45+01:00",null,null,0,1,"2039-06-21T18:52Z"],["lunar","partial","partial",97,"2039-11-30T14:55+01:00","2039-11-30T17:55+01:00","2039-11-30T20:55+01:00",null,null,1,0,"2039-11-30T16:55Z"],["lunar","total","total",100,"2040-11-18T17:06+01:00","2040-11-18T20:03+01:00","2040-11-18T23:00+01:00","2040-11-18T19:19+01:00","2040-11-18T20:47+01:00",1,0,"2040-11-18T19:03Z"],["lunar","partial","partial",3,"2041-05-15T23:27+01:00","2041-05-16T01:42+01:00","2041-05-16T03:57+01:00",null,null,0,0,"2041-05-16T00:42Z"],["lunar","partial","partial",10,"2041-11-08T03:19+01:00","2041-11-08T05:34+01:00","2041-11-08T07:48+01:00",null,null,0,0,"2041-11-08T04:34Z"],["lunar","total","total",100,"2043-09-19T00:07+01:00","2043-09-19T02:50+01:00","2043-09-19T05:33+01:00","2043-09-19T02:14+01:00","2043-09-19T03:27+01:00",0,0,"2043-09-19T01:50Z"],["lunar","total","total",100,"2044-03-13T17:48+01:00","2044-03-13T20:37+01:00","2044-03-13T23:27+01:00","2044-03-13T20:04+01:00","2044-03-13T21:11+01:00",1,0,"2044-03-13T19:37Z"],["lunar","penumbral","penumbral",0,"2045-03-03T06:40+01:00","2045-03-03T08:42+01:00","2045-03-03T10:44+01:00",null,null,0,1,"2045-03-03T07:42Z"],["lunar","partial","partial",17,"2046-07-17T23:35+01:00","2046-07-18T02:05+01:00","2046-07-18T04:34+01:00",null,null,0,0,"2046-07-18T01:05Z"],["lunar","total","total",100,"2047-01-11T23:36+01:00","2047-01-12T02:25+01:00","2047-01-12T05:14+01:00","2047-01-12T01:49+01:00","2047-01-12T03:00+01:00",0,0,"2047-01-12T01:25Z"],["lunar","total","total",100,"2048-01-01T04:52+01:00","2048-01-01T07:52+01:00","2048-01-01T10:52+01:00","2048-01-01T07:24+01:00","2048-01-01T08:21+01:00",0,1,"2048-01-01T06:52Z"],["solar","partial","annular",28,"2048-06-11T12:58+01:00","2048-06-11T14:29+01:00","2048-06-11T15:52+01:00",null,null,0,0,"2048-06-11T13:29Z"],["lunar","partial","partial",64,"2048-06-26T00:38+01:00","2048-06-26T03:01+01:00","2048-06-26T05:24+01:00",null,null,0,0,"2048-06-26T02:01Z"],["lunar","penumbral","penumbral",0,"2048-12-20T05:05+01:00","2048-12-20T07:26+01:00","2048-12-20T09:47+01:00",null,null,0,1,"2048-12-20T06:26Z"],["solar","partial","annular",6,"2049-05-31T15:02+01:00","2049-05-31T15:50+01:00","2049-05-31T16:35+01:00",null,null,0,0,"2049-05-31T14:50Z"],["lunar","penumbral","penumbral",0,"2049-06-15T19:06+01:00","2049-06-15T20:13+01:00","2049-06-15T21:19+01:00",null,null,1,0,"2049-06-15T19:13Z"],["lunar","penumbral","penumbral",0,"2049-11-09T14:57+01:00","2049-11-09T16:51+01:00","2049-11-09T18:44+01:00",null,null,1,0,"2049-11-09T15:51Z"],["lunar","total","total",100,"2050-05-06T20:40+01:00","2050-05-06T23:31+01:00","2050-05-07T02:21+01:00","2050-05-06T23:09+01:00","2050-05-06T23:53+01:00",0,0,"2050-05-06T22:31Z"],["lunar","total","total",100,"2050-10-30T01:43+01:00","2050-10-30T04:20+01:00","2050-10-30T06:57+01:00","2050-10-30T04:02+01:00","2050-10-30T04:38+01:00",0,0,"2050-10-30T03:20Z"],["solar","partial","partial",58,"2050-11-14T13:22+01:00","2050-11-14T14:56+01:00","2050-11-14T16:23+01:00",null,null,0,0,"2050-11-14T13:56Z"],["lunar","total","total",100,"2051-04-26T00:12+01:00","2051-04-26T03:15+01:00","2051-04-26T06:18+01:00","2051-04-26T02:40+01:00","2051-04-26T03:50+01:00",0,0,"2051-04-26T02:15Z"],["lunar","total","total",100,"2051-10-19T17:33+01:00","2051-10-19T20:10+01:00","2051-10-19T22:48+01:00","2051-10-19T19:28+01:00","2051-10-19T20:52+01:00",1,0,"2051-10-19T19:10Z"],["lunar","penumbral","penumbral",0,"2052-04-14T00:58+01:00","2052-04-14T03:16+01:00","2052-04-14T05:35+01:00",null,null,0,0,"2052-04-14T02:16Z"],["lunar","penumbral","penumbral",0,"2053-03-04T16:15+01:00","2053-03-04T18:21+01:00","2053-03-04T20:26+01:00",null,null,1,0,"2053-03-04T17:21Z"],["solar","partial","total",84,"2053-09-12T07:59+01:00","2053-09-12T09:04+01:00","2053-09-12T10:16+01:00",null,null,0,0,"2053-09-12T08:04Z"],["lunar","total","total",100,"2054-02-22T05:12+01:00","2054-02-22T07:50+01:00","2054-02-22T10:27+01:00","2054-02-22T07:13+01:00","2054-02-22T08:26+01:00",0,1,"2054-02-22T06:50Z"],["lunar","total","total",100,"2055-02-11T21:08+01:00","2055-02-11T23:45+01:00","2055-02-12T02:21+01:00","2055-02-11T23:11+01:00","2055-02-12T00:18+01:00",0,0,"2055-02-11T22:45Z"],["lunar","penumbral","penumbral",0,"2056-07-26T17:54+01:00","2056-07-26T19:42+01:00","2056-07-26T21:29+01:00",null,null,1,0,"2056-07-26T18:42Z"],["lunar","penumbral","penumbral",0,"2056-12-22T00:39+01:00","2056-12-22T02:47+01:00","2056-12-22T04:56+01:00",null,null,0,0,"2056-12-22T01:47Z"],["lunar","partial","partial",79,"2057-06-17T00:59+01:00","2057-06-17T03:25+01:00","2057-06-17T05:50+01:00",null,null,0,0,"2057-06-17T02:25Z"],["lunar","partial","partial",96,"2057-12-10T22:52+01:00","2057-12-11T01:52+01:00","2057-12-11T04:51+01:00",null,null,0,0,"2057-12-11T00:52Z"],["lunar","total","total",100,"2058-06-06T17:32+01:00","2058-06-06T20:14+01:00","2058-06-06T22:56+01:00","2058-06-06T19:25+01:00","2058-06-06T21:03+01:00",1,0,"2058-06-06T19:14Z"],["lunar","total","total",100,"2058-11-30T01:18+01:00","2058-11-30T04:14+01:00","2058-11-30T07:11+01:00","2058-11-30T03:29+01:00","2058-11-30T04:59+01:00",0,0,"2058-11-30T03:14Z"],["solar","partial","annular",76,"2059-11-05T07:22+01:00","2059-11-05T08:30+01:00","2059-11-05T09:47+01:00",null,null,1,0,"2059-11-05T07:30Z"],["lunar","penumbral","penumbral",0,"2060-04-15T20:27+01:00","2060-04-15T22:35+01:00","2060-04-16T00:43+01:00",null,null,0,0,"2060-04-15T21:35Z"],["solar","partial","total",22,"2060-04-30T10:04+01:00","2060-04-30T10:54+01:00","2060-04-30T11:48+01:00",null,null,0,0,"2060-04-30T09:54Z"],["lunar","penumbral","penumbral",0,"2060-10-09T17:56+01:00","2060-10-09T19:52+01:00","2060-10-09T21:48+01:00",null,null,1,0,"2060-10-09T18:52Z"],["solar","partial","annular",0,"2060-10-24T08:17+01:00","2060-10-24T08:20+01:00","2060-10-24T08:23+01:00",null,null,0,0,"2060-10-24T07:20Z"],["lunar","penumbral","penumbral",0,"2060-11-08T04:39+01:00","2060-11-08T05:02+01:00","2060-11-08T05:26+01:00",null,null,0,0,"2060-11-08T04:02Z"],["lunar","total","total",100,"2061-04-04T19:54+01:00","2061-04-04T22:52+01:00","2061-04-05T01:50+01:00","2061-04-04T22:36+01:00","2061-04-04T23:08+01:00",0,0,"2061-04-04T21:52Z"],["lunar","total","total",100,"2062-03-25T01:43+01:00","2062-03-25T04:32+01:00","2062-03-25T07:21+01:00","2062-03-25T03:54+01:00","2062-03-25T05:09+01:00",0,1,"2062-03-25T03:32Z"],["lunar","total","total",100,"2062-09-18T16:37+01:00","2062-09-18T19:32+01:00","2062-09-18T22:27+01:00","2062-09-18T19:02+01:00","2062-09-18T20:02+01:00",1,0,"2062-09-18T18:32Z"],["lunar","penumbral","penumbral",0,"2063-09-07T19:29+01:00","2063-09-07T21:39+01:00","2063-09-07T23:50+01:00",null,null,1,0,"2063-09-07T20:39Z"],["lunar","partial","partial",1,"2064-02-02T20:42+01:00","2064-02-02T22:47+01:00","2064-02-03T00:52+01:00",null,null,0,0,"2064-02-02T21:47Z"],["lunar","total","total",100,"2065-01-22T08:08+01:00","2065-01-22T10:57+01:00","2065-01-22T13:46+01:00","2065-01-22T10:22+01:00","2065-01-22T11:32+01:00",0,1,"2065-01-22T09:57Z"],["solar","partial","partial",71,"2065-02-05T09:09+01:00","2065-02-05T10:28+01:00","2065-02-05T11:55+01:00",null,null,0,0,"2065-02-05T09:28Z"],["lunar","total","total",100,"2065-07-17T16:01+01:00","2065-07-17T18:47+01:00","2065-07-17T21:32+01:00","2065-07-17T17:58+01:00","2065-07-17T19:35+01:00",1,0,"2065-07-17T17:47Z"],["lunar","total","total",100,"2066-01-11T13:02+01:00","2066-01-11T16:03+01:00","2066-01-11T19:03+01:00","2066-01-11T15:33+01:00","2066-01-11T16:32+01:00",1,0,"2066-01-11T15:03Z"],["solar","partial","annular",74,"2066-06-22T20:33+01:00","2066-06-22T21:28+01:00","2066-06-22T22:21+01:00",null,null,0,1,"2066-06-22T20:28Z"],["lunar","penumbral","penumbral",0,"2067-05-28T18:09+01:00","2067-05-28T19:54+01:00","2067-05-28T21:39+01:00",null,null,1,0,"2067-05-28T18:54Z"],["lunar","penumbral","penumbral",0,"2067-06-27T02:19+01:00","2067-06-27T03:39+01:00","2067-06-27T04:59+01:00",null,null,0,0,"2067-06-27T02:39Z"],["lunar","penumbral","penumbral",0,"2067-11-20T23:11+01:00","2067-11-21T01:03+01:00","2067-11-21T02:54+01:00",null,null,0,0,"2067-11-21T00:03Z"],["solar","partial","total",1,"2067-12-06T15:45+01:00","2067-12-06T16:06+01:00","2067-12-06T16:26+01:00",null,null,0,0,"2067-12-06T15:06Z"],["lunar","partial","partial",98,"2068-05-17T03:52+01:00","2068-05-17T06:40+01:00","2068-05-17T09:29+01:00",null,null,0,1,"2068-05-17T05:40Z"],["solar","partial","partial",8,"2069-04-21T09:47+01:00","2069-04-21T10:25+01:00","2069-04-21T11:04+01:00",null,null,0,0,"2069-04-21T09:25Z"],["lunar","total","total",100,"2069-10-30T01:55+01:00","2069-10-30T04:33+01:00","2069-10-30T07:11+01:00","2069-10-30T03:49+01:00","2069-10-30T05:17+01:00",0,0,"2069-10-30T03:33Z"],["lunar","partial","partial",8,"2070-10-19T17:37+01:00","2070-10-19T19:49+01:00","2070-10-19T22:01+01:00",null,null,1,0,"2070-10-19T18:49Z"],["lunar","penumbral","penumbral",0,"2071-03-16T00:26+01:00","2071-03-16T02:29+01:00","2071-03-16T04:32+01:00",null,null,0,0,"2071-03-16T01:29Z"],["lunar","total","total",100,"2072-08-28T14:00+01:00","2072-08-28T17:03+01:00","2072-08-28T20:07+01:00","2072-08-28T16:31+01:00","2072-08-28T17:36+01:00",1,0,"2072-08-28T16:03Z"],["lunar","total","total",100,"2073-02-22T05:45+01:00","2073-02-22T08:23+01:00","2073-02-22T11:00+01:00","2073-02-22T07:48+01:00","2073-02-22T08:57+01:00",0,1,"2073-02-22T07:23Z"],["lunar","total","total",100,"2073-08-17T15:45+01:00","2073-08-17T18:40+01:00","2073-08-17T21:36+01:00","2073-08-17T18:15+01:00","2073-08-17T19:06+01:00",1,0,"2073-08-17T17:40Z"],["lunar","penumbral","penumbral",0,"2074-02-11T19:49+01:00","2074-02-11T21:54+01:00","2074-02-11T23:59+01:00",null,null,0,0,"2074-02-11T20:54Z"],["lunar","penumbral","penumbral",0,"2074-08-07T00:57+01:00","2074-08-07T02:54+01:00","2074-08-07T04:50+01:00",null,null,0,0,"2074-08-07T01:54Z"],["solar","partial","annular",87,"2075-07-13T04:43+01:00","2075-07-13T05:38+01:00","2075-07-13T06:37+01:00",null,null,1,0,"2075-07-13T04:38Z"],["lunar","partial","partial",94,"2075-12-22T06:54+01:00","2075-12-22T09:53+01:00","2075-12-22T12:53+01:00",null,null,0,1,"2075-12-22T08:53Z"],["lunar","total","total",100,"2076-06-17T00:54+01:00","2076-06-17T03:37+01:00","2076-06-17T06:20+01:00","2076-06-17T02:47+01:00","2076-06-17T04:28+01:00",0,1,"2076-06-17T02:37Z"]],"paris":[["lunar","penumbral","penumbral",0,"2027-02-20T22:12+01:00","2027-02-21T00:13+01:00","2027-02-21T02:13+01:00",null,null,0,0,"2027-02-20T23:13Z"],["solar","partial","total",51,"2027-08-02T10:01+02:00","2027-08-02T11:01+02:00","2027-08-02T12:05+02:00",null,null,0,0,"2027-08-02T09:01Z"],["lunar","partial","partial",3,"2028-01-12T03:07+01:00","2028-01-12T05:13+01:00","2028-01-12T07:19+01:00",null,null,0,0,"2028-01-12T04:13Z"],["solar","partial","annular",66,"2028-01-26T16:38+01:00","2028-01-26T17:51+01:00","2028-01-26T18:59+01:00",null,null,0,1,"2028-01-26T16:51Z"],["lunar","partial","partial",33,"2028-07-06T17:44+02:00","2028-07-06T20:20+02:00","2028-07-06T22:55+02:00",null,null,1,0,"2028-07-06T18:20Z"],["lunar","total","total",100,"2028-12-31T15:03+01:00","2028-12-31T17:52+01:00","2028-12-31T20:40+01:00","2028-12-31T17:16+01:00","2028-12-31T18:28+01:00",1,0,"2028-12-31T16:52Z"],["lunar","total","total",100,"2029-06-26T02:34+02:00","2029-06-26T05:22+02:00","2029-06-26T08:10+02:00","2029-06-26T04:31+02:00","2029-06-26T06:13+02:00",0,1,"2029-06-26T03:22Z"],["lunar","total","total",100,"2029-12-20T20:43+01:00","2029-12-20T23:42+01:00","2029-12-21T02:41+01:00","2029-12-20T23:15+01:00","2029-12-21T00:09+01:00",0,0,"2029-12-20T22:42Z"],["solar","partial","annular",53,"2030-06-01T06:19+02:00","2030-06-01T07:17+02:00","2030-06-01T08:19+02:00",null,null,0,0,"2030-06-01T05:17Z"],["lunar","partial","partial",47,"2030-06-15T18:14+02:00","2030-06-15T20:33+02:00","2030-06-15T22:53+02:00",null,null,1,0,"2030-06-15T18:33Z"],["lunar","penumbral","penumbral",0,"2030-12-09T21:08+01:00","2030-12-09T23:28+01:00","2030-12-10T01:47+01:00",null,null,0,0,"2030-12-09T22:28Z"],["lunar","penumbral","penumbral",0,"2031-05-07T03:52+02:00","2031-05-07T05:51+02:00","2031-05-07T07:50+02:00",null,null,0,1,"2031-05-07T03:51Z"],["lunar","penumbral","penumbral",0,"2031-10-30T06:49+01:00","2031-10-30T08:45+01:00","2031-10-30T10:42+01:00",null,null,0,1,"2031-10-30T07:45Z"],["lunar","total","total",100,"2032-10-18T18:25+02:00","2032-10-18T21:02+02:00","2032-10-18T23:40+02:00","2032-10-18T20:38+02:00","2032-10-18T21:26+02:00",1,0,"2032-10-18T19:02Z"],["lunar","total","total",100,"2033-04-14T18:12+02:00","2033-04-14T21:13+02:00","2033-04-15T00:13+02:00","2033-04-14T20:48+02:00","2033-04-14T21:38+02:00",1,0,"2033-04-14T19:13Z"],["solar","partial","total",1,"2034-03-20T10:58+01:00","2034-03-20T11:20+01:00","2034-03-20T11:43+01:00",null,null,0,0,"2034-03-20T10:20Z"],["lunar","penumbral","penumbral",0,"2034-04-03T18:53+02:00","2034-04-03T21:06+02:00","2034-04-03T23:19+02:00",null,null,1,0,"2034-04-03T19:06Z"],["lunar","partial","partial",0,"2034-09-28T02:42+02:00","2034-09-28T04:46+02:00","2034-09-28T06:51+02:00",null,null,0,0,"2034-09-28T02:46Z"],["lunar","partial","partial",5,"2035-08-19T00:46+02:00","2035-08-19T03:11+02:00","2035-08-19T05:36+02:00",null,null,0,0,"2035-08-19T01:11Z"],["lunar","total","total",100,"2036-02-11T20:34+01:00","2036-02-11T23:12+01:00","2036-02-12T01:50+01:00","2036-02-11T22:34+01:00","2036-02-11T23:49+01:00",0,0,"2036-02-11T22:12Z"],["lunar","total","total",100,"2036-08-07T01:45+02:00","2036-08-07T04:51+02:00","2036-08-07T07:57+02:00","2036-08-07T04:03+02:00","2036-08-07T05:39+02:00",0,1,"2036-08-07T02:51Z"],["solar","partial","partial",58,"2036-08-21T19:21+02:00","2036-08-21T20:11+02:00","2036-08-21T20:59+02:00",null,null,0,1,"2036-08-21T18:11Z"],["solar","partial","partial",44,"2037-01-16T08:50+01:00","2037-01-16T10:06+01:00","2037-01-16T11:30+01:00",null,null,0,0,"2037-01-16T09:06Z"],["lunar","partial","partial",85,"2037-07-27T03:18+02:00","2037-07-27T06:08+02:00","2037-07-27T08:59+02:00",null,null,0,1,"2037-07-27T04:08Z"],["solar","partial","annular",8,"2038-01-05T14:54+01:00","2038-01-05T15:42+01:00","2038-01-05T16:26+01:00",null,null,0,0,"2038-01-05T14:42Z"],["lunar","penumbral","penumbral",0,"2038-01-21T02:45+01:00","2038-01-21T04:48+01:00","2038-01-21T06:52+01:00",null,null,0,0,"2038-01-21T03:48Z"],["lunar","penumbral","penumbral",0,"2038-06-17T02:15+01:00","2038-06-17T03:44+01:00","2038-06-17T05:12+01:00",null,null,0,1,"2038-06-17T02:44Z"],["solar","partial","annular",11,"2038-07-02T14:17+01:00","2038-07-02T15:09+01:00","2038-07-02T16:00+01:00",null,null,0,0,"2038-07-02T14:09Z"],["lunar","penumbral","penumbral",0,"2038-12-11T16:34+01:00","2038-12-11T18:44+01:00","2038-12-11T20:53+01:00",null,null,1,0,"2038-12-11T17:44Z"],["lunar","partial","partial",93,"2039-06-06T17:25+01:00","2039-06-06T19:53+01:00","2039-06-06T22:22+01:00",null,null,1,0,"2039-06-06T18:53Z"],["solar","partial","annular",61,"2039-06-21T18:36+01:00","2039-06-21T19:38+01:00","2039-06-21T20:36+01:00",null,null,0,0,"2039-06-21T18:38Z"],["lunar","partial","partial",97,"2039-11-30T14:55+01:00","2039-11-30T17:55+01:00","2039-11-30T20:55+01:00",null,null,1,0,"2039-11-30T16:55Z"],["lunar","total","total",100,"2040-11-18T17:06+01:00","2040-11-18T20:03+01:00","2040-11-18T23:00+01:00","2040-11-18T19:19+01:00","2040-11-18T20:47+01:00",0,0,"2040-11-18T19:03Z"],["lunar","partial","partial",3,"2041-05-15T23:27+01:00","2041-05-16T01:42+01:00","2041-05-16T03:57+01:00",null,null,0,0,"2041-05-16T00:42Z"],["lunar","partial","partial",10,"2041-11-08T03:19+01:00","2041-11-08T05:34+01:00","2041-11-08T07:48+01:00",null,null,0,0,"2041-11-08T04:34Z"],["lunar","total","total",100,"2043-09-19T00:07+01:00","2043-09-19T02:50+01:00","2043-09-19T05:33+01:00","2043-09-19T02:14+01:00","2043-09-19T03:27+01:00",0,0,"2043-09-19T01:50Z"],["lunar","total","total",100,"2044-03-13T17:48+01:00","2044-03-13T20:37+01:00","2044-03-13T23:27+01:00","2044-03-13T20:04+01:00","2044-03-13T21:11+01:00",1,0,"2044-03-13T19:37Z"],["lunar","penumbral","penumbral",0,"2045-03-03T06:40+01:00","2045-03-03T08:42+01:00","2045-03-03T10:44+01:00",null,null,0,1,"2045-03-03T07:42Z"],["lunar","partial","partial",17,"2046-07-17T23:35+01:00","2046-07-18T02:05+01:00","2046-07-18T04:34+01:00",null,null,0,0,"2046-07-18T01:05Z"],["lunar","total","total",100,"2047-01-11T23:36+01:00","2047-01-12T02:25+01:00","2047-01-12T05:14+01:00","2047-01-12T01:49+01:00","2047-01-12T03:00+01:00",0,0,"2047-01-12T01:25Z"],["lunar","total","total",100,"2048-01-01T04:52+01:00","2048-01-01T07:52+01:00","2048-01-01T10:52+01:00","2048-01-01T07:24+01:00","2048-01-01T08:21+01:00",0,1,"2048-01-01T06:52Z"],["solar","partial","annular",56,"2048-06-11T12:56+01:00","2048-06-11T14:31+01:00","2048-06-11T15:57+01:00",null,null,0,0,"2048-06-11T13:31Z"],["lunar","partial","partial",64,"2048-06-26T00:38+01:00","2048-06-26T03:01+01:00","2048-06-26T05:24+01:00",null,null,0,1,"2048-06-26T02:01Z"],["lunar","penumbral","penumbral",0,"2048-12-20T05:05+01:00","2048-12-20T07:26+01:00","2048-12-20T09:47+01:00",null,null,0,1,"2048-12-20T06:26Z"],["lunar","penumbral","penumbral",0,"2049-06-15T19:06+01:00","2049-06-15T20:13+01:00","2049-06-15T21:19+01:00",null,null,1,0,"2049-06-15T19:13Z"],["lunar","penumbral","penumbral",0,"2049-11-09T14:57+01:00","2049-11-09T16:51+01:00","2049-11-09T18:44+01:00",null,null,1,0,"2049-11-09T15:51Z"],["lunar","total","total",100,"2050-05-06T20:40+01:00","2050-05-06T23:31+01:00","2050-05-07T02:21+01:00","2050-05-06T23:09+01:00","2050-05-06T23:53+01:00",0,0,"2050-05-06T22:31Z"],["lunar","total","total",100,"2050-10-30T01:43+01:00","2050-10-30T04:20+01:00","2050-10-30T06:57+01:00","2050-10-30T04:02+01:00","2050-10-30T04:38+01:00",0,0,"2050-10-30T03:20Z"],["solar","partial","partial",70,"2050-11-14T13:26+01:00","2050-11-14T14:56+01:00","2050-11-14T16:19+01:00",null,null,0,0,"2050-11-14T13:56Z"],["lunar","total","total",100,"2051-04-26T00:12+01:00","2051-04-26T03:15+01:00","2051-04-26T06:18+01:00","2051-04-26T02:40+01:00","2051-04-26T03:50+01:00",0,1,"2051-04-26T02:15Z"],["lunar","total","total",100,"2051-10-19T17:33+01:00","2051-10-19T20:10+01:00","2051-10-19T22:48+01:00","2051-10-19T19:28+01:00","2051-10-19T20:52+01:00",1,0,"2051-10-19T19:10Z"],["lunar","penumbral","penumbral",0,"2052-04-14T00:58+01:00","2052-04-14T03:16+01:00","2052-04-14T05:35+01:00",null,null,0,0,"2052-04-14T02:16Z"],["lunar","penumbral","penumbral",0,"2053-03-04T16:15+01:00","2053-03-04T18:21+01:00","2053-03-04T20:26+01:00",null,null,1,0,"2053-03-04T17:21Z"],["solar","partial","total",52,"2053-09-12T08:13+01:00","2053-09-12T09:15+01:00","2053-09-12T10:21+01:00",null,null,0,0,"2053-09-12T08:15Z"],["lunar","total","total",100,"2054-02-22T05:12+01:00","2054-02-22T07:50+01:00","2054-02-22T10:27+01:00","2054-02-22T07:13+01:00","2054-02-22T08:26+01:00",0,1,"2054-02-22T06:50Z"],["lunar","total","total",100,"2055-02-11T21:08+01:00","2055-02-11T23:45+01:00","2055-02-12T02:21+01:00","2055-02-11T23:11+01:00","2055-02-12T00:18+01:00",0,0,"2055-02-11T22:45Z"],["lunar","penumbral","penumbral",0,"2056-07-26T17:54+01:00","2056-07-26T19:42+01:00","2056-07-26T21:29+01:00",null,null,1,0,"2056-07-26T18:42Z"],["lunar","penumbral","penumbral",0,"2056-12-22T00:39+01:00","2056-12-22T02:47+01:00","2056-12-22T04:56+01:00",null,null,0,0,"2056-12-22T01:47Z"],["lunar","partial","partial",79,"2057-06-17T00:59+01:00","2057-06-17T03:25+01:00","2057-06-17T05:50+01:00",null,null,0,1,"2057-06-17T02:25Z"],["lunar","partial","partial",96,"2057-12-10T22:52+01:00","2057-12-11T01:52+01:00","2057-12-11T04:51+01:00",null,null,0,0,"2057-12-11T00:52Z"],["lunar","total","total",100,"2058-06-06T17:32+01:00","2058-06-06T20:14+01:00","2058-06-06T22:56+01:00","2058-06-06T19:25+01:00","2058-06-06T21:03+01:00",1,0,"2058-06-06T19:14Z"],["lunar","total","total",100,"2058-11-30T01:18+01:00","2058-11-30T04:14+01:00","2058-11-30T07:11+01:00","2058-11-30T03:29+01:00","2058-11-30T04:59+01:00",0,0,"2058-11-30T03:14Z"],["solar","partial","annular",77,"2059-11-05T07:26+01:00","2059-11-05T08:37+01:00","2059-11-05T09:54+01:00",null,null,1,0,"2059-11-05T07:37Z"],["lunar","penumbral","penumbral",0,"2060-04-15T20:27+01:00","2060-04-15T22:35+01:00","2060-04-16T00:43+01:00",null,null,0,0,"2060-04-15T21:35Z"],["solar","partial","total",17,"2060-04-30T10:27+01:00","2060-04-30T11:14+01:00","2060-04-30T12:03+01:00",null,null,0,0,"2060-04-30T10:14Z"],["lunar","penumbral","penumbral",0,"2060-10-09T17:56+01:00","2060-10-09T19:52+01:00","2060-10-09T21:48+01:00",null,null,1,0,"2060-10-09T18:52Z"],["lunar","penumbral","penumbral",0,"2060-11-08T04:39+01:00","2060-11-08T05:02+01:00","2060-11-08T05:26+01:00",null,null,0,0,"2060-11-08T04:02Z"],["lunar","total","total",100,"2061-04-04T19:54+01:00","2061-04-04T22:52+01:00","2061-04-05T01:50+01:00","2061-04-04T22:36+01:00","2061-04-04T23:08+01:00",0,0,"2061-04-04T21:52Z"],["lunar","total","total",100,"2062-03-25T01:43+01:00","2062-03-25T04:32+01:00","2062-03-25T07:21+01:00","2062-03-25T03:54+01:00","2062-03-25T05:09+01:00",0,1,"2062-03-25T03:32Z"],["lunar","total","total",100,"2062-09-18T16:37+01:00","2062-09-18T19:32+01:00","2062-09-18T22:27+01:00","2062-09-18T19:02+01:00","2062-09-18T20:02+01:00",1,0,"2062-09-18T18:32Z"],["lunar","partial","partial",1,"2063-03-14T15:00+01:00","2063-03-14T17:04+01:00","2063-03-14T19:08+01:00",null,null,1,0,"2063-03-14T16:04Z"],["lunar","penumbral","penumbral",0,"2063-09-07T19:29+01:00","2063-09-07T21:39+01:00","2063-09-07T23:50+01:00",null,null,0,0,"2063-09-07T20:39Z"],["lunar","partial","partial",1,"2064-02-02T20:42+01:00","2064-02-02T22:47+01:00","2064-02-03T00:52+01:00",null,null,0,0,"2064-02-02T21:47Z"],["lunar","total","total",100,"2065-01-22T08:08+01:00","2065-01-22T10:57+01:00","2065-01-22T13:46+01:00","2065-01-22T10:22+01:00","2065-01-22T11:32+01:00",0,1,"2065-01-22T09:57Z"],["solar","partial","partial",76,"2065-02-05T09:30+01:00","2065-02-05T10:51+01:00","2065-02-05T12:17+01:00",null,null,0,0,"2065-02-05T09:51Z"],["lunar","total","total",100,"2065-07-17T16:01+01:00","2065-07-17T18:47+01:00","2065-07-17T21:32+01:00","2065-07-17T17:58+01:00","2065-07-17T19:35+01:00",1,0,"2065-07-17T17:47Z"],["lunar","total","total",100,"2066-01-11T13:02+01:00","2066-01-11T16:03+01:00","2066-01-11T19:03+01:00","2066-01-11T15:33+01:00","2066-01-11T16:32+01:00",1,0,"2066-01-11T15:03Z"],["solar","partial","annular",60,"2066-06-22T20:20+01:00","2066-06-22T21:14+01:00","2066-06-22T22:07+01:00",null,null,0,1,"2066-06-22T20:14Z"],["lunar","penumbral","penumbral",0,"2066-12-31T13:06+01:00","2066-12-31T15:28+01:00","2066-12-31T17:50+01:00",null,null,1,0,"2066-12-31T14:28Z"],["lunar","penumbral","penumbral",0,"2067-05-28T18:09+01:00","2067-05-28T19:54+01:00","2067-05-28T21:39+01:00",null,null,1,0,"2067-05-28T18:54Z"],["lunar","penumbral","penumbral",0,"2067-06-27T02:19+01:00","2067-06-27T03:39+01:00","2067-06-27T04:59+01:00",null,null,0,0,"2067-06-27T02:39Z"],["lunar","penumbral","penumbral",0,"2067-11-20T23:11+01:00","2067-11-21T01:03+01:00","2067-11-21T02:54+01:00",null,null,0,0,"2067-11-21T00:03Z"],["lunar","partial","partial",98,"2068-05-17T03:52+01:00","2068-05-17T06:40+01:00","2068-05-17T09:29+01:00",null,null,0,1,"2068-05-17T05:40Z"],["solar","partial","partial",17,"2069-04-21T09:59+01:00","2069-04-21T10:47+01:00","2069-04-21T11:36+01:00",null,null,0,0,"2069-04-21T09:47Z"],["lunar","total","total",100,"2069-10-30T01:55+01:00","2069-10-30T04:33+01:00","2069-10-30T07:11+01:00","2069-10-30T03:49+01:00","2069-10-30T05:17+01:00",0,0,"2069-10-30T03:33Z"],["lunar","partial","partial",8,"2070-10-19T17:37+01:00","2070-10-19T19:49+01:00","2070-10-19T22:01+01:00",null,null,1,0,"2070-10-19T18:49Z"],["lunar","penumbral","penumbral",0,"2071-03-16T00:26+01:00","2071-03-16T02:29+01:00","2071-03-16T04:32+01:00",null,null,0,0,"2071-03-16T01:29Z"],["lunar","total","total",100,"2072-03-04T13:44+01:00","2072-03-04T16:21+01:00","2072-03-04T18:58+01:00","2072-03-04T15:46+01:00","2072-03-04T16:55+01:00",1,0,"2072-03-04T15:21Z"],["lunar","total","total",100,"2072-08-28T14:00+01:00","2072-08-28T17:03+01:00","2072-08-28T20:07+01:00","2072-08-28T16:31+01:00","2072-08-28T17:36+01:00",1,0,"2072-08-28T16:03Z"],["solar","partial","total",8,"2072-09-12T08:05+01:00","2072-09-12T08:39+01:00","2072-09-12T09:14+01:00",null,null,0,0,"2072-09-12T07:39Z"],["lunar","total","total",100,"2073-02-22T05:45+01:00","2073-02-22T08:23+01:00","2073-02-22T11:00+01:00","2073-02-22T07:48+01:00","2073-02-22T08:57+01:00",0,1,"2073-02-22T07:23Z"],["lunar","total","total",100,"2073-08-17T15:45+01:00","2073-08-17T18:40+01:00","2073-08-17T21:36+01:00","2073-08-17T18:15+01:00","2073-08-17T19:06+01:00",1,0,"2073-08-17T17:40Z"],["lunar","penumbral","penumbral",0,"2074-02-11T19:49+01:00","2074-02-11T21:54+01:00","2074-02-11T23:59+01:00",null,null,0,0,"2074-02-11T20:54Z"],["lunar","penumbral","penumbral",0,"2074-08-07T00:57+01:00","2074-08-07T02:54+01:00","2074-08-07T04:50+01:00",null,null,0,0,"2074-08-07T01:54Z"],["solar","partial","annular",77,"2075-07-13T04:47+01:00","2075-07-13T05:45+01:00","2075-07-13T06:48+01:00",null,null,1,0,"2075-07-13T04:45Z"],["lunar","partial","partial",94,"2075-12-22T06:54+01:00","2075-12-22T09:53+01:00","2075-12-22T12:53+01:00",null,null,0,1,"2075-12-22T08:53Z"],["lunar","total","total",100,"2076-06-17T00:54+01:00","2076-06-17T03:37+01:00","2076-06-17T06:20+01:00","2076-06-17T02:47+01:00","2076-06-17T04:28+01:00",0,1,"2076-06-17T02:37Z"]],"rom":[["lunar","penumbral","penumbral",0,"2027-02-20T22:12+01:00","2027-02-21T00:13+01:00","2027-02-21T02:13+01:00",null,null,0,0,"2027-02-20T23:13Z"],["solar","partial","total",75,"2027-08-02T10:02+02:00","2027-08-02T11:13+02:00","2027-08-02T12:27+02:00",null,null,0,0,"2027-08-02T09:13Z"],["lunar","partial","partial",3,"2028-01-12T03:07+01:00","2028-01-12T05:13+01:00","2028-01-12T07:19+01:00",null,null,0,0,"2028-01-12T04:13Z"],["solar","partial","annular",82,"2028-01-26T16:46+01:00","2028-01-26T17:57+01:00","2028-01-26T19:01+01:00",null,null,0,1,"2028-01-26T16:57Z"],["lunar","partial","partial",33,"2028-07-06T17:44+02:00","2028-07-06T20:20+02:00","2028-07-06T22:55+02:00",null,null,1,0,"2028-07-06T18:20Z"],["lunar","total","total",100,"2028-12-31T15:03+01:00","2028-12-31T17:52+01:00","2028-12-31T20:40+01:00","2028-12-31T17:16+01:00","2028-12-31T18:28+01:00",1,0,"2028-12-31T16:52Z"],["lunar","total","total",100,"2029-06-26T02:34+02:00","2029-06-26T05:22+02:00","2029-06-26T08:10+02:00","2029-06-26T04:31+02:00","2029-06-26T06:13+02:00",0,1,"2029-06-26T03:22Z"],["lunar","total","total",100,"2029-12-20T20:43+01:00","2029-12-20T23:42+01:00","2029-12-21T02:41+01:00","2029-12-20T23:15+01:00","2029-12-21T00:09+01:00",0,0,"2029-12-20T22:42Z"],["solar","partial","annular",75,"2030-06-01T06:02+02:00","2030-06-01T07:04+02:00","2030-06-01T08:13+02:00",null,null,0,0,"2030-06-01T05:04Z"],["lunar","partial","partial",47,"2030-06-15T18:14+02:00","2030-06-15T20:33+02:00","2030-06-15T22:53+02:00",null,null,1,0,"2030-06-15T18:33Z"],["lunar","penumbral","penumbral",0,"2030-12-09T21:08+01:00","2030-12-09T23:28+01:00","2030-12-10T01:47+01:00",null,null,0,0,"2030-12-09T22:28Z"],["lunar","penumbral","penumbral",0,"2031-05-07T03:52+02:00","2031-05-07T05:51+02:00","2031-05-07T07:50+02:00",null,null,0,1,"2031-05-07T03:51Z"],["lunar","total","total",100,"2032-10-18T18:25+02:00","2032-10-18T21:02+02:00","2032-10-18T23:40+02:00","2032-10-18T20:38+02:00","2032-10-18T21:26+02:00",0,0,"2032-10-18T19:02Z"],["lunar","total","total",100,"2033-04-14T18:12+02:00","2033-04-14T21:13+02:00","2033-04-15T00:13+02:00","2033-04-14T20:48+02:00","2033-04-14T21:38+02:00",1,0,"2033-04-14T19:13Z"],["solar","partial","total",16,"2034-03-20T10:36+01:00","2034-03-20T11:29+01:00","2034-03-20T12:24+01:00",null,null,0,0,"2034-03-20T10:29Z"],["lunar","penumbral","penumbral",0,"2034-04-03T18:53+02:00","2034-04-03T21:06+02:00","2034-04-03T23:19+02:00",null,null,1,0,"2034-04-03T19:06Z"],["lunar","partial","partial",0,"2034-09-28T02:42+02:00","2034-09-28T04:46+02:00","2034-09-28T06:51+02:00",null,null,0,0,"2034-09-28T02:46Z"],["lunar","partial","partial",5,"2035-08-19T00:46+02:00","2035-08-19T03:11+02:00","2035-08-19T05:36+02:00",null,null,0,0,"2035-08-19T01:11Z"],["lunar","total","total",100,"2036-02-11T20:34+01:00","2036-02-11T23:12+01:00","2036-02-12T01:50+01:00","2036-02-11T22:34+01:00","2036-02-11T23:49+01:00",0,0,"2036-02-11T22:12Z"],["lunar","total","total",100,"2036-08-07T01:45+02:00","2036-08-07T04:51+02:00","2036-08-07T07:57+02:00","2036-08-07T04:03+02:00","2036-08-07T05:39+02:00",0,1,"2036-08-07T02:51Z"],["solar","partial","partial",50,"2036-08-21T19:32+02:00","2036-08-21T20:18+02:00","2036-08-21T21:01+02:00",null,null,0,1,"2036-08-21T18:18Z"],["solar","partial","partial",39,"2037-01-16T08:51+01:00","2037-01-16T10:13+01:00","2037-01-16T11:43+01:00",null,null,0,0,"2037-01-16T09:13Z"],["lunar","total","total",100,"2037-01-31T12:24+01:00","2037-01-31T15:00+01:00","2037-01-31T17:37+01:00","2037-01-31T14:28+01:00","2037-01-31T15:32+01:00",1,0,"2037-01-31T14:00Z"],["lunar","partial","partial",85,"2037-07-27T03:18+02:00","2037-07-27T06:08+02:00","2037-07-27T08:59+02:00",null,null,0,1,"2037-07-27T04:08Z"],["solar","partial","annular",25,"2038-01-05T14:59+01:00","2038-01-05T16:02+01:00","2038-01-05T16:59+01:00",null,null,0,1,"2038-01-05T15:02Z"],["lunar","penumbral","penumbral",0,"2038-01-21T02:45+01:00","2038-01-21T04:48+01:00","2038-01-21T06:52+01:00",null,null,0,0,"2038-01-21T03:48Z"],["lunar","penumbral","penumbral",0,"2038-06-17T02:15+01:00","2038-06-17T03:44+01:00","2038-06-17T05:12+01:00",null,null,0,1,"2038-06-17T02:44Z"],["solar","partial","annular",20,"2038-07-02T14:29+01:00","2038-07-02T15:30+01:00","2038-07-02T16:27+01:00",null,null,0,0,"2038-07-02T14:30Z"],["lunar","penumbral","penumbral",0,"2038-12-11T16:34+01:00","2038-12-11T18:44+01:00","2038-12-11T20:53+01:00",null,null,1,0,"2038-12-11T17:44Z"],["lunar","partial","partial",93,"2039-06-06T17:25+01:00","2039-06-06T19:53+01:00","2039-06-06T22:22+01:00",null,null,1,0,"2039-06-06T18:53Z"],["solar","partial","annular",57,"2039-06-21T18:46+01:00","2039-06-21T19:43+01:00","2039-06-21T20:37+01:00",null,null,0,1,"2039-06-21T18:43Z"],["lunar","partial","partial",97,"2039-11-30T14:55+01:00","2039-11-30T17:55+01:00","2039-11-30T20:55+01:00",null,null,1,0,"2039-11-30T16:55Z"],["lunar","total","total",100,"2040-11-18T17:06+01:00","2040-11-18T20:03+01:00","2040-11-18T23:00+01:00","2040-11-18T19:19+01:00","2040-11-18T20:47+01:00",0,0,"2040-11-18T19:03Z"],["lunar","partial","partial",3,"2041-05-15T23:27+01:00","2041-05-16T01:42+01:00","2041-05-16T03:57+01:00",null,null,0,0,"2041-05-16T00:42Z"],["lunar","partial","partial",10,"2041-11-08T03:19+01:00","2041-11-08T05:34+01:00","2041-11-08T07:48+01:00",null,null,0,1,"2041-11-08T04:34Z"],["lunar","total","total",100,"2043-09-19T00:07+01:00","2043-09-19T02:50+01:00","2043-09-19T05:33+01:00","2043-09-19T02:14+01:00","2043-09-19T03:27+01:00",0,0,"2043-09-19T01:50Z"],["lunar","total","total",100,"2044-03-13T17:48+01:00","2044-03-13T20:37+01:00","2044-03-13T23:27+01:00","2044-03-13T20:04+01:00","2044-03-13T21:11+01:00",1,0,"2044-03-13T19:37Z"],["lunar","partial","partial",17,"2046-07-17T23:35+01:00","2046-07-18T02:05+01:00","2046-07-18T04:34+01:00",null,null,0,0,"2046-07-18T01:05Z"],["lunar","total","total",100,"2047-01-11T23:36+01:00","2047-01-12T02:25+01:00","2047-01-12T05:14+01:00","2047-01-12T01:49+01:00","2047-01-12T03:00+01:00",0,0,"2047-01-12T01:25Z"],["lunar","total","total",100,"2048-01-01T04:52+01:00","2048-01-01T07:52+01:00","2048-01-01T10:52+01:00","2048-01-01T07:24+01:00","2048-01-01T08:21+01:00",0,1,"2048-01-01T06:52Z"],["solar","partial","annular",45,"2048-06-11T13:30+01:00","2048-06-11T15:00+01:00","2048-06-11T16:18+01:00",null,null,0,0,"2048-06-11T14:00Z"],["lunar","partial","partial",64,"2048-06-26T00:38+01:00","2048-06-26T03:01+01:00","2048-06-26T05:24+01:00",null,null,0,1,"2048-06-26T02:01Z"],["lunar","penumbral","penumbral",0,"2048-12-20T05:05+01:00","2048-12-20T07:26+01:00","2048-12-20T09:47+01:00",null,null,0,1,"2048-12-20T06:26Z"],["lunar","penumbral","penumbral",0,"2049-06-15T19:06+01:00","2049-06-15T20:13+01:00","2049-06-15T21:19+01:00",null,null,1,0,"2049-06-15T19:13Z"],["lunar","penumbral","penumbral",0,"2049-11-09T14:57+01:00","2049-11-09T16:51+01:00","2049-11-09T18:44+01:00",null,null,1,0,"2049-11-09T15:51Z"],["lunar","total","total",100,"2050-05-06T20:40+01:00","2050-05-06T23:31+01:00","2050-05-07T02:21+01:00","2050-05-06T23:09+01:00","2050-05-06T23:53+01:00",0,0,"2050-05-06T22:31Z"],["lunar","total","total",100,"2050-10-30T01:43+01:00","2050-10-30T04:20+01:00","2050-10-30T06:57+01:00","2050-10-30T04:02+01:00","2050-10-30T04:38+01:00",0,1,"2050-10-30T03:20Z"],["solar","partial","partial",55,"2050-11-14T13:54+01:00","2050-11-14T15:19+01:00","2050-11-14T16:35+01:00",null,null,0,0,"2050-11-14T14:19Z"],["lunar","total","total",100,"2051-04-26T00:12+01:00","2051-04-26T03:15+01:00","2051-04-26T06:18+01:00","2051-04-26T02:40+01:00","2051-04-26T03:50+01:00",0,1,"2051-04-26T02:15Z"],["lunar","total","total",100,"2051-10-19T17:33+01:00","2051-10-19T20:10+01:00","2051-10-19T22:48+01:00","2051-10-19T19:28+01:00","2051-10-19T20:52+01:00",0,0,"2051-10-19T19:10Z"],["lunar","penumbral","penumbral",0,"2052-04-14T00:58+01:00","2052-04-14T03:16+01:00","2052-04-14T05:35+01:00",null,null,0,0,"2052-04-14T02:16Z"],["lunar","penumbral","penumbral",0,"2053-03-04T16:15+01:00","2053-03-04T18:21+01:00","2053-03-04T20:26+01:00",null,null,1,0,"2053-03-04T17:21Z"],["solar","partial","total",70,"2053-09-12T08:11+01:00","2053-09-12T09:21+01:00","2053-09-12T10:38+01:00",null,null,0,0,"2053-09-12T08:21Z"],["lunar","total","total",100,"2054-02-22T05:12+01:00","2054-02-22T07:50+01:00","2054-02-22T10:27+01:00","2054-02-22T07:13+01:00","2054-02-22T08:26+01:00",0,1,"2054-02-22T06:50Z"],["lunar","total","total",100,"2055-02-11T21:08+01:00","2055-02-11T23:45+01:00","2055-02-12T02:21+01:00","2055-02-11T23:11+01:00","2055-02-12T00:18+01:00",0,0,"2055-02-11T22:45Z"],["lunar","penumbral","penumbral",0,"2056-07-26T17:54+01:00","2056-07-26T19:42+01:00","2056-07-26T21:29+01:00",null,null,1,0,"2056-07-26T18:42Z"],["lunar","penumbral","penumbral",0,"2056-12-22T00:39+01:00","2056-12-22T02:47+01:00","2056-12-22T04:56+01:00",null,null,0,0,"2056-12-22T01:47Z"],["lunar","partial","partial",79,"2057-06-17T00:59+01:00","2057-06-17T03:25+01:00","2057-06-17T05:50+01:00",null,null,0,1,"2057-06-17T02:25Z"],["lunar","partial","partial",96,"2057-12-10T22:52+01:00","2057-12-11T01:52+01:00","2057-12-11T04:51+01:00",null,null,0,0,"2057-12-11T00:52Z"],["lunar","total","total",100,"2058-06-06T17:32+01:00","2058-06-06T20:14+01:00","2058-06-06T22:56+01:00","2058-06-06T19:25+01:00","2058-06-06T21:03+01:00",1,0,"2058-06-06T19:14Z"],["lunar","total","total",100,"2058-11-30T01:18+01:00","2058-11-30T04:14+01:00","2058-11-30T07:11+01:00","2058-11-30T03:29+01:00","2058-11-30T04:59+01:00",0,0,"2058-11-30T03:14Z"],["solar","partial","annular",83,"2059-11-05T07:24+01:00","2059-11-05T08:40+01:00","2059-11-05T10:05+01:00",null,null,0,0,"2059-11-05T07:40Z"],["lunar","penumbral","penumbral",0,"2060-04-15T20:27+01:00","2060-04-15T22:35+01:00","2060-04-16T00:43+01:00",null,null,0,0,"2060-04-15T21:35Z"],["solar","partial","total",47,"2060-04-30T10:11+01:00","2060-04-30T11:17+01:00","2060-04-30T12:25+01:00",null,null,0,0,"2060-04-30T10:17Z"],["lunar","penumbral","penumbral",0,"2060-10-09T17:56+01:00","2060-10-09T19:52+01:00","2060-10-09T21:48+01:00",null,null,0,0,"2060-10-09T18:52Z"],["lunar","penumbral","penumbral",0,"2060-11-08T04:39+01:00","2060-11-08T05:02+01:00","2060-11-08T05:26+01:00",null,null,0,0,"2060-11-08T04:02Z"],["lunar","total","total",100,"2061-04-04T19:54+01:00","2061-04-04T22:52+01:00","2061-04-05T01:50+01:00","2061-04-04T22:36+01:00","2061-04-04T23:08+01:00",0,0,"2061-04-04T21:52Z"],["lunar","total","total",100,"2062-03-25T01:43+01:00","2062-03-25T04:32+01:00","2062-03-25T07:21+01:00","2062-03-25T03:54+01:00","2062-03-25T05:09+01:00",0,1,"2062-03-25T03:32Z"],["lunar","total","total",100,"2062-09-18T16:37+01:00","2062-09-18T19:32+01:00","2062-09-18T22:27+01:00","2062-09-18T19:02+01:00","2062-09-18T20:02+01:00",1,0,"2062-09-18T18:32Z"],["lunar","partial","partial",1,"2063-03-14T15:00+01:00","2063-03-14T17:04+01:00","2063-03-14T19:08+01:00",null,null,1,0,"2063-03-14T16:04Z"],["lunar","penumbral","penumbral",0,"2063-09-07T19:29+01:00","2063-09-07T21:39+01:00","2063-09-07T23:50+01:00",null,null,0,0,"2063-09-07T20:39Z"],["lunar","partial","partial",1,"2064-02-02T20:42+01:00","2064-02-02T22:47+01:00","2064-02-03T00:52+01:00",null,null,0,0,"2064-02-02T21:47Z"],["solar","partial","partial",60,"2065-02-05T09:31+01:00","2065-02-05T10:55+01:00","2065-02-05T12:23+01:00",null,null,0,0,"2065-02-05T09:55Z"],["lunar","total","total",100,"2065-07-17T16:01+01:00","2065-07-17T18:47+01:00","2065-07-17T21:32+01:00","2065-07-17T17:58+01:00","2065-07-17T19:35+01:00",1,0,"2065-07-17T17:47Z"],["lunar","total","total",100,"2066-01-11T13:02+01:00","2066-01-11T16:03+01:00","2066-01-11T19:03+01:00","2066-01-11T15:33+01:00","2066-01-11T16:32+01:00",1,0,"2066-01-11T15:03Z"],["lunar","penumbral","penumbral",0,"2066-12-31T13:06+01:00","2066-12-31T15:28+01:00","2066-12-31T17:50+01:00",null,null,1,0,"2066-12-31T14:28Z"],["lunar","penumbral","penumbral",0,"2067-05-28T18:09+01:00","2067-05-28T19:54+01:00","2067-05-28T21:39+01:00",null,null,1,0,"2067-05-28T18:54Z"],["lunar","penumbral","penumbral",0,"2067-06-27T02:19+01:00","2067-06-27T03:39+01:00","2067-06-27T04:59+01:00",null,null,0,1,"2067-06-27T02:39Z"],["lunar","penumbral","penumbral",0,"2067-11-20T23:11+01:00","2067-11-21T01:03+01:00","2067-11-21T02:54+01:00",null,null,0,0,"2067-11-21T00:03Z"],["solar","partial","total",7,"2067-12-06T15:42+01:00","2067-12-06T16:20+01:00","2067-12-06T16:56+01:00",null,null,0,1,"2067-12-06T15:20Z"],["lunar","partial","partial",98,"2068-05-17T03:52+01:00","2068-05-17T06:40+01:00","2068-05-17T09:29+01:00",null,null,0,1,"2068-05-17T05:40Z"],["solar","partial","partial",0,"2069-04-21T10:33+01:00","2069-04-21T10:49+01:00","2069-04-21T11:05+01:00",null,null,0,0,"2069-04-21T09:49Z"],["lunar","total","total",100,"2069-10-30T01:55+01:00","2069-10-30T04:33+01:00","2069-10-30T07:11+01:00","2069-10-30T03:49+01:00","2069-10-30T05:17+01:00",0,1,"2069-10-30T03:33Z"],["lunar","partial","partial",8,"2070-10-19T17:37+01:00","2070-10-19T19:49+01:00","2070-10-19T22:01+01:00",null,null,0,0,"2070-10-19T18:49Z"],["lunar","penumbral","penumbral",0,"2071-03-16T00:26+01:00","2071-03-16T02:29+01:00","2071-03-16T04:32+01:00",null,null,0,0,"2071-03-16T01:29Z"],["lunar","total","total",100,"2072-03-04T13:44+01:00","2072-03-04T16:21+01:00","2072-03-04T18:58+01:00","2072-03-04T15:46+01:00","2072-03-04T16:55+01:00",1,0,"2072-03-04T15:21Z"],["lunar","total","total",100,"2072-08-28T14:00+01:00","2072-08-28T17:03+01:00","2072-08-28T20:07+01:00","2072-08-28T16:31+01:00","2072-08-28T17:36+01:00",1,0,"2072-08-28T16:03Z"],["lunar","total","total",100,"2073-02-22T05:45+01:00","2073-02-22T08:23+01:00","2073-02-22T11:00+01:00","2073-02-22T07:48+01:00","2073-02-22T08:57+01:00",0,1,"2073-02-22T07:23Z"],["lunar","total","total",100,"2073-08-17T15:45+01:00","2073-08-17T18:40+01:00","2073-08-17T21:36+01:00","2073-08-17T18:15+01:00","2073-08-17T19:06+01:00",1,0,"2073-08-17T17:40Z"],["lunar","penumbral","penumbral",0,"2074-02-11T19:49+01:00","2074-02-11T21:54+01:00","2074-02-11T23:59+01:00",null,null,0,0,"2074-02-11T20:54Z"],["lunar","penumbral","penumbral",0,"2074-08-07T00:57+01:00","2074-08-07T02:54+01:00","2074-08-07T04:50+01:00",null,null,0,0,"2074-08-07T01:54Z"],["solar","partial","annular",87,"2075-07-13T04:33+01:00","2075-07-13T05:32+01:00","2075-07-13T06:37+01:00",null,null,1,0,"2075-07-13T04:32Z"],["lunar","partial","partial",94,"2075-12-22T06:54+01:00","2075-12-22T09:53+01:00","2075-12-22T12:53+01:00",null,null,0,1,"2075-12-22T08:53Z"],["lunar","total","total",100,"2076-06-17T00:54+01:00","2076-06-17T03:37+01:00","2076-06-17T06:20+01:00","2076-06-17T02:47+01:00","2076-06-17T04:28+01:00",0,1,"2076-06-17T02:37Z"]],"saopaulo":[["solar","partial","annular",78,"2027-02-06T11:31-03:00","2027-02-06T13:21-03:00","2027-02-06T14:59-03:00",null,null,0,0,"2027-02-06T16:21Z"],["lunar","penumbral","penumbral",0,"2027-02-20T18:12-03:00","2027-02-20T20:13-03:00","2027-02-20T22:13-03:00",null,null,1,0,"2027-02-20T23:13Z"],["lunar","penumbral","penumbral",0,"2027-08-17T02:24-03:00","2027-08-17T04:14-03:00","2027-08-17T06:03-03:00",null,null,0,0,"2027-08-17T07:14Z"],["lunar","partial","partial",3,"2028-01-11T23:07-03:00","2028-01-12T01:13-03:00","2028-01-12T03:19-03:00",null,null,0,0,"2028-01-12T04:13Z"],["solar","partial","annular",14,"2028-01-26T10:17-03:00","2028-01-26T11:32-03:00","2028-01-26T12:47-03:00",null,null,0,0,"2028-01-26T14:32Z"],["lunar","partial","partial",33,"2028-07-06T12:44-03:00","2028-07-06T15:20-03:00","2028-07-06T17:55-03:00",null,null,1,0,"2028-07-06T18:20Z"],["lunar","total","total",100,"2029-06-25T21:34-03:00","2029-06-26T00:22-03:00","2029-06-26T03:10-03:00","2029-06-25T23:31-03:00","2029-06-26T01:13-03:00",0,0,"2029-06-26T03:22Z"],["lunar","total","total",100,"2029-12-20T16:43-03:00","2029-12-20T19:42-03:00","2029-12-20T22:41-03:00","2029-12-20T19:15-03:00","2029-12-20T20:09-03:00",1,0,"2029-12-20T22:42Z"],["lunar","partial","partial",47,"2030-06-15T13:14-03:00","2030-06-15T15:33-03:00","2030-06-15T17:53-03:00",null,null,1,0,"2030-06-15T18:33Z"],["lunar","penumbral","penumbral",0,"2030-12-09T17:08-03:00","2030-12-09T19:28-03:00","2030-12-09T21:47-03:00",null,null,1,0,"2030-12-09T22:28Z"],["lunar","penumbral","penumbral",0,"2031-05-06T22:52-03:00","2031-05-07T00:51-03:00","2031-05-07T02:50-03:00",null,null,0,0,"2031-05-07T03:51Z"],["lunar","penumbral","penumbral",0,"2031-10-30T02:49-03:00","2031-10-30T04:45-03:00","2031-10-30T06:42-03:00",null,null,0,1,"2031-10-30T07:45Z"],["solar","partial","annular",6,"2032-05-09T08:38-03:00","2032-05-09T09:20-03:00","2032-05-09T10:04-03:00",null,null,0,0,"2032-05-09T12:20Z"],["lunar","total","total",100,"2032-10-18T13:25-03:00","2032-10-18T16:02-03:00","2032-10-18T18:40-03:00","2032-10-18T15:38-03:00","2032-10-18T16:26-03:00",1,0,"2032-10-18T19:02Z"],["lunar","total","total",100,"2033-04-14T13:12-03:00","2033-04-14T16:13-03:00","2033-04-14T19:13-03:00","2033-04-14T15:48-03:00","2033-04-14T16:38-03:00",1,0,"2033-04-14T19:13Z"],["lunar","total","total",100,"2033-10-08T05:19-03:00","2033-10-08T07:55-03:00","2033-10-08T10:32-03:00","2033-10-08T07:16-03:00","2033-10-08T08:35-03:00",0,1,"2033-10-08T10:55Z"],["lunar","penumbral","penumbral",0,"2034-04-03T13:53-03:00","2034-04-03T16:06-03:00","2034-04-03T18:19-03:00",null,null,1,0,"2034-04-03T19:06Z"],["solar","partial","annular",67,"2034-09-12T12:52-03:00","2034-09-12T14:30-03:00","2034-09-12T15:56-03:00",null,null,0,0,"2034-09-12T17:30Z"],["lunar","partial","partial",0,"2034-09-27T21:42-03:00","2034-09-27T23:46-03:00","2034-09-28T01:51-03:00",null,null,0,0,"2034-09-28T02:46Z"],["lunar","penumbral","penumbral",0,"2035-02-22T03:57-03:00","2035-02-22T06:05-03:00","2035-02-22T08:13-03:00",null,null,0,1,"2035-02-22T09:05Z"],["lunar","partial","partial",5,"2035-08-18T19:46-03:00","2035-08-18T22:11-03:00","2035-08-19T00:36-03:00",null,null,0,0,"2035-08-19T01:11Z"],["lunar","total","total",100,"2036-02-11T16:34-03:00","2036-02-11T19:12-03:00","2036-02-11T21:50-03:00","2036-02-11T18:34-03:00","2036-02-11T19:49-03:00",1,0,"2036-02-11T22:12Z"],["lunar","total","total",100,"2036-08-06T20:45-03:00","2036-08-06T23:51-03:00","2036-08-07T02:57-03:00","2036-08-06T23:03-03:00","2036-08-07T00:39-03:00",0,0,"2036-08-07T02:51Z"],["lunar","partial","partial",85,"2037-07-26T22:18-03:00","2037-07-27T01:08-03:00","2037-07-27T03:59-03:00",null,null,0,0,"2037-07-27T04:08Z"],["solar","partial","annular",5,"2038-01-05T09:14-03:00","2038-01-05T09:57-03:00","2038-01-05T10:42-03:00",null,null,0,0,"2038-01-05T12:57Z"],["lunar","penumbral","penumbral",0,"2038-01-20T22:45-03:00","2038-01-21T00:48-03:00","2038-01-21T02:52-03:00",null,null,0,0,"2038-01-21T03:48Z"],["lunar","penumbral","penumbral",0,"2038-06-16T22:15-03:00","2038-06-16T23:44-03:00","2038-06-17T01:12-03:00",null,null,0,0,"2038-06-17T02:44Z"],["lunar","partial","partial",93,"2039-06-06T13:25-03:00","2039-06-06T15:53-03:00","2039-06-06T18:22-03:00",null,null,1,0,"2039-06-06T18:53Z"],["lunar","total","total",100,"2040-05-26T06:04-03:00","2040-05-26T08:45-03:00","2040-05-26T11:26-03:00","2040-05-26T07:59-03:00","2040-05-26T09:32-03:00",0,1,"2040-05-26T11:45Z"],["lunar","total","total",100,"2040-11-18T13:06-03:00","2040-11-18T16:03-03:00","2040-11-18T19:00-03:00","2040-11-18T15:19-03:00","2040-11-18T16:47-03:00",1,0,"2040-11-18T19:03Z"],["solar","partial","total",16,"2041-04-30T06:29-03:00","2041-04-30T07:11-03:00","2041-04-30T07:57-03:00",null,null,1,0,"2041-04-30T10:11Z"],["lunar","partial","partial",3,"2041-05-15T19:27-03:00","2041-05-15T21:42-03:00","2041-05-15T23:57-03:00",null,null,0,0,"2041-05-16T00:42Z"],["lunar","partial","partial",10,"2041-11-07T23:19-03:00","2041-11-08T01:34-03:00","2041-11-08T03:48-03:00",null,null,0,0,"2041-11-08T04:34Z"],["lunar","penumbral","penumbral",0,"2042-09-29T05:45-03:00","2042-09-29T07:45-03:00","2042-09-29T09:44-03:00",null,null,0,1,"2042-09-29T10:45Z"],["lunar","total","total",100,"2043-09-18T20:07-03:00","2043-09-18T22:50-03:00","2043-09-19T01:33-03:00","2043-09-18T22:14-03:00","2043-09-18T23:27-03:00",0,0,"2043-09-19T01:50Z"],["solar","partial","annular",50,"2044-02-28T17:37-03:00","2044-02-28T18:34-03:00","2044-02-28T19:26-03:00",null,null,0,1,"2044-02-28T21:34Z"],["lunar","total","total",100,"2044-03-13T13:48-03:00","2044-03-13T16:37-03:00","2044-03-13T19:27-03:00","2044-03-13T16:04-03:00","2044-03-13T17:11-03:00",1,0,"2044-03-13T19:37Z"],["lunar","total","total",100,"2044-09-07T05:27-03:00","2044-09-07T08:19-03:00","2044-09-07T11:12-03:00","2044-09-07T08:02-03:00","2044-09-07T08:37-03:00",0,1,"2044-09-07T11:19Z"],["lunar","penumbral","penumbral",0,"2045-03-03T02:40-03:00","2045-03-03T04:42-03:00","2045-03-03T06:44-03:00",null,null,0,1,"2045-03-03T07:42Z"],["solar","partial","total",28,"2045-08-12T15:35-03:00","2045-08-12T16:25-03:00","2045-08-12T17:10-03:00",null,null,0,0,"2045-08-12T19:25Z"],["lunar","partial","partial",17,"2046-07-17T19:35-03:00","2046-07-17T22:05-03:00","2046-07-18T00:34-03:00",null,null,0,0,"2046-07-18T01:05Z"],["solar","partial","total",70,"2046-08-02T05:09-03:00","2046-08-02T06:02-03:00","2046-08-02T07:01-03:00",null,null,1,0,"2046-08-02T09:02Z"],["lunar","total","total",100,"2047-01-11T19:36-03:00","2047-01-11T22:25-03:00","2047-01-12T01:14-03:00","2047-01-11T21:49-03:00","2047-01-11T23:00-03:00",0,0,"2047-01-12T01:25Z"],["lunar","total","total",100,"2047-07-07T04:47-03:00","2047-07-07T07:34-03:00","2047-07-07T10:21-03:00","2047-07-07T06:44-03:00","2047-07-07T08:25-03:00",0,1,"2047-07-07T10:34Z"],["lunar","total","total",100,"2048-01-01T00:52-03:00","2048-01-01T03:52-03:00","2048-01-01T06:52-03:00","2048-01-01T03:24-03:00","2048-01-01T04:21-03:00",0,1,"2048-01-01T06:52Z"],["lunar","partial","partial",64,"2048-06-25T20:38-03:00","2048-06-25T23:01-03:00","2048-06-26T01:24-03:00",null,null,0,0,"2048-06-26T02:01Z"],["solar","partial","total",20,"2048-12-05T11:54-03:00","2048-12-05T13:03-03:00","2048-12-05T14:09-03:00",null,null,0,0,"2048-12-05T16:03Z"],["lunar","penumbral","penumbral",0,"2048-12-20T01:05-03:00","2048-12-20T03:26-03:00","2048-12-20T05:47-03:00",null,null,0,1,"2048-12-20T06:26Z"],["solar","partial","annular",3,"2049-05-31T09:03-03:00","2049-05-31T09:42-03:00","2049-05-31T10:25-03:00",null,null,0,0,"2049-05-31T12:42Z"],["lunar","total","total",100,"2050-05-06T16:40-03:00","2050-05-06T19:31-03:00","2050-05-06T22:21-03:00","2050-05-06T19:09-03:00","2050-05-06T19:53-03:00",1,0,"2050-05-06T22:31Z"],["lunar","total","total",100,"2050-10-29T21:43-03:00","2050-10-30T00:20-03:00","2050-10-30T02:57-03:00","2050-10-30T00:02-03:00","2050-10-30T00:38-03:00",0,0,"2050-10-30T03:20Z"],["lunar","total","total",100,"2051-04-25T20:12-03:00","2051-04-25T23:15-03:00","2051-04-26T02:18-03:00","2051-04-25T22:40-03:00","2051-04-25T23:50-03:00",0,0,"2051-04-26T02:15Z"],["lunar","total","total",100,"2051-10-19T13:33-03:00","2051-10-19T16:10-03:00","2051-10-19T18:48-03:00","2051-10-19T15:28-03:00","2051-10-19T16:52-03:00",1,0,"2051-10-19T19:10Z"],["lunar","penumbral","penumbral",0,"2052-04-13T20:58-03:00","2052-04-13T23:16-03:00","2052-04-14T01:35-03:00",null,null,0,0,"2052-04-14T02:16Z"],["lunar","partial","partial",4,"2052-10-08T05:36-03:00","2052-10-08T07:44-03:00","2052-10-08T09:53-03:00",null,null,0,1,"2052-10-08T10:44Z"],["lunar","penumbral","penumbral",0,"2053-08-29T02:45-03:00","2053-08-29T05:04-03:00","2053-08-29T07:24-03:00",null,null,0,1,"2053-08-29T08:04Z"],["lunar","total","total",100,"2054-02-22T01:12-03:00","2054-02-22T03:50-03:00","2054-02-22T06:27-03:00","2054-02-22T03:13-03:00","2054-02-22T04:26-03:00",0,1,"2054-02-22T06:50Z"],["lunar","total","total",100,"2054-08-18T03:20-03:00","2054-08-18T06:25-03:00","2054-08-18T09:30-03:00","2054-08-18T05:43-03:00","2054-08-18T07:07-03:00",0,1,"2054-08-18T09:25Z"],["lunar","total","total",100,"2055-02-11T17:08-03:00","2055-02-11T19:45-03:00","2055-02-11T22:21-03:00","2055-02-11T19:11-03:00","2055-02-11T20:18-03:00",1,0,"2055-02-11T22:45Z"],["lunar","partial","partial",99,"2055-08-07T04:58-03:00","2055-08-07T07:52-03:00","2055-08-07T10:45-03:00",null,null,0,1,"2055-08-07T10:52Z"],["lunar","penumbral","penumbral",0,"2056-06-27T05:46-03:00","2056-06-27T07:01-03:00","2056-06-27T08:17-03:00",null,null,0,1,"2056-06-27T10:01Z"],["lunar","penumbral","penumbral",0,"2056-12-21T20:39-03:00","2056-12-21T22:47-03:00","2056-12-22T00:56-03:00",null,null,0,0,"2056-12-22T01:47Z"],["solar","partial","total",64,"2057-01-05T04:27-03:00","2057-01-05T05:15-03:00","2057-01-05T06:06-03:00",null,null,1,0,"2057-01-05T08:15Z"],["lunar","partial","partial",79,"2057-06-16T20:59-03:00","2057-06-16T23:25-03:00","2057-06-17T01:50-03:00",null,null,0,0,"2057-06-17T02:25Z"],["lunar","partial","partial",96,"2057-12-10T18:52-03:00","2057-12-10T21:52-03:00","2057-12-11T00:51-03:00",null,null,0,0,"2057-12-11T00:52Z"],["lunar","total","total",100,"2058-06-06T13:32-03:00","2058-06-06T16:14-03:00","2058-06-06T18:56-03:00","2058-06-06T15:25-03:00","2058-06-06T17:03-03:00",1,0,"2058-06-06T19:14Z"],["lunar","total","total",100,"2058-11-29T21:18-03:00","2058-11-30T00:14-03:00","2058-11-30T03:11-03:00","2058-11-29T23:29-03:00","2058-11-30T00:59-03:00",0,0,"2058-11-30T03:14Z"],["solar","partial","total",55,"2059-05-11T16:35-03:00","2059-05-11T17:39-03:00","2059-05-11T18:36-03:00",null,null,0,1,"2059-05-11T20:39Z"],["lunar","partial","partial",11,"2059-05-27T02:33-03:00","2059-05-27T04:54-03:00","2059-05-27T07:15-03:00",null,null,0,1,"2059-05-27T07:54Z"],["lunar","penumbral","penumbral",0,"2060-04-15T16:27-03:00","2060-04-15T18:35-03:00","2060-04-15T20:43-03:00",null,null,1,0,"2060-04-15T21:35Z"],["solar","partial","annular",4,"2060-10-24T04:43-03:00","2060-10-24T05:10-03:00","2060-10-24T05:39-03:00",null,null,1,0,"2060-10-24T08:10Z"],["lunar","penumbral","penumbral",0,"2060-11-08T00:39-03:00","2060-11-08T01:02-03:00","2060-11-08T01:26-03:00",null,null,0,0,"2060-11-08T04:02Z"],["lunar","total","total",100,"2061-04-04T15:54-03:00","2061-04-04T18:52-03:00","2061-04-04T21:50-03:00","2061-04-04T18:36-03:00","2061-04-04T19:08-03:00",1,0,"2061-04-04T21:52Z"],["lunar","total","total",100,"2061-09-29T03:54-03:00","2061-09-29T06:36-03:00","2061-09-29T09:19-03:00","2061-09-29T06:06-03:00","2061-09-29T07:06-03:00",0,1,"2061-09-29T09:36Z"],["solar","partial","annular",52,"2061-10-13T05:18-03:00","2061-10-13T06:16-03:00","2061-10-13T07:19-03:00",null,null,1,0,"2061-10-13T09:16Z"],["lunar","total","total",100,"2062-03-24T21:43-03:00","2062-03-25T00:32-03:00","2062-03-25T03:21-03:00","2062-03-24T23:54-03:00","2062-03-25T01:09-03:00",0,0,"2062-03-25T03:32Z"],["lunar","total","total",100,"2062-09-18T12:37-03:00","2062-09-18T15:32-03:00","2062-09-18T18:27-03:00","2062-09-18T15:02-03:00","2062-09-18T16:02-03:00",1,0,"2062-09-18T18:32Z"],["lunar","penumbral","penumbral",0,"2063-09-07T15:29-03:00","2063-09-07T17:39-03:00","2063-09-07T19:50-03:00",null,null,1,0,"2063-09-07T20:39Z"],["lunar","partial","partial",1,"2064-02-02T16:42-03:00","2064-02-02T18:47-03:00","2064-02-02T20:52-03:00",null,null,1,0,"2064-02-02T21:47Z"],["lunar","partial","partial",5,"2064-07-28T02:28-03:00","2064-07-28T04:51-03:00","2064-07-28T07:13-03:00",null,null,0,1,"2064-07-28T07:51Z"],["solar","partial","total",24,"2064-08-12T15:23-03:00","2064-08-12T16:16-03:00","2064-08-12T17:04-03:00",null,null,0,0,"2064-08-12T19:16Z"],["lunar","total","total",100,"2065-01-22T04:08-03:00","2065-01-22T06:57-03:00","2065-01-22T09:46-03:00","2065-01-22T06:22-03:00","2065-01-22T07:32-03:00",0,1,"2065-01-22T09:57Z"],["lunar","partial","partial",81,"2066-07-07T04:02-03:00","2066-07-07T06:28-03:00","2066-07-07T08:55-03:00",null,null,0,1,"2066-07-07T09:28Z"],["lunar","penumbral","penumbral",0,"2067-05-28T14:09-03:00","2067-05-28T15:54-03:00","2067-05-28T17:39-03:00",null,null,1,0,"2067-05-28T18:54Z"],["lunar","penumbral","penumbral",0,"2067-06-26T22:19-03:00","2067-06-26T23:39-03:00","2067-06-27T00:59-03:00",null,null,0,0,"2067-06-27T02:39Z"],["lunar","penumbral","penumbral",0,"2067-11-20T19:11-03:00","2067-11-20T21:03-03:00","2067-11-20T22:54-03:00",null,null,0,0,"2067-11-21T00:03Z"],["solar","partial","total",27,"2067-12-06T09:16-03:00","2067-12-06T10:28-03:00","2067-12-06T11:46-03:00",null,null,0,0,"2067-12-06T13:28Z"],["lunar","partial","partial",98,"2068-05-16T23:52-03:00","2068-05-17T02:40-03:00","2068-05-17T05:29-03:00",null,null,0,0,"2068-05-17T05:40Z"],["lunar","total","total",100,"2069-05-06T03:03-03:00","2069-05-06T06:08-03:00","2069-05-06T09:12-03:00","2069-05-06T05:25-03:00","2069-05-06T06:50-03:00",0,1,"2069-05-06T09:08Z"],["lunar","total","total",100,"2069-10-29T21:55-03:00","2069-10-30T00:33-03:00","2069-10-30T03:11-03:00","2069-10-29T23:49-03:00","2069-10-30T01:17-03:00",0,0,"2069-10-30T03:33Z"],["lunar","penumbral","penumbral",0,"2070-04-25T03:55-03:00","2070-04-25T06:19-03:00","2070-04-25T08:43-03:00",null,null,0,1,"2070-04-25T09:19Z"],["lunar","penumbral","penumbral",0,"2071-03-15T20:26-03:00","2071-03-15T22:29-03:00","2071-03-16T00:32-03:00",null,null,0,0,"2071-03-16T01:29Z"],["solar","partial","annular",96,"2071-03-31T09:48-03:00","2071-03-31T11:24-03:00","2071-03-31T13:06-03:00",null,null,0,0,"2071-03-31T14:24Z"],["solar","partial","total",16,"2071-09-23T15:04-03:00","2071-09-23T15:54-03:00","2071-09-23T16:40-03:00",null,null,0,0,"2071-09-23T18:54Z"],["solar","partial","partial",6,"2072-03-19T18:01-03:00","2072-03-19T18:35-03:00","2072-03-19T19:07-03:00",null,null,0,1,"2072-03-19T21:35Z"],["lunar","total","total",100,"2073-02-22T01:45-03:00","2073-02-22T04:23-03:00","2073-02-22T07:00-03:00","2073-02-22T03:48-03:00","2073-02-22T04:57-03:00",0,1,"2073-02-22T07:23Z"],["solar","partial","total",7,"2073-08-03T14:46-03:00","2073-08-03T15:27-03:00","2073-08-03T16:05-03:00",null,null,0,0,"2073-08-03T18:27Z"],["lunar","penumbral","penumbral",0,"2074-02-11T15:49-03:00","2074-02-11T17:54-03:00","2074-02-11T19:59-03:00",null,null,1,0,"2074-02-11T20:54Z"],["lunar","penumbral","penumbral",0,"2074-08-06T20:57-03:00","2074-08-06T22:54-03:00","2074-08-07T00:50-03:00",null,null,0,0,"2074-08-07T01:54Z"],["lunar","penumbral","penumbral",0,"2075-01-02T04:45-03:00","2075-01-02T06:53-03:00","2075-01-02T09:00-03:00",null,null,0,1,"2075-01-02T09:53Z"],["solar","partial","total",86,"2075-01-16T15:53-03:00","2075-01-16T17:00-03:00","2075-01-16T18:00-03:00",null,null,0,0,"2075-01-16T20:00Z"],["lunar","partial","partial",62,"2075-06-28T04:31-03:00","2075-06-28T06:53-03:00","2075-06-28T09:15-03:00",null,null,0,1,"2075-06-28T09:53Z"],["lunar","partial","partial",94,"2075-12-22T02:54-03:00","2075-12-22T05:53-03:00","2075-12-22T08:53-03:00",null,null,0,1,"2075-12-22T08:53Z"],["solar","partial","total",1,"2076-01-06T05:11-03:00","2076-01-06T05:24-03:00","2076-01-06T05:37-03:00",null,null,1,0,"2076-01-06T08:24Z"],["lunar","total","total",100,"2076-06-16T20:54-03:00","2076-06-16T23:37-03:00","2076-06-17T02:20-03:00","2076-06-16T22:47-03:00","2076-06-17T00:28-03:00",0,0,"2076-06-17T02:37Z"]],"tokio":[["lunar","penumbral","penumbral",0,"2027-02-21T06:12+09:00","2027-02-21T08:13+09:00","2027-02-21T10:13+09:00",null,null,0,1,"2027-02-20T23:13Z"],["lunar","penumbral","penumbral",0,"2027-07-19T00:53+09:00","2027-07-19T01:03+09:00","2027-07-19T01:13+09:00",null,null,0,0,"2027-07-18T16:03Z"],["lunar","partial","partial",33,"2028-07-07T00:44+09:00","2028-07-07T03:20+09:00","2028-07-07T05:55+09:00",null,null,0,1,"2028-07-06T18:20Z"],["lunar","total","total",100,"2028-12-31T23:03+09:00","2029-01-01T01:52+09:00","2029-01-01T04:40+09:00","2029-01-01T01:16+09:00","2029-01-01T02:28+09:00",0,0,"2028-12-31T16:52Z"],["lunar","total","total",100,"2029-12-21T04:43+09:00","2029-12-21T07:42+09:00","2029-12-21T10:41+09:00","2029-12-21T07:15+09:00","2029-12-21T08:09+09:00",0,1,"2029-12-20T22:42Z"],["solar","partial","annular",72,"2030-06-01T15:53+09:00","2030-06-01T17:08+09:00","2030-06-01T18:13+09:00",null,null,0,0,"2030-06-01T08:08Z"],["lunar","partial","partial",47,"2030-06-16T01:14+09:00","2030-06-16T03:33+09:00","2030-06-16T05:53+09:00",null,null,0,1,"2030-06-15T18:33Z"],["lunar","penumbral","penumbral",0,"2030-12-10T05:08+09:00","2030-12-10T07:28+09:00","2030-12-10T09:47+09:00",null,null,0,1,"2030-12-09T22:28Z"],["lunar","penumbral","penumbral",0,"2031-06-05T19:56+09:00","2031-06-05T20:44+09:00","2031-06-05T21:32+09:00",null,null,0,0,"2031-06-05T11:44Z"],["lunar","penumbral","penumbral",0,"2031-10-30T14:49+09:00","2031-10-30T16:45+09:00","2031-10-30T18:42+09:00",null,null,1,0,"2031-10-30T07:45Z"],["lunar","total","total",100,"2032-04-25T21:22+09:00","2032-04-26T00:14+09:00","2032-04-26T03:05+09:00","2032-04-25T23:41+09:00","2032-04-26T00:47+09:00",0,0,"2032-04-25T15:14Z"],["lunar","total","total",100,"2032-10-19T01:25+09:00","2032-10-19T04:02+09:00","2032-10-19T06:40+09:00","2032-10-19T03:38+09:00","2032-10-19T04:26+09:00",0,1,"2032-10-18T19:02Z"],["solar","partial","partial",40,"2032-11-03T14:21+09:00","2032-11-03T15:36+09:00","2032-11-03T16:41+09:00",null,null,0,1,"2032-11-03T06:36Z"],["lunar","total","total",100,"2033-04-15T01:12+09:00","2033-04-15T04:13+09:00","2033-04-15T07:13+09:00","2033-04-15T03:48+09:00","2033-04-15T04:38+09:00",0,1,"2033-04-14T19:13Z"],["lunar","total","total",100,"2033-10-08T17:19+09:00","2033-10-08T19:55+09:00","2033-10-08T22:32+09:00","2033-10-08T19:16+09:00","2033-10-08T20:35+09:00",0,0,"2033-10-08T10:55Z"],["lunar","penumbral","penumbral",0,"2034-04-04T01:53+09:00","2034-04-04T04:06+09:00","2034-04-04T06:19+09:00",null,null,0,1,"2034-04-03T19:06Z"],["lunar","penumbral","penumbral",0,"2035-02-22T15:57+09:00","2035-02-22T18:05+09:00","2035-02-22T20:13+09:00",null,null,1,0,"2035-02-22T09:05Z"],["solar","partial","total",99,"2035-09-02T08:45+09:00","2035-09-02T10:08+09:00","2035-09-02T11:37+09:00",null,null,0,0,"2035-09-02T01:08Z"],["lunar","total","total",100,"2036-02-12T04:34+09:00","2036-02-12T07:12+09:00","2036-02-12T09:50+09:00","2036-02-12T06:34+09:00","2036-02-12T07:49+09:00",0,1,"2036-02-11T22:12Z"],["lunar","total","total",100,"2037-01-31T20:24+09:00","2037-01-31T23:00+09:00","2037-02-01T01:37+09:00","2037-01-31T22:28+09:00","2037-01-31T23:32+09:00",0,0,"2037-01-31T14:00Z"],["lunar","penumbral","penumbral",0,"2038-07-16T18:58+09:00","2038-07-16T20:35+09:00","2038-07-16T22:11+09:00",null,null,1,0,"2038-07-16T11:35Z"],["lunar","penumbral","penumbral",0,"2038-12-12T00:34+09:00","2038-12-12T02:44+09:00","2038-12-12T04:53+09:00",null,null,0,0,"2038-12-11T17:44Z"],["lunar","partial","partial",93,"2039-06-07T01:25+09:00","2039-06-07T03:53+09:00","2039-06-07T06:22+09:00",null,null,0,1,"2039-06-06T18:53Z"],["lunar","partial","partial",97,"2039-11-30T22:55+09:00","2039-12-01T01:55+09:00","2039-12-01T04:55+09:00",null,null,0,0,"2039-11-30T16:55Z"],["lunar","total","total",100,"2040-05-26T18:04+09:00","2040-05-26T20:45+09:00","2040-05-26T23:26+09:00","2040-05-26T19:59+09:00","2040-05-26T21:32+09:00",1,0,"2040-05-26T11:45Z"],["lunar","total","total",100,"2040-11-19T01:06+09:00","2040-11-19T04:03+09:00","2040-11-19T07:00+09:00","2040-11-19T03:19+09:00","2040-11-19T04:47+09:00",0,1,"2040-11-18T19:03Z"],["solar","partial","annular",87,"2041-10-25T07:48+09:00","2041-10-25T09:11+09:00","2041-10-25T10:44+09:00",null,null,0,0,"2041-10-25T00:11Z"],["lunar","penumbral","penumbral",0,"2042-04-05T21:14+09:00","2042-04-05T23:29+09:00","2042-04-06T01:43+09:00",null,null,0,0,"2042-04-05T14:29Z"],["solar","partial","total",86,"2042-04-20T10:18+09:00","2042-04-20T11:35+09:00","2042-04-20T12:54+09:00",null,null,0,0,"2042-04-20T02:35Z"],["lunar","penumbral","penumbral",0,"2042-09-29T17:45+09:00","2042-09-29T19:45+09:00","2042-09-29T21:44+09:00",null,null,0,0,"2042-09-29T10:45Z"],["lunar","total","total",100,"2043-03-25T20:31+09:00","2043-03-25T23:30+09:00","2043-03-26T02:30+09:00","2043-03-25T23:03+09:00","2043-03-25T23:58+09:00",0,0,"2043-03-25T14:30Z"],["lunar","total","total",100,"2044-03-14T01:48+09:00","2044-03-14T04:37+09:00","2044-03-14T07:27+09:00","2044-03-14T04:04+09:00","2044-03-14T05:11+09:00",0,1,"2044-03-13T19:37Z"],["lunar","total","total",100,"2044-09-07T17:27+09:00","2044-09-07T20:19+09:00","2044-09-07T23:12+09:00","2044-09-07T20:02+09:00","2044-09-07T20:37+09:00",1,0,"2044-09-07T11:19Z"],["lunar","penumbral","penumbral",0,"2045-03-03T14:40+09:00","2045-03-03T16:42+09:00","2045-03-03T18:44+09:00",null,null,1,0,"2045-03-03T07:42Z"],["lunar","penumbral","penumbral",0,"2045-08-27T20:52+09:00","2045-08-27T22:53+09:00","2045-08-28T00:55+09:00",null,null,0,0,"2045-08-27T13:53Z"],["lunar","partial","partial",2,"2046-01-22T19:56+09:00","2046-01-22T22:01+09:00","2046-01-23T00:06+09:00",null,null,0,0,"2046-01-22T13:01Z"],["solar","partial","annular",4,"2046-02-06T06:29+09:00","2046-02-06T07:07+09:00","2046-02-06T07:48+09:00",null,null,1,0,"2046-02-05T22:07Z"],["solar","partial","partial",53,"2047-01-26T09:01+09:00","2047-01-26T10:28+09:00","2047-01-26T11:59+09:00",null,null,0,0,"2047-01-26T01:28Z"],["lunar","total","total",100,"2047-07-07T16:47+09:00","2047-07-07T19:34+09:00","2047-07-07T22:21+09:00","2047-07-07T18:44+09:00","2047-07-07T20:25+09:00",1,0,"2047-07-07T10:34Z"],["lunar","total","total",100,"2048-01-01T12:52+09:00","2048-01-01T15:52+09:00","2048-01-01T18:52+09:00","2048-01-01T15:24+09:00","2048-01-01T16:21+09:00",1,0,"2048-01-01T06:52Z"],["lunar","penumbral","penumbral",0,"2048-12-20T13:05+09:00","2048-12-20T15:26+09:00","2048-12-20T17:47+09:00",null,null,1,0,"2048-12-20T06:26Z"],["lunar","penumbral","penumbral",0,"2049-05-17T18:33+09:00","2049-05-17T20:25+09:00","2049-05-17T22:18+09:00",null,null,1,0,"2049-05-17T11:25Z"],["lunar","penumbral","penumbral",0,"2049-06-16T03:06+09:00","2049-06-16T04:13+09:00","2049-06-16T05:19+09:00",null,null,0,1,"2049-06-15T19:13Z"],["lunar","penumbral","penumbral",0,"2049-11-09T22:57+09:00","2049-11-10T00:51+09:00","2049-11-10T02:44+09:00",null,null,0,0,"2049-11-09T15:51Z"],["solar","partial","total",11,"2049-11-25T15:07+09:00","2049-11-25T15:51+09:00","2049-11-25T16:33+09:00",null,null,0,1,"2049-11-25T06:51Z"],["lunar","total","total",100,"2051-10-20T01:33+09:00","2051-10-20T04:10+09:00","2051-10-20T06:48+09:00","2051-10-20T03:28+09:00","2051-10-20T04:52+09:00",0,1,"2051-10-19T19:10Z"],["lunar","partial","partial",4,"2052-10-08T17:36+09:00","2052-10-08T19:44+09:00","2052-10-08T21:53+09:00",null,null,0,0,"2052-10-08T10:44Z"],["lunar","penumbral","penumbral",0,"2053-03-05T00:15+09:00","2053-03-05T02:21+09:00","2053-03-05T04:26+09:00",null,null,0,0,"2053-03-04T17:21Z"],["lunar","penumbral","penumbral",0,"2053-08-29T14:45+09:00","2053-08-29T17:04+09:00","2053-08-29T19:24+09:00",null,null,1,0,"2053-08-29T08:04Z"],["lunar","total","total",100,"2054-02-22T13:12+09:00","2054-02-22T15:50+09:00","2054-02-22T18:27+09:00","2054-02-22T15:13+09:00","2054-02-22T16:26+09:00",1,0,"2054-02-22T06:50Z"],["lunar","total","total",100,"2054-08-18T15:20+09:00","2054-08-18T18:25+09:00","2054-08-18T21:30+09:00","2054-08-18T17:43+09:00","2054-08-18T19:07+09:00",1,0,"2054-08-18T09:25Z"],["lunar","total","total",100,"2055-02-12T05:08+09:00","2055-02-12T07:45+09:00","2055-02-12T10:21+09:00","2055-02-12T07:11+09:00","2055-02-12T08:18+09:00",0,1,"2055-02-11T22:45Z"],["lunar","partial","partial",99,"2055-08-07T16:58+09:00","2055-08-07T19:52+09:00","2055-08-07T22:45+09:00",null,null,1,0,"2055-08-07T10:52Z"],["lunar","penumbral","penumbral",0,"2056-02-01T19:20+09:00","2056-02-01T21:24+09:00","2056-02-01T23:28+09:00",null,null,0,0,"2056-02-01T12:24Z"],["lunar","penumbral","penumbral",0,"2056-06-27T17:46+09:00","2056-06-27T19:01+09:00","2056-06-27T20:17+09:00",null,null,1,0,"2056-06-27T10:01Z"],["lunar","penumbral","penumbral",0,"2056-07-27T01:54+09:00","2056-07-27T03:42+09:00","2056-07-27T05:29+09:00",null,null,0,1,"2056-07-26T18:42Z"],["solar","partial","annular",32,"2057-07-02T06:02+09:00","2057-07-02T07:02+09:00","2057-07-02T08:10+09:00",null,null,0,0,"2057-07-01T22:02Z"],["lunar","total","total",100,"2058-06-07T01:32+09:00","2058-06-07T04:14+09:00","2058-06-07T06:56+09:00","2058-06-07T03:25+09:00","2058-06-07T05:03+09:00",0,1,"2058-06-06T19:14Z"],["solar","partial","partial",31,"2058-11-16T10:59+09:00","2058-11-16T12:14+09:00","2058-11-16T13:29+09:00",null,null,0,0,"2058-11-16T03:14Z"],["lunar","partial","partial",11,"2059-05-27T14:33+09:00","2059-05-27T16:54+09:00","2059-05-27T19:15+09:00",null,null,1,0,"2059-05-27T07:54Z"],["lunar","partial","partial",14,"2059-11-19T19:44+09:00","2059-11-19T22:00+09:00","2059-11-20T00:15+09:00",null,null,0,0,"2059-11-19T13:00Z"],["lunar","penumbral","penumbral",0,"2060-04-16T04:27+09:00","2060-04-16T06:35+09:00","2060-04-16T08:43+09:00",null,null,0,1,"2060-04-15T21:35Z"],["lunar","penumbral","penumbral",0,"2060-10-10T01:56+09:00","2060-10-10T03:52+09:00","2060-10-10T05:48+09:00",null,null,0,0,"2060-10-09T18:52Z"],["lunar","total","total",100,"2061-04-05T03:54+09:00","2061-04-05T06:52+09:00","2061-04-05T09:50+09:00","2061-04-05T06:36+09:00","2061-04-05T07:08+09:00",0,1,"2061-04-04T21:52Z"],["lunar","total","total",100,"2061-09-29T15:54+09:00","2061-09-29T18:36+09:00","2061-09-29T21:19+09:00","2061-09-29T18:06+09:00","2061-09-29T19:06+09:00",1,0,"2061-09-29T09:36Z"],["solar","partial","partial",74,"2062-09-03T17:45+09:00","2062-09-03T18:36+09:00","2062-09-03T19:25+09:00",null,null,0,1,"2062-09-03T09:36Z"],["lunar","total","total",100,"2062-09-19T00:37+09:00","2062-09-19T03:32+09:00","2062-09-19T06:27+09:00","2062-09-19T03:02+09:00","2062-09-19T04:02+09:00",0,1,"2062-09-18T18:32Z"],["lunar","partial","partial",1,"2063-03-14T23:00+09:00","2063-03-15T01:04+09:00","2063-03-15T03:08+09:00",null,null,0,0,"2063-03-14T16:04Z"],["solar","partial","total",82,"2063-08-24T08:05+09:00","2063-08-24T09:16+09:00","2063-08-24T10:32+09:00",null,null,0,0,"2063-08-24T00:16Z"],["lunar","penumbral","penumbral",0,"2063-09-08T03:29+09:00","2063-09-08T05:39+09:00","2063-09-08T07:50+09:00",null,null,0,1,"2063-09-07T20:39Z"],["lunar","partial","partial",1,"2064-02-03T04:42+09:00","2064-02-03T06:47+09:00","2064-02-03T08:52+09:00",null,null,0,1,"2064-02-02T21:47Z"],["solar","partial","annular",50,"2064-02-17T16:48+09:00","2064-02-17T17:53+09:00","2064-02-17T18:52+09:00",null,null,0,1,"2064-02-17T08:53Z"],["lunar","partial","partial",5,"2064-07-28T14:28+09:00","2064-07-28T16:51+09:00","2064-07-28T19:13+09:00",null,null,1,0,"2064-07-28T07:51Z"],["lunar","total","total",100,"2065-01-22T16:08+09:00","2065-01-22T18:57+09:00","2065-01-22T21:46+09:00","2065-01-22T18:22+09:00","2065-01-22T19:32+09:00",1,0,"2065-01-22T09:57Z"],["lunar","total","total",100,"2065-07-18T00:01+09:00","2065-07-18T02:47+09:00","2065-07-18T05:32+09:00","2065-07-18T01:58+09:00","2065-07-18T03:35+09:00",0,1,"2065-07-17T17:47Z"],["lunar","total","total",100,"2066-01-11T21:02+09:00","2066-01-12T00:03+09:00","2066-01-12T03:03+09:00","2066-01-11T23:33+09:00","2066-01-12T00:32+09:00",0,0,"2066-01-11T15:03Z"],["lunar","partial","partial",81,"2066-07-07T16:02+09:00","2066-07-07T18:28+09:00","2066-07-07T20:55+09:00",null,null,1,0,"2066-07-07T09:28Z"],["lunar","penumbral","penumbral",0,"2066-12-31T21:06+09:00","2066-12-31T23:28+09:00","2067-01-01T01:50+09:00",null,null,0,0,"2066-12-31T14:28Z"],["lunar","penumbral","penumbral",0,"2067-05-29T02:09+09:00","2067-05-29T03:54+09:00","2067-05-29T05:39+09:00",null,null,0,1,"2067-05-28T18:54Z"],["lunar","total","total",100,"2068-11-09T18:09+09:00","2068-11-09T20:45+09:00","2068-11-09T23:21+09:00","2068-11-09T20:35+09:00","2068-11-09T20:55+09:00",0,0,"2068-11-09T11:45Z"],["lunar","total","total",100,"2069-05-06T15:03+09:00","2069-05-06T18:08+09:00","2069-05-06T21:12+09:00","2069-05-06T17:25+09:00","2069-05-06T18:50+09:00",1,0,"2069-05-06T09:08Z"],["solar","partial","total",89,"2070-04-11T10:28+09:00","2070-04-11T11:52+09:00","2070-04-11T13:16+09:00",null,null,0,0,"2070-04-11T02:52Z"],["lunar","penumbral","penumbral",0,"2070-04-25T15:55+09:00","2070-04-25T18:19+09:00","2070-04-25T20:43+09:00",null,null,1,0,"2070-04-25T09:19Z"],["lunar","partial","partial",8,"2070-10-20T01:37+09:00","2070-10-20T03:49+09:00","2070-10-20T06:01+09:00",null,null,0,1,"2070-10-19T18:49Z"],["lunar","penumbral","penumbral",0,"2071-09-09T21:51+09:00","2071-09-10T00:04+09:00","2071-09-10T02:16+09:00",null,null,0,0,"2071-09-09T15:04Z"],["lunar","total","total",100,"2072-03-04T21:44+09:00","2072-03-05T00:21+09:00","2072-03-05T02:58+09:00","2072-03-04T23:46+09:00","2072-03-05T00:55+09:00",0,0,"2072-03-04T15:21Z"],["lunar","total","total",100,"2072-08-28T22:00+09:00","2072-08-29T01:03+09:00","2072-08-29T04:07+09:00","2072-08-29T00:31+09:00","2072-08-29T01:36+09:00",0,0,"2072-08-28T16:03Z"],["solar","partial","partial",22,"2073-02-07T09:21+09:00","2073-02-07T10:39+09:00","2073-02-07T12:01+09:00",null,null,0,0,"2073-02-07T01:39Z"],["lunar","total","total",100,"2073-02-22T13:45+09:00","2073-02-22T16:23+09:00","2073-02-22T19:00+09:00","2073-02-22T15:48+09:00","2073-02-22T16:57+09:00",1,0,"2073-02-22T07:23Z"],["lunar","total","total",100,"2073-08-17T23:45+09:00","2073-08-18T02:40+09:00","2073-08-18T05:36+09:00","2073-08-18T02:15+09:00","2073-08-18T03:06+09:00",0,1,"2073-08-17T17:40Z"],["solar","partial","annular",90,"2074-01-27T16:14+09:00","2074-01-27T17:21+09:00","2074-01-27T18:21+09:00",null,null,0,1,"2074-01-27T08:21Z"],["lunar","penumbral","penumbral",0,"2074-02-12T03:49+09:00","2074-02-12T05:54+09:00","2074-02-12T07:59+09:00",null,null,0,1,"2074-02-11T20:54Z"],["lunar","penumbral","penumbral",0,"2074-07-09T01:20+09:00","2074-07-09T02:19+09:00","2074-07-09T03:18+09:00",null,null,0,0,"2074-07-08T17:19Z"],["solar","partial","annular",15,"2074-07-24T11:00+09:00","2074-07-24T12:08+09:00","2074-07-24T13:14+09:00",null,null,0,0,"2074-07-24T03:08Z"],["lunar","penumbral","penumbral",0,"2075-01-02T16:45+09:00","2075-01-02T18:53+09:00","2075-01-02T21:00+09:00",null,null,0,0,"2075-01-02T09:53Z"],["lunar","partial","partial",62,"2075-06-28T16:31+09:00","2075-06-28T18:53+09:00","2075-06-28T21:15+09:00",null,null,1,0,"2075-06-28T09:53Z"],["solar","partial","annular",58,"2075-07-13T15:19+09:00","2075-07-13T16:36+09:00","2075-07-13T17:42+09:00",null,null,0,0,"2075-07-13T07:36Z"],["lunar","partial","partial",94,"2075-12-22T14:54+09:00","2075-12-22T17:53+09:00","2075-12-22T20:53+09:00",null,null,1,0,"2075-12-22T08:53Z"]]}};
+
+(function () {
+  var D = window.ASTIRA_ECLIPSE;
+  if (!D) return;
+
+  var wahl = document.getElementById('ort');
+  var abschnitte = {};
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.termin'),
+    function (el) { abschnitte[el.getAttribute('data-art')] = el; }
+  );
+
+  function feld(zeile, name) { return zeile[D.felder.indexOf(name)]; }
+
+  // Wanduhrzeit: der Zeitpunkt, wie er in der Stadt an der Wand steht.
+  function wand(text) { return new Date(text.slice(0, 16) + 'Z'); }
+
+  function datumText(text) {
+    try {
+      return new Intl.DateTimeFormat(D.sprache, {
+        dateStyle: 'long', timeZone: 'UTC'
+      }).format(wand(text));
+    } catch (e) { return text.slice(0, 10); }
+  }
+
+  function uhrText(text) {
+    try {
+      return new Intl.DateTimeFormat(D.sprache, {
+        timeStyle: 'short', timeZone: 'UTC'
+      }).format(wand(text));
+    } catch (e) { return text.slice(11, 16); }
+  }
+
+  function fuellen(muster, werte) {
+    return muster.replace(/\{(\w+)\}/g, function (_, name) {
+      return werte[name] !== undefined ? werte[name] : '{' + name + '}';
+    });
+  }
+
+  function was(art, hier) {
+    if (art === 'solar') {
+      if (hier === 'total') return D.texte.eclipseWhatTotalSun;
+      if (hier === 'annular') return D.texte.eclipseWhatAnnular;
+      return D.texte.eclipseWhatPartialSun;
+    }
+    if (hier === 'total') return D.texte.eclipseWhatTotalMoon;
+    if (hier === 'penumbral') return D.texte.eclipseWhatPenumbral;
+    return D.texte.eclipseWhatPartialMoon;
+  }
+
+  // „in 34 Tagen" in der Sprache der Seite, ohne dass ein Wort davon
+  // uebersetzt werden muss. Gewaehlt wird die groesste Einheit, die noch
+  // eine Zahl groesser als eins ergibt.
+  function countdown(zielUtc) {
+    var ms = new Date(zielUtc).getTime() - Date.now();
+    if (!isFinite(ms) || ms < 0) return '';
+    try {
+      var rtf = new Intl.RelativeTimeFormat(D.sprache, { numeric: 'auto' });
+      var minuten = Math.round(ms / 60000);
+      if (minuten < 60) return rtf.format(minuten, 'minute');
+      var stunden = Math.round(ms / 3600000);
+      if (stunden < 48) return rtf.format(stunden, 'hour');
+      var tage = Math.round(ms / 86400000);
+      if (tage < 60) return rtf.format(tage, 'day');
+      var monate = Math.round(tage / 30.44);
+      if (monate < 24) return rtf.format(monate, 'month');
+      return rtf.format(Math.round(tage / 365.25), 'year');
+    } catch (e) { return ''; }
+  }
+
+  // Der naechste Termin, der etwas hergibt. Halbschattige Mondfinsternisse
+  // uebergeht die Suche: Der Mond streift nur den Rand des Erdschattens, die
+  // Bedeckung steht bei 0 Prozent — darauf sollte ein Countdown nicht
+  // zeigen. Gibt es nur solche, wird die erste davon genommen; „keine zu
+  // sehen" waere falsch.
+  function kommende(zeilen, art) {
+    var jetzt = Date.now();
+    var out = [];
+    for (var i = 0; i < zeilen.length; i++) {
+      if (feld(zeilen[i], 'art') !== art) continue;
+      if (new Date(feld(zeilen[i], 'hoehepunkt_utc')).getTime() >= jetzt) {
+        out.push(zeilen[i]);
+      }
+    }
+    return out;
+  }
+
+  function naechste(zeilen, art) {
+    var liste = kommende(zeilen, art);
+    for (var i = 0; i < liste.length; i++) {
+      if (feld(liste[i], 'hier') !== 'penumbral') return liste[i];
+    }
+    return liste.length ? liste[0] : null;
+  }
+
+  // Die naechste halbschattige, sofern sie vor dem gezeigten Termin liegt.
+  // Nur die naechste: Zwischen zwei richtigen liegen oft mehrere.
+  function davorHalbschatten(zeilen, ziel) {
+    if (!ziel) return null;
+    var bis = new Date(feld(ziel, 'hoehepunkt_utc')).getTime();
+    var liste = kommende(zeilen, 'lunar');
+    for (var i = 0; i < liste.length; i++) {
+      if (feld(liste[i], 'hier') !== 'penumbral') continue;
+      if (new Date(feld(liste[i], 'hoehepunkt_utc')).getTime() < bis) {
+        return liste[i];
+      }
+    }
+    return null;
+  }
+
+  function absatz(text, klasse) {
+    var p = document.createElement('p');
+    if (klasse) p.className = klasse;
+    p.textContent = text;
+    return p;
+  }
+
+  function zeichnen(art, zeile, davor) {
+    var ziel = abschnitte[art];
+    if (!ziel) return;
+    var kopf = ziel.querySelector('h2');
+    while (ziel.lastChild && ziel.lastChild !== kopf) {
+      ziel.removeChild(ziel.lastChild);
+    }
+    if (!zeile) {
+      ziel.appendChild(absatz(
+        art === 'solar' ? D.texte.eclipseNoneSolar : D.texte.eclipseNoneLunar,
+        'leer'
+      ));
+      return;
+    }
+    var hier = feld(zeile, 'hier');
+    var hoehepunkt = feld(zeile, 'hoehepunkt');
+
+    ziel.appendChild(absatz(countdown(feld(zeile, 'hoehepunkt_utc')), 'countdown'));
+    ziel.appendChild(absatz(fuellen(D.texte.eclipseDateCovered, {
+      date: datumText(hoehepunkt), percent: feld(zeile, 'bedeckung')
+    }), 'datum'));
+    ziel.appendChild(absatz(was(art, hier)));
+    ziel.appendChild(absatz(fuellen(D.texte.eclipseTimes, {
+      from: uhrText(feld(zeile, 'anfang')),
+      to: uhrText(feld(zeile, 'ende')),
+      peak: uhrText(hoehepunkt)
+    })));
+    var vollAnfang = feld(zeile, 'voll_anfang');
+    var vollEnde = feld(zeile, 'voll_ende');
+    if (vollAnfang && vollEnde) {
+      ziel.appendChild(absatz(fuellen(
+        hier === 'annular' ? D.texte.eclipseRingTimes : D.texte.eclipseFullTimes,
+        { from: uhrText(vollAnfang), to: uhrText(vollEnde) }
+      )));
+    }
+    if (feld(zeile, 'anfang_unter_horizont')) {
+      ziel.appendChild(absatz(D.texte.eclipseStartBelowHorizon, 'note'));
+    }
+    if (feld(zeile, 'ende_unter_horizont')) {
+      ziel.appendChild(absatz(D.texte.eclipseEndBelowHorizon, 'note'));
+    }
+    if (art === 'solar') {
+      ziel.appendChild(absatz(D.texte.eclipseSunWarning, 'warn'));
+    }
+    if (davor) {
+      ziel.appendChild(absatz(
+        D.davor + datumText(feld(davor, 'hoehepunkt')) + ' · ' +
+        D.texte.eclipseWhatPenumbral,
+        'note davor'
+      ));
+    }
+  }
+
+  // Die Stadt reist im Adresszusatz mit. Damit bleibt sie beim
+  // Sprachwechsel erhalten, ohne dass die Seite etwas auf dem Geraet
+  // ablegt — und ein weitergegebener Link zeigt dieselbe Stadt.
+  function sprachlinks(ort) {
+    var zusatz = ort === D.vorgabe ? '' : '?ort=' + encodeURIComponent(ort);
+    Array.prototype.forEach.call(
+      document.querySelectorAll('.langs a'),
+      function (a) {
+        var ziel = a.getAttribute('href').split('?')[0];
+        a.setAttribute('href', ziel + zusatz);
+      }
+    );
+  }
+
+  function setzen(ort, ersterLauf) {
+    var zeilen = D.staedte[ort];
+    if (!zeilen) return;
+    zeichnen('solar', naechste(zeilen, 'solar'), null);
+    var mond = naechste(zeilen, 'lunar');
+    zeichnen('lunar', mond, davorHalbschatten(zeilen, mond));
+    sprachlinks(ort);
+    if (!ersterLauf && window.history && history.replaceState) {
+      history.replaceState(null, '',
+        ort === D.vorgabe ? location.pathname : '?ort=' + encodeURIComponent(ort));
+    }
+  }
+
+  var gewuenscht = null;
+  try {
+    gewuenscht = new URLSearchParams(location.search).get('ort');
+  } catch (e) { gewuenscht = null; }
+  var start = (gewuenscht && D.staedte[gewuenscht]) ? gewuenscht : D.vorgabe;
+
+  if (wahl) {
+    wahl.value = start;
+    wahl.addEventListener('change', function () { setzen(wahl.value, false); });
+  }
+  setzen(start, true);
+})();
+
+</script>
+</body>
+</html>
