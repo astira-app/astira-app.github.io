@@ -320,8 +320,12 @@
   /* Der Nebensatz zur übersprungenen Finsternis: **normaler Text** wie der
      Rest (Nutzer-Vorgabe 06.09.2026), aber eine Leerzeile darüber. Er
      gehört nicht zum Termin darüber — die Zeile Abstand sagt das, ohne dass
-     es ein Wort erklären müsste. */
-  .davor { margin-top: 26px; }
+     es ein Wort erklären müsste.
+
+     ⚠️ `.termin .davor` und nicht `.davor`: Die Regel darüber ist mit
+     `.termin p` die spezifischere und schlüge eine Klasse allein — der
+     Abstand blieb dann bei 6 px, im Browser gemessen. */
+  .termin .davor { margin-top: 26px; }
   .termin p:last-child { margin-bottom: 0; }
   .datum { color: var(--text); font-weight: 600; }
   /* Die Warnung vor dem Blick in die Sonne. Sie steht bei jeder
