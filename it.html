@@ -274,11 +274,15 @@
   /* Der Tipp auf der Hilfeseite. Er ist ein `card`, damit eine Änderung an
      den Kästen ihn mitnimmt — behält aber sein eigenes Aussehen (Vorgabe
      30.08.2026). Zwei Klassen schlagen die `.card`-Regel. */
-  .card.tip {
-    padding: 14px 16px; margin-bottom: 26px;
+  /* Ein Kasten, zwei Verwendungen: der Tipp der Hilfeseite und die
+     Sonnen-Warnung der Finsternis-Seite. **Beide in einer Regel**, damit
+     „sieht aus wie" nicht beim nächsten Anfassen wieder auseinanderläuft. */
+  .card.tip, .warn {
+    padding: 14px 16px;
     background: rgba(143, 167, 232, .10);
     border: 1px solid rgba(143, 167, 232, .45); border-radius: 12px;
   }
+  .card.tip { margin-bottom: 26px; }
   .card.tip p { margin: 0; }
   /* --------------------------------- nur auf der Finsternis-Seite */
   /* Die Ortswahl steht **über** den beiden Terminen: Erst der Ort, dann
@@ -313,16 +317,22 @@
   }
   .countdown:empty { display: none; }
   .termin p { margin: 0 0 6px; }
+  /* Der Nebensatz zur übersprungenen Finsternis: **normaler Text** wie der
+     Rest (Nutzer-Vorgabe 06.09.2026), aber eine Leerzeile darüber. Er
+     gehört nicht zum Termin darüber — die Zeile Abstand sagt das, ohne dass
+     es ein Wort erklären müsste. */
+  .davor { margin-top: 26px; }
   .termin p:last-child { margin-bottom: 0; }
   .datum { color: var(--text); font-weight: 600; }
   /* Die Warnung vor dem Blick in die Sonne. Sie steht bei jeder
      Sonnenfinsternis und nicht erst nach einem Klick — dieselbe Auflage
-     wie in der App (PROJEKTPLAN, Phase 19). */
-  .warn {
-    margin: 10px 0 0; padding: 10px 12px; border-radius: 10px;
-    background: rgba(232, 176, 143, .10);
-    border: 1px solid rgba(232, 176, 143, .45);
-  }
+     wie in der App (PROJEKTPLAN, Phase 19).
+
+     **Sie sieht aus wie der Tipp der Hilfeseite** (Nutzer-Vorgabe
+     06.09.2026) und teilt sich deshalb dessen Regel weiter unten; vorher
+     trug sie einen eigenen, orangefarbenen Ton. Die Auflage betrifft, dass
+     die Warnung **dasteht**, nicht welche Farbe sie hat. */
+  .warn { margin: 10px 0 0; }
   /* Der Hinweis auf die App, ganz unten: Was die Seite bewusst nicht kann
      — Zeiten für den eigenen Standort — ist der Grund, sie zu laden
      (Nutzer-Entwurf 05.09.2026). Der Knopf darunter ist derselbe wie auf
@@ -397,7 +407,7 @@
     body { background: #fff; color: #000; }
     .main { margin: 0; padding: 0; max-width: none; }
     .inner { display: block; min-height: 0; max-width: none; }
-    .card, .card.intro, .card.tip {
+    .card, .card.intro, .card.tip, .warn {
       background: none; border: 0; padding: 0; margin-bottom: 14px;
     }
     h2, a { color: #000; }
