@@ -242,7 +242,12 @@
      sonst wie ein fett gesetzter Satz da. Die Regel gilt für die
      **Seitenüberschrift und nur für sie** — die Zwischenüberschriften (h2)
      bleiben bei der Grundgröße und heben sich weiter über die Farbe ab. */
-  .card.intro h1 { font-size: 1.35rem; line-height: 1.35; }
+  /* Farbe wie die Zwischenüberschriften (Nutzer-Vorgabe 06.09.2026):
+     Damit sind alle Überschriften der Seite blau, und der Unterschied
+     zwischen Haupt- und Zwischenüberschrift liegt allein in der Größe. */
+  .card.intro h1 {
+    font-size: 1.35rem; line-height: 1.35; color: var(--accent);
+  }
   .note { color: var(--muted); }
   .addr { line-height: 1.5; }
   /* Ohne Balken und Einzug (Nutzer-Vorgabe 30.08.2026): Der Satz gehört
@@ -284,7 +289,11 @@
      nicht erst aufklappen. Der gezeigte Ort steht fett und ohne Link —
      **nur das Gewicht ändert sich**, nicht Größe und nicht Schnitt, sonst
      springt die Zeile bei jedem Wechsel. */
-  .orte { margin: 0; }
+  /* **Mittig und mit Luft nach oben** (Nutzer-Vorgabe 06.09.2026): Der
+     Abstand über der Zeile ist derselbe wie der darunter — 52 px, die der
+     Kopf der Seite ohnehin zum Inhalt hält. Die Zeile steht damit für sich
+     und klebt weder an der Beschreibung noch am ersten Abschnitt. */
+  .orte { margin: 52px 0 0; text-align: center; }
   .orte strong { color: var(--text); font-weight: 700; }
   /* Der Countdown ist die eine Zahl, für die jemand herkommt. Trotzdem
      **keine zweite Schriftgröße**: Die Regel vom 31.08.2026 gilt für die
@@ -295,8 +304,12 @@
      Ohne JavaScript bleibt die Zeile leer und verschwindet (`:empty`),
      statt eine Lücke zu hinterlassen: Ein fester Text könnte nur den Stand
      des Bautags nennen, und „noch 40 Tage" wäre nach 41 Tagen falsch. */
+  /* **Weiß wie das Datum darunter** (Nutzer-Vorgabe 06.09.2026): Die
+     Akzentfarbe gehört jetzt den Überschriften, und der Countdown gehört
+     zur Angabe darunter, nicht zur Überschrift darüber. Er hebt sich über
+     das Gewicht ab. */
   .countdown {
-    color: var(--accent); font-weight: 600; margin: 0 0 10px;
+    color: var(--text); font-weight: 600; margin: 0 0 10px;
   }
   .countdown:empty { display: none; }
   .termin p { margin: 0 0 6px; }
@@ -473,7 +486,7 @@
 <div class="inner">
   <section class="card intro">
     <h1>ヘルプ</h1>
-    <p class="note">アプリの操作の説明</p>
+    <p>アプリの操作の説明</p>
   </section>
 
   <section class="card">
