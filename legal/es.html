@@ -72,7 +72,12 @@
     color: var(--text); text-decoration: none;
   }
   .brand img { width: 28px; height: 28px; display: block; }
-  .pages { display: flex; gap: 2px; overflow: hidden; }
+  /* `overflow: hidden` ist hier weg (06.09.2026): Das Klappmenü „Über
+     Astira" liegt in dieser Leiste, und ein abgeschnittenes Klappmenü wäre
+     keins. Nötig war die Zeile als Notnagel gegen eine zu lange Leiste —
+     und die ist seit dem Zusammenfassen der beiden Rechtstexte deutlich
+     kürzer als vorher. */
+  .pages { display: flex; gap: 2px; }
   .pages a, .pages strong {
     padding: 8px 12px; border-radius: 8px; text-decoration: none;
     color: var(--muted); white-space: nowrap;
@@ -80,29 +85,55 @@
   .pages a:hover { background: var(--card); color: var(--text); }
   .pages strong { color: var(--text); font-weight: 600; }
 
-  /* Sprachauswahl als Klappmenü — `details` kann das ohne JavaScript. */
-  .langs { margin-left: auto; position: relative; }
-  .langs summary {
-    list-style: none; cursor: pointer; padding: 7px 12px; border-radius: 8px;
-    color: var(--text); white-space: nowrap; border: 1px solid var(--line);
-    display: flex; align-items: center; gap: 8px;
+  /* **Die beiden Klappmenüs der Kopfleiste**: „Über Astira" links bei den
+     Seiten, die Sprachauswahl rechts. Gleich gebaut (`details`, ohne
+     JavaScript) und seit dem 06.09.2026 gleich gekleidet (Nutzer-Vorgabe):
+
+     **Kein Rahmen und kein eigener Hintergrund.** Sie sitzen auf der
+     Leiste, also tragen sie deren Farbe — ein umrandeter Knopf sah aus wie
+     ein Fremdkörper neben den Seitennamen, die nur Text sind. Was sie als
+     aufklappbar ausweist, ist der Pfeil nach unten und sonst nichts.
+
+     Die Fläche beim Überfahren bleibt: Sie zeigt, dass hier etwas zu
+     klicken ist, und ist dieselbe wie bei den Seitennamen daneben. */
+  .langs, .ueber { position: relative; }
+  .langs { margin-left: auto; }
+  .langs summary, .ueber summary {
+    list-style: none; cursor: pointer; padding: 8px 12px; border-radius: 8px;
+    white-space: nowrap; display: flex; align-items: center; gap: 8px;
   }
-  .langs summary::-webkit-details-marker { display: none; }
-  .langs summary::after { content: " \25BE"; color: var(--muted); }
-  .langs summary:hover { background: var(--card); }
-  .langs ul {
-    position: absolute; right: 0; top: calc(100% + 6px); margin: 0;
+  .langs summary { color: var(--text); }
+  .ueber summary { color: var(--muted); }
+  /* Steht man auf einer der beiden Seiten darin, ist das Menüwort so
+     hervorgehoben wie sonst der Name der offenen Seite. */
+  .ueber summary.aktuell { color: var(--text); font-weight: 600; }
+  .langs summary::-webkit-details-marker,
+  .ueber summary::-webkit-details-marker { display: none; }
+  .langs summary::after, .ueber summary::after {
+    content: " \25BE"; color: var(--muted);
+  }
+  .langs summary:hover, .ueber summary:hover {
+    background: var(--card); color: var(--text);
+  }
+  .langs ul, .ueber ul {
+    position: absolute; top: calc(100% + 6px); margin: 0;
     padding: 6px; list-style: none; min-width: 200px;
     background: var(--card); border: 1px solid var(--line);
     border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
   }
-  .langs li a, .langs li strong {
+  /* Die Sprachauswahl sitzt am rechten Rand, „Über Astira" mitten in der
+     Leiste — jedes Klappfach hängt an der Kante, an der es steht. */
+  .langs ul { right: 0; }
+  .ueber ul { left: 0; }
+  .langs li a, .langs li strong, .ueber li a, .ueber li strong {
     display: flex; align-items: center; gap: 8px;
     padding: 8px 12px; border-radius: 6px;
-    text-decoration: none; color: var(--muted);
+    text-decoration: none; color: var(--muted); white-space: nowrap;
   }
-  .langs li a:hover { background: var(--surface); color: var(--text); }
-  .langs li strong { color: var(--text); }
+  .langs li a:hover, .ueber li a:hover {
+    background: var(--surface); color: var(--text);
+  }
+  .langs li strong, .ueber li strong { color: var(--text); }
   /* Die Flaggen liegen als `symbol` einmal in der Seite. Der helle Rand
      trennt eine weisse Flagge (Japan) vom dunklen Grund — ohne ihn schwebt
      dort ein roter Punkt im Nichts. */
@@ -191,14 +222,27 @@
     background: none; border: 0; border-radius: 0;
     padding: 0; margin-bottom: 30px;
   }
-  /* **Der erste Kasten einer Seite behält seinen Rahmen** (Vorgabe
-     30.08.2026) — der mit der Überschrift. Er gibt der Seite einen Anfang,
-     während die Abschnitte darunter frei stehen. Zwei Klassen schlagen die
-     `.card`-Regel darüber, gleich in welcher Reihenfolge sie steht. */
-  .card.intro {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 14px; padding: 22px 24px; margin-bottom: 26px;
-  }
+  /* **Der Kopf einer Seite steht frei** (Nutzer-Vorgabe 06.09.2026). Bis
+     dahin trug er als einziger Abschnitt noch einen Kasten; der ist weg.
+     Getrennt wird jetzt über den Abstand — und der ist hier größer als der
+     zwischen zwei Abschnitten (30 px), damit die Überschrift sichtbar vor
+     dem Inhalt steht statt an ihm zu kleben. **Auf allen Seiten derselbe
+     Wert**, denn die Kopfzeile ist überall dieselbe Sache.
+
+     52 px und nicht 40: Bei 40 blieben nur zehn Pixel Unterschied zum
+     Abstand zwischen zwei Abschnitten — gemessen im Browser, und zu wenig,
+     um als Trennung gelesen zu werden.
+
+     Nur die Startseite hat keinen solchen Kopf: Dort steht die Grafik mit
+     dem Namen, und die bringt ihren eigenen Abstand mit. */
+  .card.intro { margin-bottom: 52px; }
+  /* **Die einzige Ausnahme von „eine Größe für alles"** (Nutzer-Vorgabe
+     06.09.2026). Ohne Kasten braucht die Überschrift ein anderes Mittel,
+     sich abzuheben, und Gewicht allein trägt das nicht mehr: Sie stünde
+     sonst wie ein fett gesetzter Satz da. Die Regel gilt für die
+     **Seitenüberschrift und nur für sie** — die Zwischenüberschriften (h2)
+     bleiben bei der Grundgröße und heben sich weiter über die Farbe ab. */
+  .card.intro h1 { font-size: 1.35rem; line-height: 1.35; }
   .note { color: var(--muted); }
   .addr { line-height: 1.5; }
   /* Ohne Balken und Einzug (Nutzer-Vorgabe 30.08.2026): Der Satz gehört
@@ -233,12 +277,15 @@
   .card.tip p { margin: 0; }
   /* --------------------------------- nur auf der Finsternis-Seite */
   /* Die Ortswahl steht **über** den beiden Terminen: Erst der Ort, dann
-     was dort zu sehen ist — in dieser Reihenfolge liest man es auch. */
-  .ortwahl { display: flex; align-items: center; gap: 10px; margin: 0; }
-  .ortwahl select {
-    font: inherit; color: var(--text); background: var(--surface);
-    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
-  }
+     was dort zu sehen ist — in dieser Reihenfolge liest man es auch.
+
+     Eine **Zeile statt einer Klappliste** (Nutzer-Vorgabe 06.09.2026):
+     Sieben Namen passen nebeneinander, und was man sehen kann, muss man
+     nicht erst aufklappen. Der gezeigte Ort steht fett und ohne Link —
+     **nur das Gewicht ändert sich**, nicht Größe und nicht Schnitt, sonst
+     springt die Zeile bei jedem Wechsel. */
+  .orte { margin: 0; }
+  .orte strong { color: var(--text); font-weight: 700; }
   /* Der Countdown ist die eine Zahl, für die jemand herkommt. Trotzdem
      **keine zweite Schriftgröße**: Die Regel vom 31.08.2026 gilt für die
      ganze Website — Überschriften heben sich über Farbe und Gewicht ab, nie
@@ -384,10 +431,15 @@
   <a class="brand" href="../es.html">
     <img src="../assets/icon.png?v=44a7abc7" alt="" width="28" height="28">Astira</a>
   <nav class="pages">
-    <a href="../eclipse/es.html">Próximo eclipse</a>
+    <a href="../eclipse/es.html">Eclipses de Sol y de Luna</a>
     <a href="../help/es.html">Ayuda</a>
-    <a href="../privacy/es.html">Política de privacidad</a>
-    <strong>Aviso legal</strong>
+    <details class="ueber">
+      <summary class="aktuell">Acerca de Astira</summary>
+      <ul>
+        <li><a href="../privacy/es.html">Política de privacidad</a></li>
+        <li><strong>Aviso legal</strong></li>
+      </ul>
+    </details>
   </nav>
   <details class="langs">
     <summary><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-es"/></svg>Español</summary>
@@ -406,7 +458,7 @@
 <aside class="sidebar">
   <nav class="drawer-pages">
     <a href="../es.html">Astira</a>
-    <a href="../eclipse/es.html">Próximo eclipse</a>
+    <a href="../eclipse/es.html">Eclipses de Sol y de Luna</a>
     <a href="../help/es.html">Ayuda</a>
     <a href="../privacy/es.html">Política de privacidad</a>
     <strong>Aviso legal</strong>
