@@ -342,7 +342,14 @@
      (Nutzer-Entwurf 05.09.2026). Der Knopf darunter ist derselbe wie auf
      der Startseite. */
   .card.cta { text-align: center; margin-bottom: 0; }
-  .card.cta p { margin: 0; }
+  /* Die Frage ist **wie eine Zwischenüberschrift ausgezeichnet** (Farbe und
+     Gewicht, Nutzer-Vorgabe 06.09.2026) — aber sie bleibt ein Absatz und
+     wird kein `h2`: Sie gliedert die Seite nicht, sie fragt etwas. Ein
+     Element, das im Inhaltsverzeichnis der Seite auftaucht, wäre sie zu
+     Unrecht. */
+  .card.cta p {
+    margin: 0; color: var(--accent); font-weight: 600;
+  }
   .card.cta + .play { margin-top: 28px; }
   footer {
     color: var(--muted); text-align: center;

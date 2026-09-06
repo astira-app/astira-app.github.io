@@ -342,7 +342,14 @@
      (Nutzer-Entwurf 05.09.2026). Der Knopf darunter ist derselbe wie auf
      der Startseite. */
   .card.cta { text-align: center; margin-bottom: 0; }
-  .card.cta p { margin: 0; }
+  /* Die Frage ist **wie eine Zwischenüberschrift ausgezeichnet** (Farbe und
+     Gewicht, Nutzer-Vorgabe 06.09.2026) — aber sie bleibt ein Absatz und
+     wird kein `h2`: Sie gliedert die Seite nicht, sie fragt etwas. Ein
+     Element, das im Inhaltsverzeichnis der Seite auftaucht, wäre sie zu
+     Unrecht. */
+  .card.cta p {
+    margin: 0; color: var(--accent); font-weight: 600;
+  }
   .card.cta + .play { margin-top: 28px; }
   footer {
     color: var(--muted); text-align: center;
@@ -543,7 +550,7 @@
     <img src="../assets/badge/es.svg?v=56c4cd8b" alt="Google Play" height="56" width="189">
   </a>
 
-  <p class="note">
+  <p>
     Las horas lejanas en el futuro son predicciones. Cuánto habrá girado la Tierra para entonces puede indicarse con un margen de medio minuto a cincuenta años vista. La mayor incertidumbre es el horario de verano: que siga vigente lo decide la política, no el cálculo. Si cambian las reglas, la hora indicada se desplaza una hora entera.
     (Actualizado: 2026-09-06)
   </p>
